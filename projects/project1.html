@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case study: Marketing Grants CRM Dashboard – Bernardeta Wiekiera. Power BI, Power Query, Excel." />
+  <title>Marketing Grants CRM Dashboard – Bernardeta Wiekiera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- NAWIGACJA -->
+  <nav id="navbar" role="navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">BW<span>.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" role="list">
+        <li><a href="../index.html"        class="nav-link" data-page="home"      data-i18n="nav_home">Główna</a></li>
+        <li><a href="../portfolio.html"    class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="../certificates.html" class="nav-link" data-page="cert"      data-i18n="nav_cert">Certyfikaty</a></li>
+        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- GŁÓWNA TREŚĆ -->
+  <main>
+    <div class="container">
+      <div class="cs-layout">
+
+        <!-- SIDEBAR — nawigacja po sekcjach -->
+        <aside class="cs-sidebar" aria-label="Nawigacja po sekcjach">
+          <span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
+          <nav class="cs-sidebar-nav">
+            <a href="#problem"   data-i18n="cs_s_problem">Problem biznesowy</a>
+            <a href="#dataset"   data-i18n="cs_s_data">Dane</a>
+            <a href="#tools"     data-i18n="cs_s_tools">Narzędzia</a>
+            <a href="#dataprep"  data-i18n="cs_s_prep">Przygotowanie danych</a>
+            <a href="#analysis"  data-i18n="cs_s_analysis">Proces analizy</a>
+            <a href="#dashboard" data-i18n="cs_s_dashboard">Dashboard</a>
+            <a href="#findings"  data-i18n="cs_s_findings">Wnioski</a>
+            <a href="#recs"      data-i18n="cs_s_recs">Rekomendacje</a>
+            <a href="#learned"   data-i18n="cs_s_learned">Czego się nauczyłam</a>
+            <a href="#repo"      data-i18n="cs_s_repo">Repozytorium</a>
+          </nav>
+        </aside>
+
+        <!-- GŁÓWNA TREŚĆ CASE STUDY -->
+        <article class="cs-main">
+
+          <!-- Przycisk powrotu -->
+          <a href="../portfolio.html" class="cs-back-link">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span data-i18n="cs_back">← Powrót do Portfolio</span>
+          </a>
+
+          <!-- Duży screenshot / placeholder -->
+          <div class="cs-hero-img">
+            <img src="../images/projects/project1.png" alt="Marketing Grants CRM Dashboard – screenshot"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="cs-hero-img-placeholder" style="display:none;">
+              <i class="fas fa-chart-bar" aria-hidden="true"></i>
+              <span>project1.png — główny screenshot dashboardu</span>
+            </div>
+          </div>
+
+          <!-- Intro -->
+          <div class="cs-intro fade-in">
+            <h1 class="cs-title" data-i18n="cs1_title">Marketing Grants CRM Dashboard</h1>
+            <div class="cs-intro-meta">
+              <span class="tag">Excel</span>
+              <span class="tag">Power Query</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">DAX</span>
+              <span class="tag">Dashboard</span>
+            </div>
+            <p class="cs-intro-p" data-i18n="cs1_intro">
+              Dashboard analityczny do monitorowania i optymalizacji wykorzystania dotacji marketingowych w sieci partnerów CRM. Projekt łączy umiejętności ETL w Power Query z wizualizacją danych w Power BI.
+            </p>
+          </div>
+
+          <!-- 1. Problem biznesowy -->
+          <section class="cs-section fade-in" id="problem">
+            <h2 class="cs-section-title">
+              <span class="cs-num">1</span>
+              <span data-i18n="cs_s_problem">Problem biznesowy</span>
+            </h2>
+            <p data-i18n="cs1_problem">
+              Firma ubezpieczeniowa dysponowała budżetem dotacji marketingowych dla sieci dystrybutorów CRM, ale brakowało przejrzystego narzędzia do monitorowania ich wykorzystania. Decyzje o alokacji środków były podejmowane bez pełnego obrazu ROI i efektywności poszczególnych partnerów.
+            </p>
+          </section>
+
+          <!-- 2. Dane -->
+          <section class="cs-section fade-in" id="dataset">
+            <h2 class="cs-section-title">
+              <span class="cs-num">2</span>
+              <span data-i18n="cs_s_data">Dane</span>
+            </h2>
+            <p data-i18n="cs1_dataset">
+              Dane eksportowane z systemu CRM (aktywności kampanii, kontakty, konwersje) połączone z wewnętrznymi raportami finansowymi dotyczącymi przyznanych i rozliczonych dotacji. Zakres czasowy: 12 miesięcy.
+            </p>
+          </section>
+
+          <!-- 3. Narzędzia -->
+          <section class="cs-section fade-in" id="tools">
+            <h2 class="cs-section-title">
+              <span class="cs-num">3</span>
+              <span data-i18n="cs_s_tools">Narzędzia</span>
+            </h2>
+            <div class="tags">
+              <span class="tag">Excel</span>
+              <span class="tag">Power Query</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">DAX</span>
+            </div>
+          </section>
+
+          <!-- 4. Przygotowanie danych -->
+          <section class="cs-section fade-in" id="dataprep">
+            <h2 class="cs-section-title">
+              <span class="cs-num">4</span>
+              <span data-i18n="cs_s_prep">Przygotowanie danych</span>
+            </h2>
+            <p data-i18n="cs1_prep">
+              Dane z dwóch źródeł wymagały normalizacji struktury i unifikacji kluczy łączenia. W Power Query przeprowadzono czyszczenie, usunięcie duplikatów, transformację kolumn dat i scalenie tabel w jeden model danych.
+            </p>
+          </section>
+
+          <!-- 5. Proces analizy -->
+          <section class="cs-section fade-in" id="analysis">
+            <h2 class="cs-section-title">
+              <span class="cs-num">5</span>
+              <span data-i18n="cs_s_analysis">Proces analizy</span>
+            </h2>
+            <p data-i18n="cs1_analysis">
+              Analiza objęła: segmentację partnerów według wskaźnika wykorzystania budżetu, porównanie plan vs. wykonanie, identyfikację kampanii o najwyższym ROI oraz analizę trendów miesięcznych wydatków.
+            </p>
+          </section>
+
+          <!-- 6. Dashboard -->
+          <section class="cs-section fade-in" id="dashboard">
+            <h2 class="cs-section-title">
+              <span class="cs-num">6</span>
+              <span data-i18n="cs_s_dashboard">Dashboard</span>
+            </h2>
+            <p data-i18n="cs1_dashboard_desc">
+              Dashboard w Power BI z dynamicznymi filtrami (partner, region, miesiąc), wizualizacją wykorzystania budżetu, rankingiem partnerów i trendami ROI. Zastąp plikiem images/projects/cs1-dashboard.png.
+            </p>
+            <div class="cs-screenshot-ph" style="margin-top:20px;">
+              <i class="fas fa-chart-pie" aria-hidden="true"></i>
+              <span>Wstaw screenshot dashboardu: images/projects/cs1-dashboard.png</span>
+            </div>
+          </section>
+
+          <!-- 7. Wnioski -->
+          <section class="cs-section fade-in" id="findings">
+            <h2 class="cs-section-title">
+              <span class="cs-num">7</span>
+              <span data-i18n="cs_s_findings">Najważniejsze wnioski</span>
+            </h2>
+            <ul>
+              <li>Zidentyfikowano 3 segmenty partnerów: high-performers, underutilizers i high-ROI przy niskim budżecie</li>
+              <li>15% partnerów generuje 60% konwersji z działań CRM</li>
+              <li>Wyraźna sezonowość wydatków z pikiem w Q4</li>
+              <li>Część przyznanych dotacji pozostaje niewykorzystana mimo dostępnego budżetu</li>
+            </ul>
+          </section>
+
+          <!-- 8. Rekomendacje -->
+          <section class="cs-section fade-in" id="recs">
+            <h2 class="cs-section-title">
+              <span class="cs-num">8</span>
+              <span data-i18n="cs_s_recs">Rekomendacje biznesowe</span>
+            </h2>
+            <p data-i18n="cs1_recs">
+              1. Realokacja budżetu od underutilizers do high-performers z zachowaniem buforu. 2. Wprowadzenie kwartalnych przeglądów efektywności kampanii. 3. Ustalenie minimalnego progu wykorzystania dotacji jako warunku przedłużenia umowy partnerskiej.
+            </p>
+          </section>
+
+          <!-- 9. Czego się nauczyłam -->
+          <section class="cs-section fade-in" id="learned">
+            <h2 class="cs-section-title">
+              <span class="cs-num">9</span>
+              <span data-i18n="cs_s_learned">Czego się nauczyłam</span>
+            </h2>
+            <p data-i18n="cs1_learned">
+              Projekt rozwinął umiejętności modelowania danych w Power Query, tworzenia miar DAX i projektowania dashboardów z myślą o odbiorcy biznesowym. Nauczyłam się też, jak ważne jest zdefiniowanie pytań biznesowych przed przystąpieniem do analizy.
+            </p>
+          </section>
+
+          <!-- 10. Repozytorium -->
+          <section class="cs-section fade-in" id="repo">
+            <h2 class="cs-section-title">
+              <span class="cs-num">10</span>
+              <span data-i18n="cs_s_repo">Repozytorium</span>
+            </h2>
+            <a href="https://github.com/placeholder" class="btn btn-outline" target="_blank" rel="noopener">
+              <i class="fab fa-github" aria-hidden="true"></i>
+              <span data-i18n="cs_view_gh">Zobacz na GitHub</span>
+            </a>
+          </section>
+
+          <!-- Footer projektu -->
+          <div class="cs-footer fade-in">
+            <a href="../portfolio.html" class="btn btn-ghost">
+              <i class="fas fa-arrow-left" aria-hidden="true"></i>
+              <span data-i18n="cs_back">← Powrót do Portfolio</span>
+            </a>
+            <div class="tags">
+              <span class="tag tag-navy">Excel</span>
+              <span class="tag tag-navy">Power Query</span>
+              <span class="tag tag-navy">Power BI</span>
+              <span class="tag tag-navy">Dashboard</span>
+              <span class="tag tag-navy">CRM</span>
+            </div>
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
+  </footer>
+
+  <script src="../js/translations.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

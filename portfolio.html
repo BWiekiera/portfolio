@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio projektów analitycznych – Bernardeta Wiekiera. Excel, Power Query, SQL, Power BI." />
+  <title>Portfolio – Bernardeta Wiekiera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAWIGACJA -->
+  <nav id="navbar" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">BW<span>.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" role="list">
+        <li><a href="index.html"        class="nav-link" data-page="home"      data-i18n="nav_home">Główna</a></li>
+        <li><a href="portfolio.html"    class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="certificates.html" class="nav-link" data-page="cert"      data-i18n="nav_cert">Certyfikaty</a></li>
+        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-label" style="color:rgba(255,255,255,0.6);">Projekty analityczne</span>
+      <h1 data-i18n="port_page_title">Portfolio</h1>
+      <p data-i18n="port_page_sub">Projekty analityczne łączące doświadczenie biznesowe z danymi</p>
+    </div>
+  </header>
+
+  <!-- LISTA PROJEKTÓW -->
+  <main class="section section-bg">
+    <div class="container">
+      <div class="portfolio-list">
+
+        <!-- ==================== PROJEKT 1 ==================== -->
+        <article class="portfolio-card fade-in">
+          <div class="portfolio-card-inner">
+
+            <!-- Zdjęcie / screenshot -->
+            <div class="portfolio-card-img">
+              <img src="images/projects/project1.png" alt="Marketing Grants CRM Dashboard"
+                onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+              <span style="position:relative;z-index:1;">images/projects/project1.png</span>
+            </div>
+
+            <!-- Treść karty -->
+            <div class="portfolio-card-content">
+              <h2 class="portfolio-card-title" data-i18n="p1_title">Marketing Grants CRM Dashboard</h2>
+
+              <div class="portfolio-meta">
+                <span class="meta-label" data-i18n="port_lbl_project">Projekt:</span>
+                <span class="meta-value" data-i18n="p1_title">Marketing Grants CRM Dashboard</span>
+
+                <span class="meta-label" data-i18n="port_lbl_tools">Narzędzia:</span>
+                <span class="meta-value" data-i18n="port_p1_tools">Excel, Power Query, Power BI</span>
+
+                <span class="meta-label" data-i18n="port_lbl_goal">Cel:</span>
+                <span class="meta-value" data-i18n="port_p1_goal">
+                  Zbudowanie interaktywnego dashboardu monitorującego wykorzystanie dotacji marketingowych przez sieć partnerów CRM.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_desc">Opis:</span>
+                <span class="meta-value" data-i18n="port_p1_desc">
+                  Projekt obejmuje czyszczenie danych w Power Query, modelowanie relacji, wizualizację trendów wydatków i ROI oraz segmentację partnerów według efektywności kampanii.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_data">Dane:</span>
+                <span class="meta-value" data-i18n="port_p1_data">Eksport z systemu CRM, dane finansowe z raportów wewnętrznych</span>
+
+                <span class="meta-label" data-i18n="port_lbl_repo">Repozytorium:</span>
+                <span class="meta-value">
+                  <a href="https://github.com/placeholder" target="_blank" rel="noopener"
+                    style="color:var(--blue); text-decoration:underline;" data-i18n="port_p1_repo">
+                    github.com/placeholder/marketing-grants-dashboard
+                  </a>
+                </span>
+              </div>
+
+              <div class="portfolio-card-footer">
+                <a href="projects/project1.html" class="btn btn-primary btn-sm">
+                  <span data-i18n="btn_read_more">Czytaj więcej</span>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== PROJEKT 2 ==================== -->
+        <article class="portfolio-card fade-in">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-img">
+              <img src="images/projects/project2.png" alt="Sales Performance Analysis"
+                onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+              <span style="position:relative;z-index:1;">images/projects/project2.png</span>
+            </div>
+            <div class="portfolio-card-content">
+              <h2 class="portfolio-card-title" data-i18n="p2_title">Sales Performance Analysis</h2>
+
+              <div class="portfolio-meta">
+                <span class="meta-label" data-i18n="port_lbl_project">Projekt:</span>
+                <span class="meta-value" data-i18n="p2_title">Sales Performance Analysis</span>
+
+                <span class="meta-label" data-i18n="port_lbl_tools">Narzędzia:</span>
+                <span class="meta-value" data-i18n="port_p2_tools">SQL, Power BI, Excel</span>
+
+                <span class="meta-label" data-i18n="port_lbl_goal">Cel:</span>
+                <span class="meta-value" data-i18n="port_p2_goal">
+                  Analiza wyników sprzedaży w celu identyfikacji top-performerów, trendów sezonowych i obszarów wymagających wsparcia.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_desc">Opis:</span>
+                <span class="meta-value" data-i18n="port_p2_desc">
+                  Eksploracja danych w SQL, budowa miar w Power BI, stworzenie dynamicznego dashboardu z filtrowaniem wg regionu, produktu i okresu.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_data">Dane:</span>
+                <span class="meta-value" data-i18n="port_p2_data">Dane transakcyjne z systemu sprzedaży, plany sprzedażowe</span>
+
+                <span class="meta-label" data-i18n="port_lbl_repo">Repozytorium:</span>
+                <span class="meta-value">
+                  <a href="https://github.com/placeholder" target="_blank" rel="noopener"
+                    style="color:var(--blue); text-decoration:underline;" data-i18n="port_p2_repo">
+                    github.com/placeholder/sales-performance-analysis
+                  </a>
+                </span>
+              </div>
+
+              <div class="portfolio-card-footer">
+                <a href="projects/project2.html" class="btn btn-primary btn-sm">
+                  <span data-i18n="btn_read_more">Czytaj więcej</span>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== PROJEKT 3 ==================== -->
+        <article class="portfolio-card fade-in">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-img">
+              <img src="images/projects/project3.png" alt="Customer Segmentation Analysis"
+                onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+              <span style="position:relative;z-index:1;">images/projects/project3.png</span>
+            </div>
+            <div class="portfolio-card-content">
+              <h2 class="portfolio-card-title" data-i18n="p3_title">Customer Segmentation Analysis</h2>
+
+              <div class="portfolio-meta">
+                <span class="meta-label" data-i18n="port_lbl_project">Projekt:</span>
+                <span class="meta-value" data-i18n="p3_title">Customer Segmentation Analysis</span>
+
+                <span class="meta-label" data-i18n="port_lbl_tools">Narzędzia:</span>
+                <span class="meta-value" data-i18n="port_p3_tools">Excel, Power Query, Power BI</span>
+
+                <span class="meta-label" data-i18n="port_lbl_goal">Cel:</span>
+                <span class="meta-value" data-i18n="port_p3_goal">
+                  Segmentacja bazy klientów w celu identyfikacji grup o wysokiej wartości i opracowania strategii targetowania.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_desc">Opis:</span>
+                <span class="meta-value" data-i18n="port_p3_desc">
+                  Segmentacja RFM na podstawie historii zakupów, częstotliwości kontaktów i wartości klienta. Prezentacja wyników z rekomendacjami biznesowymi.
+                </span>
+
+                <span class="meta-label" data-i18n="port_lbl_data">Dane:</span>
+                <span class="meta-value" data-i18n="port_p3_data">Dane historyczne z systemu CRM z 3 lat, dane transakcyjne</span>
+
+                <span class="meta-label" data-i18n="port_lbl_repo">Repozytorium:</span>
+                <span class="meta-value">
+                  <a href="https://github.com/placeholder" target="_blank" rel="noopener"
+                    style="color:var(--blue); text-decoration:underline;" data-i18n="port_p3_repo">
+                    github.com/placeholder/customer-segmentation
+                  </a>
+                </span>
+              </div>
+
+              <div class="portfolio-card-footer">
+                <a href="projects/project3.html" class="btn btn-primary btn-sm">
+                  <span data-i18n="btn_read_more">Czytaj więcej</span>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

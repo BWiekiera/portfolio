@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Certyfikaty analityczne – Bernardeta Wiekiera. Excel, SQL, Power BI, Power Query." />
+  <title>Certyfikaty – Bernardeta Wiekiera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAWIGACJA -->
+  <nav id="navbar" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">BW<span>.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" role="list">
+        <li><a href="index.html"        class="nav-link" data-page="home"      data-i18n="nav_home">Główna</a></li>
+        <li><a href="portfolio.html"    class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="certificates.html" class="nav-link" data-page="cert"      data-i18n="nav_cert">Certyfikaty</a></li>
+        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-label" style="color:rgba(255,255,255,0.6);">Kwalifikacje</span>
+      <h1 data-i18n="cert_page_title">Certyfikaty</h1>
+      <p data-i18n="cert_page_sub">Potwierdzenie kompetencji analitycznych</p>
+    </div>
+  </header>
+
+  <!-- LISTA CERTYFIKATÓW -->
+  <main class="section section-bg">
+    <div class="container">
+      <div class="cert-list">
+
+        <!-- ==================== CERTYFIKAT 1: EXCEL ==================== -->
+        <article class="cert-card fade-in">
+          <div class="cert-card-img">
+            <img src="images/certificates/certificate1.png" alt="Certyfikat Excel"
+              onerror="this.parentElement.classList.add('cert-img-missing'); this.remove();" />
+            <div class="cert-img-fallback" aria-hidden="true"><i class="fas fa-file-excel"></i></div>
+            <div class="cert-zoom-hint" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="cert-card-content">
+            <h2 class="cert-card-title" data-i18n="cert1_name">Microsoft Excel – Poziom zaawansowany</h2>
+            <div class="cert-meta">
+              <span class="meta-label" data-i18n="cert_lbl_issuer">Organizator:</span>
+              <span class="meta-value" data-i18n="cert1_issuer">Placeholder – np. Udemy / Coursera</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_date">Data:</span>
+              <span class="meta-value" data-i18n="cert1_date">2024</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_scope">Zakres kursu:</span>
+              <span class="meta-value" data-i18n="cert1_scope">
+                Zaawansowane funkcje Excela: formuły tablicowe, tabele przestawne, Power Pivot, makra VBA i automatyzacja powtarzalnych zadań.
+              </span>
+
+              <span class="meta-label" data-i18n="cert_lbl_skills">Potwierdzone umiejętności:</span>
+              <span class="meta-value">
+                <div class="tags" style="margin-top:4px;" data-i18n-tags="cert1_skills" data-tag-variant="tag"></div>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== CERTYFIKAT 2: SQL ==================== -->
+        <article class="cert-card fade-in">
+          <div class="cert-card-img">
+            <img src="images/certificates/certificate2.png" alt="Certyfikat SQL"
+              onerror="this.parentElement.classList.add('cert-img-missing'); this.remove();" />
+            <div class="cert-img-fallback" aria-hidden="true"><i class="fas fa-database"></i></div>
+            <div class="cert-zoom-hint" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="cert-card-content">
+            <h2 class="cert-card-title" data-i18n="cert2_name">SQL dla analityków danych</h2>
+            <div class="cert-meta">
+              <span class="meta-label" data-i18n="cert_lbl_issuer">Organizator:</span>
+              <span class="meta-value" data-i18n="cert2_issuer">Placeholder – np. DataCamp / Coursera</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_date">Data:</span>
+              <span class="meta-value" data-i18n="cert2_date">2024</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_scope">Zakres kursu:</span>
+              <span class="meta-value" data-i18n="cert2_scope">
+                Zapytania SQL, agregacje, podzapytania, łączenie tabel, analiza i eksploracja danych w relacyjnych bazach danych.
+              </span>
+
+              <span class="meta-label" data-i18n="cert_lbl_skills">Potwierdzone umiejętności:</span>
+              <span class="meta-value">
+                <div class="tags" style="margin-top:4px;" data-i18n-tags="cert2_skills" data-tag-variant="tag"></div>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== CERTYFIKAT 3: POWER BI ==================== -->
+        <article class="cert-card fade-in">
+          <div class="cert-card-img">
+            <img src="images/certificates/certificate3.png" alt="Certyfikat Power BI"
+              onerror="this.parentElement.classList.add('cert-img-missing'); this.remove();" />
+            <div class="cert-img-fallback" aria-hidden="true"><i class="fas fa-chart-bar"></i></div>
+            <div class="cert-zoom-hint" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="cert-card-content">
+            <h2 class="cert-card-title" data-i18n="cert3_name">Power BI – Dashboardy i raporty</h2>
+            <div class="cert-meta">
+              <span class="meta-label" data-i18n="cert_lbl_issuer">Organizator:</span>
+              <span class="meta-value" data-i18n="cert3_issuer">Placeholder – np. Microsoft Learn / Udemy</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_date">Data:</span>
+              <span class="meta-value" data-i18n="cert3_date">2024</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_scope">Zakres kursu:</span>
+              <span class="meta-value" data-i18n="cert3_scope">
+                Tworzenie interaktywnych raportów i dashboardów, język DAX, relacje między tabelami, wizualizacje danych.
+              </span>
+
+              <span class="meta-label" data-i18n="cert_lbl_skills">Potwierdzone umiejętności:</span>
+              <span class="meta-value">
+                <div class="tags" style="margin-top:4px;" data-i18n-tags="cert3_skills" data-tag-variant="tag"></div>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==================== CERTYFIKAT 4: POWER QUERY ==================== -->
+        <article class="cert-card fade-in">
+          <div class="cert-card-img">
+            <img src="images/certificates/certificate4.png" alt="Certyfikat Power Query"
+              onerror="this.parentElement.classList.add('cert-img-missing'); this.remove();" />
+            <div class="cert-img-fallback" aria-hidden="true"><i class="fas fa-filter"></i></div>
+            <div class="cert-zoom-hint" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="cert-card-content">
+            <h2 class="cert-card-title" data-i18n="cert4_name">Power Query – Transformacja danych</h2>
+            <div class="cert-meta">
+              <span class="meta-label" data-i18n="cert_lbl_issuer">Organizator:</span>
+              <span class="meta-value" data-i18n="cert4_issuer">Placeholder – np. Udemy / Excel Campus</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_date">Data:</span>
+              <span class="meta-value" data-i18n="cert4_date">9999</span>
+
+              <span class="meta-label" data-i18n="cert_lbl_scope">Zakres kursu:</span>
+              <span class="meta-value" data-i18n="cert4_scope">
+                Importowanie, czyszczenie i transformacja danych, automatyzacja procesów ETL, łączenie wielu źródeł danych.
+              </span>
+
+              <span class="meta-label" data-i18n="cert_lbl_skills">Potwierdzone umiejętności:</span>
+              <span class="meta-value">
+                <div class="tags" style="margin-top:4px;" data-i18n-tags="cert4_skills" data-tag-variant="tag"></div>
+              </span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
+  </footer>
+
+  <!-- Lightbox certyfikatu -->
+  <div id="cert-lightbox" class="cert-lightbox" role="dialog" aria-modal="true" aria-label="Powiększony certyfikat">
+    <button class="cert-lightbox-close" id="cert-lightbox-close" aria-label="Zamknij">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <img src="" alt="" id="cert-lightbox-img" />
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

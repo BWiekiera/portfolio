@@ -1,0 +1,485 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bernardeta Wiekiera – profesjonalistka biznesowa rozwijająca kompetencje w analityce danych. Portfolio projektów z Excel, Power BI, SQL." />
+  <title>Bernardeta Wiekiera – Data Analytics Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAWIGACJA
+       ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="Główna nawigacja">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">BW<span>.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" role="list">
+        <li><a href="#hero"       class="nav-link" data-page="home" data-i18n="nav_home">Główna</a></li>
+        <li><a href="portfolio.html" class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="certificates.html" class="nav-link" data-page="cert" data-i18n="nav_cert">Certyfikaty</a></li>
+        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO — sekcja główna
+       ============================================================ -->
+  <section id="hero">
+    <div class="hero-blob" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Lewa strona: tekst + statystyki -->
+        <div class="hero-content">
+          <p class="hero-badge">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span data-i18n="hero_greeting">Cześć, jestem</span>
+          </p>
+          <h1 class="hero-name">Bernardeta Wiekiera</h1>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
+            Profesjonalistka biznesowa w drodze do analityki danych
+          </p>
+          <p class="hero-desc" data-i18n="hero_desc">
+            Ponad 15 lat doświadczenia w bankowości, wsparciu sprzedaży, zarządzaniu procesami i raportowaniu. Rozwijam kompetencje analityczne, łącząc perspektywę biznesową z nowoczesnymi narzędziami danych.
+          </p>
+          <div class="hero-btns">
+            <a href="images/cv/cv-bernardeta-wiekiera.pdf" class="btn btn-primary" download>
+              <i class="fas fa-download" aria-hidden="true"></i>
+              <span data-i18n="hero_cv">Pobierz CV</span>
+            </a>
+            <a href="#projects" class="btn btn-outline">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              <span data-i18n="hero_projects">Zobacz projekty</span>
+            </a>
+          </div>
+
+          <!-- Statystyki -->
+          <div class="hero-stats">
+            <div class="stat-card fade-in">
+              <span class="stat-num" data-i18n="stat1_num">15+</span>
+              <span class="stat-label" data-i18n="stat1_label">lat w finansach i bankowości</span>
+            </div>
+            <div class="stat-card fade-in">
+              <span class="stat-num" data-i18n="stat2_num">7</span>
+              <span class="stat-label" data-i18n="stat2_label">lat jako właścicielka firmy</span>
+            </div>
+            <div class="stat-card fade-in">
+              <span class="stat-num" data-i18n="stat3_num">3</span>
+              <span class="stat-label" data-i18n="stat3_label">projekty analityczne</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prawa strona: zdjęcie profilowe -->
+        <div class="hero-img-wrap" aria-hidden="true">
+          <div class="hero-img-glow"></div>
+          <div class="hero-img-frame">
+            <!-- Zastąp profile.jpg swoim zdjęciem -->
+            <img src="images/profile/profile.jpg" alt="Bernardeta Wiekiera"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="hero-img-placeholder" style="display:none;">
+              <i class="fas fa-user"></i>
+              <span>images/profile/profile.jpg</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJEKTY — karty na stronie głównej
+       ============================================================ -->
+  <section id="projects" class="section section-bg">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Portfolio</span>
+        <h2 data-i18n="sec_proj_title">Zobacz moje projekty</h2>
+        <p data-i18n="sec_proj_sub">Projekty łączące wieloletnie doświadczenie biznesowe z analizą danych</p>
+      </div>
+
+      <!-- Karuzela projektów -->
+      <div class="carousel-outer fade-in">
+        <button class="carousel-btn carousel-prev" id="proj-prev" aria-label="Poprzedni projekt">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+
+        <div class="carousel-stage" id="proj-stage">
+          <div class="carousel-track" id="proj-track">
+
+            <!-- Projekt 1 -->
+            <article class="project-card">
+              <div class="project-card-img">
+                <img src="images/projects/project1.png" alt="Marketing Grants CRM Dashboard"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+                <span>images/projects/project1.png</span>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title" data-i18n="p1_title">Marketing Grants CRM Dashboard</h3>
+                <p class="project-card-desc" data-i18n="p1_short">
+                  Interaktywny dashboard do śledzenia dotacji marketingowych i efektywności kampanii CRM.
+                </p>
+                <div class="project-card-tags">
+                  <div class="tags">
+                    <span class="tag">Excel</span>
+                    <span class="tag">Power Query</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">Dashboard</span>
+                  </div>
+                </div>
+                <div class="project-card-btns">
+                  <a href="https://github.com/placeholder" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span data-i18n="btn_github">GitHub</span>
+                  </a>
+                  <a href="projects/project1.html" class="btn btn-primary btn-sm">
+                    <span data-i18n="btn_read_more">Czytaj więcej</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Projekt 2 -->
+            <article class="project-card">
+              <div class="project-card-img">
+                <img src="images/projects/project2.png" alt="Sales Performance Analysis"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+                <span>images/projects/project2.png</span>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title" data-i18n="p2_title">Sales Performance Analysis</h3>
+                <p class="project-card-desc" data-i18n="p2_short">
+                  Kompleksowa analiza wyników sprzedaży z identyfikacją kluczowych KPI i trendów.
+                </p>
+                <div class="project-card-tags">
+                  <div class="tags">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                    <span class="tag">KPI</span>
+                  </div>
+                </div>
+                <div class="project-card-btns">
+                  <a href="https://github.com/placeholder" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span data-i18n="btn_github">GitHub</span>
+                  </a>
+                  <a href="projects/project2.html" class="btn btn-primary btn-sm">
+                    <span data-i18n="btn_read_more">Czytaj więcej</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Projekt 3 -->
+            <article class="project-card">
+              <div class="project-card-img">
+                <img src="images/projects/project3.png" alt="Customer Segmentation Analysis"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.removeProperty('display');" />
+                <span>images/projects/project3.png</span>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title" data-i18n="p3_title">Customer Segmentation Analysis</h3>
+                <p class="project-card-desc" data-i18n="p3_short">
+                  Segmentacja bazy klientów na podstawie danych historycznych i zachowań zakupowych.
+                </p>
+                <div class="project-card-tags">
+                  <div class="tags">
+                    <span class="tag">Excel</span>
+                    <span class="tag">Power Query</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">Segmentacja</span>
+                  </div>
+                </div>
+                <div class="project-card-btns">
+                  <a href="https://github.com/placeholder" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span data-i18n="btn_github">GitHub</span>
+                  </a>
+                  <a href="projects/project3.html" class="btn btn-primary btn-sm">
+                    <span data-i18n="btn_read_more">Czytaj więcej</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Projekt 4 — teaser -->
+            <article class="project-card project-card--teaser">
+              <div class="project-card-img project-card-img--teaser">
+                <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title" data-i18n="p4_title">Wkrótce nowy projekt</h3>
+                <p class="project-card-desc" data-i18n="p4_short">
+                  Kolejne analizy i dashboardy już w trakcie realizacji. Wróć wkrótce, aby zobaczyć nowe projekty.
+                </p>
+                <div class="project-card-tags">
+                  <div class="tags">
+                    <span class="tag" data-i18n="p4_tag1">W przygotowaniu</span>
+                  </div>
+                </div>
+                <div class="project-card-btns">
+                  <a href="portfolio.html" class="btn btn-outline btn-sm">
+                    <span data-i18n="btn_view_all">Zobacz wszystkie projekty</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <button class="carousel-btn carousel-next" id="proj-next" aria-label="Następny projekt">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Dots nawigacyjne -->
+      <div class="carousel-dots" id="proj-dots" aria-label="Nawigacja po projektach">
+        <button class="carousel-dot active" data-index="0" aria-label="Projekt 1"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Projekt 2"></button>
+        <button class="carousel-dot" data-index="2" aria-label="Projekt 3"></button>
+        <button class="carousel-dot" data-index="3" aria-label="Projekt 4"></button>
+      </div>
+
+      <div class="projects-cta fade-in">
+        <a href="portfolio.html" class="btn btn-outline">
+          <i class="fas fa-grid-2" aria-hidden="true"></i>
+          <span data-i18n="btn_view_all">Zobacz wszystkie projekty</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DOŚWIADCZENIE — oś czasu
+       ============================================================ -->
+  <section id="experience" class="section section-white">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Ścieżka kariery</span>
+        <h2 data-i18n="sec_exp_title">Doświadczenie</h2>
+        <p data-i18n="sec_exp_sub">Droga od bankowości, przez biznes, do analityki danych</p>
+      </div>
+
+      <div class="timeline">
+
+        <!-- Wpis 1 -->
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <span class="timeline-period" data-i18n="exp1_period">2022 – obecnie</span>
+          <div class="timeline-card">
+            <div class="timeline-role" data-i18n="exp1_role">Sales Network Support Manager</div>
+            <div class="timeline-company" data-i18n="exp1_company">Ubezpieczenia / Wsparcie Sieci Sprzedaży</div>
+            <p class="timeline-desc" data-i18n="exp1_desc">
+              Koordynacja procesów wsparcia sieci sprzedaży, raportowanie i analiza KPI, zarządzanie budżetami operacyjnymi i marketingowymi, rozliczenia finansowe oraz zarządzanie rozproszonym zespołem.
+            </p>
+            <div class="tags" data-i18n-tags="exp1_tags" data-tag-variant="tag tag-navy"></div>
+          </div>
+        </div>
+
+        <!-- Wpis 2 -->
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <span class="timeline-period" data-i18n="exp2_period">2015 – 2022</span>
+          <div class="timeline-card">
+            <div class="timeline-role" data-i18n="exp2_role">Właścicielka firmy</div>
+            <div class="timeline-company" data-i18n="exp2_company">Nieruchomości & Doradztwo Finansowe</div>
+            <p class="timeline-desc" data-i18n="exp2_desc">
+              Prowadzenie własnej działalności doradczej w obszarze nieruchomości i usług finansowych. Kompleksowa obsługa klientów, analiza potrzeb, zarządzanie procesami i pełna odpowiedzialność za wyniki.
+            </p>
+            <div class="tags" data-i18n-tags="exp2_tags" data-tag-variant="tag tag-navy"></div>
+          </div>
+        </div>
+
+        <!-- Wpis 3 -->
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <span class="timeline-period" data-i18n="exp3_period">2000 – 2015</span>
+          <div class="timeline-card">
+            <div class="timeline-role" data-i18n="exp3_role">Analiza Kredytowa & Zarządzanie Zespołem</div>
+            <div class="timeline-company" data-i18n="exp3_company">Sektor Bankowy</div>
+            <p class="timeline-desc" data-i18n="exp3_desc">
+              Analiza wniosków kredytowych hipotecznych, ocena ryzyka i zdolności kredytowej, praca z dokumentacją finansową i raportowanie. Stopniowy awans od stanowisk analitycznych do zarządzania zespołem.
+            </p>
+            <div class="tags" data-i18n-tags="exp3_tags" data-tag-variant="tag tag-navy"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       O MNIE
+       ============================================================ -->
+  <section id="about" class="section section-bg">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Tekst -->
+        <div class="about-content fade-in">
+          <span class="section-label">Bio</span>
+          <h2 data-i18n="sec_about_title">Więcej o mnie</h2>
+          <p data-i18n="about_p1">
+            Przez ponad 15 lat pracowałam w bankowości i finansach — analizując wnioski kredytowe, zarządzając zespołami i raportując wyniki do zarządu. Potem przez kilka lat prowadziłam własną firmę doradczą, gdzie liczby i decyzje biznesowe były moją codziennością.
+          </p>
+          <p data-i18n="about_p2">
+            Teraz robię kolejny krok: rozwijam kompetencje w analityce danych. Nie dlatego, że zmieniam kierunek — ale dlatego, że chcę wzmocnić to, co robię od zawsze. Excel, Power BI, SQL, Power Query — to narzędzia, które pozwalają mi jeszcze lepiej zadawać pytania o dane i znajdować odpowiedzi, które mają realne znaczenie biznesowe.
+          </p>
+          <p data-i18n="about_p3">
+            Kiedy nie pracuję z danymi, zajmuję się rękodziełem albo wyruszam na motor. Jedno i drugie wymaga precyzji, planowania i cierpliwości — cech, które świetnie sprawdzają się też w analityce.
+          </p>
+        </div>
+
+        <!-- Cytat -->
+        <div class="about-quote-card fade-in" aria-label="Cytat">
+          <p class="about-quote-text" data-i18n="about_quote">
+            Łączę wieloletnie doświadczenie biznesowe z nowymi kompetencjami analitycznymi — bo najlepsze decyzje rodzą się na styku danych i praktyki.
+          </p>
+          <div class="about-quote-attr">— Bernardeta Wiekiera</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TECHNOLOGIE I NARZĘDZIA
+       ============================================================ -->
+  <section id="skills" class="section section-white">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Tech Stack</span>
+        <h2 data-i18n="sec_skills_title">Technologie i narzędzia</h2>
+        <p data-i18n="sec_skills_sub">Narzędzia, z którymi pracuję na co dzień</p>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-file-excel" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_excel_name">Excel</div>
+          <div class="skill-desc" data-i18n="sk_excel_desc">Zaawansowane formuły, tabele przestawne, automatyzacja</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-filter" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_pq_name">Power Query</div>
+          <div class="skill-desc" data-i18n="sk_pq_desc">Transformacja i czyszczenie danych</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_sql_name">SQL</div>
+          <div class="skill-desc" data-i18n="sk_sql_desc">Zapytania, agregacje, analiza danych</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-chart-bar" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_pbi_name">Power BI</div>
+          <div class="skill-desc" data-i18n="sk_pbi_desc">Dashboardy, wizualizacje, raportowanie</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-file-powerpoint" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_ppt_name">PowerPoint</div>
+          <div class="skill-desc" data-i18n="sk_ppt_desc">Prezentacje danych i wyników biznesowych</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-building-columns" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_sap_name">SAP</div>
+          <div class="skill-desc" data-i18n="sk_sap_desc">Systemy ERP, dane operacyjne</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_da_name">Analityka danych</div>
+          <div class="skill-desc" data-i18n="sk_da_desc">Analiza trendów, KPI i wzorców</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_dash_name">Dashboarding</div>
+          <div class="skill-desc" data-i18n="sk_dash_desc">Projektowanie czytelnych dashboardów</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_ba_name">Analiza biznesowa</div>
+          <div class="skill-desc" data-i18n="sk_ba_desc">Definiowanie potrzeb i wymagań biznesowych</div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></div>
+          <div class="skill-name" data-i18n="sk_rep_name">Raportowanie</div>
+          <div class="skill-desc" data-i18n="sk_rep_desc">Raporty cykliczne i analizy zarządcze</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KONTAKT
+       ============================================================ -->
+  <section id="contact" class="section section-bg">
+    <div class="container">
+      <div class="contact-wrap fade-in">
+        <span class="section-label">Kontakt</span>
+        <h2 data-i18n="sec_contact_title">Kontakt</h2>
+        <p class="contact-sub" data-i18n="sec_contact_sub">Zaintrygowany/a? Porozmawiajmy.</p>
+        <div class="contact-badge" data-i18n="contact_avail">
+          Dostępna do rozmów o możliwościach w obszarze analityki danych
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:twoj@email.com" class="contact-link-box">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span data-i18n="contact_email_label">E-mail</span>
+          </a>
+          <a href="https://linkedin.com/in/placeholder" class="contact-link-box" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+            <span data-i18n="contact_li_label">LinkedIn</span>
+          </a>
+          <a href="https://github.com/placeholder" class="contact-link-box" target="_blank" rel="noopener">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <span data-i18n="contact_gh_label">GitHub</span>
+          </a>
+        </div>
+
+        <a href="mailto:twoj@email.com" class="btn btn-primary">
+          <i class="fas fa-paper-plane" aria-hidden="true"></i>
+          <span data-i18n="contact_btn">Napisz do mnie</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
