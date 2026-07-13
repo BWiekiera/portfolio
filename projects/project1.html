@@ -1,237 +1,393 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Case study: Marketing Grants CRM Dashboard – Bernardeta Wiekiera. Power BI, Power Query, Excel." />
-  <title>Marketing Grants CRM Dashboard – Bernardeta Wiekiera</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="../css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="CRM i dashboard komisji ds. dofinansowań marketingowych – projekt Excel, Power Query, Power Pivot i VBA." name="description"/>
+<title>CRM i dashboard komisji ds. dofinansowań marketingowych – Bernardeta Wiekiera</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
+<nav aria-label="Główna nawigacja" id="navbar" role="navigation">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">BW<span>.</span></a>
+<button aria-expanded="false" aria-label="Menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<ul id="nav-menu" role="list">
+<li><a class="nav-link" data-i18n="nav_home" data-page="home" href="../index.html">Główna</a></li>
+<li><a class="nav-link" data-i18n="nav_portfolio" data-page="portfolio" href="../portfolio.html">Portfolio</a></li>
+<li><a class="nav-link" data-i18n="nav_cert" data-page="cert" href="../certificates.html">Certyfikaty</a></li>
+<li><button aria-label="Zmień język" class="lang-btn" id="lang-toggle">EN</button></li>
+</ul>
+</div>
+</nav>
+<main class="section section-bg">
+<div class="container">
+<div class="cs-layout">
+<aside class="cs-sidebar">
+<span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
+<nav aria-label="Nawigacja po projekcie" class="cs-sidebar-nav"><a href="#pl-overview" data-project-top-link="true">Widok projektu</a>
+<a href="#pl-s1">Problem i cel projektu</a>
+<a href="#pl-s2">Dane</a>
+<a href="#pl-s3">Model danych</a>
+<a href="#pl-s4">Przygotowanie danych</a>
+<a href="#pl-s5">Struktura skoroszytu</a>
+<a href="#pl-s6">Wnioski techniczne</a>
+<a href="#pl-s7">Wnioski biznesowe</a>
+<a href="#pl-s8">Rekomendacje biznesowe</a>
+<a href="#pl-s9">Dalszy rozwój projektu</a>
+<a href="#pl-s10">Powiązanie z projektem Power BI</a>
+<a href="#pl-s11">Czego się nauczyłam</a>
+<a href="#pl-s12">Repozytorium</a>
+</nav>
+</aside>
+<article class="cs-content project1-case">
+<a class="cs-back-link" data-i18n="cs_back" href="../portfolio.html">← Powrót do Portfolio</a>
 
-  <!-- NAWIGACJA -->
-  <nav id="navbar" role="navigation">
-    <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">BW<span>.</span></a>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul id="nav-menu" role="list">
-        <li><a href="../index.html"        class="nav-link" data-page="home"      data-i18n="nav_home">Główna</a></li>
-        <li><a href="../portfolio.html"    class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
-        <li><a href="../certificates.html" class="nav-link" data-page="cert"      data-i18n="nav_cert">Certyfikaty</a></li>
-        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
-      </ul>
-    </div>
-  </nav>
+<div data-project-lang="pl" id="pl-overview"><figure class="cs-figure cs-main-figure"><div class="cs-hero-img"><img alt="CRM i dashboard komisji ds. dofinansowań marketingowych — widok główny projektu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_main.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_main.png</span></div></div></figure><h1 class="cs-title">CRM i dashboard komisji ds. dofinansowań marketingowych</h1><div class="cs-intro-meta"><span class="tag">Excel</span><span class="tag">Power Query</span><span class="tag">Power Pivot</span><span class="tag">VBA</span><span class="tag">KPI</span></div>
+<p>Excelowy system operacyjno-analityczny wspierający ocenę wniosków o dofinansowanie działań marketingowych, kontrolę rozliczeń oraz analizę efektywności programu. Projekt łączy przygotowanie syntetycznej bazy danych, Power Query, model danych, dashboardy KPI, aktywną nawigację między arkuszami oraz formularz VBA do obsługi decyzji komisji.</p>
+<p>Dane przedstawiają stan na 1 lutego 2025 roku i obejmują pełne lata 2022–2024 oraz wnioski ze stycznia 2025 roku. Wnioski styczniowe znajdują się na etapie rozpatrywania przez komisję. W wersji demonstracyjnej pokazano również, jak formularz VBA zapisuje decyzję dla wybranego wniosku i aktualizuje dane w głównej bazie.</p>
+<p>Narzędzia: Excel, Power Query, Power Pivot, VBA, tabele przestawne, formuły, formatowanie warunkowe, dashboard design.</p>
+<figure class="cs-figure cs-demo-video"><div class="cs-video-wrap cs-video-giflike"><video autoplay muted loop playsinline preload="metadata" aria-label="Demonstracja działania skoroszytu"><source src="../images/projects/project1_demo.mp4" type="video/mp4"/>Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div></figure>
+<section class="cs-section" id="pl-s1"><h2 class="cs-section-title"><span class="cs-num">1</span>Problem i cel projektu</h2>
+<p>W organizacji posiadającej sieć sprzedaży lub partnerów biznesowych proces przyznawania dofinansowań marketingowych może obejmować wiele wniosków, różnych przedstawicieli, regionów, typów akcji i budżetów. Sama decyzja o przyznaniu środków nie wystarcza — ważne jest również późniejsze rozliczenie akcji i ocena, czy dofinansowanie przyniosło oczekiwany efekt biznesowy.</p>
+<p>Głównym problemem biznesowym był brak jednego narzędzia, które pozwalałoby komisji oraz osobom nadzorującym program dofinansowań kompleksowo obsługiwać proces: od przeglądu wniosków, przez ocenę historii przedstawiciela, po kontrolę rozliczeń i analizę efektywności programu.</p><p>Takie narzędzie powinno umożliwiać:</p><ul><li>przeglądanie i filtrowanie wniosków,</li><li>sprawdzanie historii przedstawiciela przed podjęciem decyzji,</li><li>analizowanie wcześniejszych wyników i rozliczeń,</li><li>monitorowanie opóźnień w rozliczeniach,</li><li>kontrolowanie wykorzystania budżetu,</li><li>identyfikowanie wniosków wymagających dodatkowej uwagi,</li><li>ocenę efektywności programu dofinansowań.</li></ul>
+<p>Celem projektu było stworzenie skoroszytu Excel, który nie jest wyłącznie statycznym raportem, ale pełni funkcję prostego narzędzia operacyjnego dla komisji i osób nadzorujących program dofinansowań.</p>
+<p>Dashboardy zostały przygotowane z myślą o pracy na dużym ekranie jako stanowisko robocze. Dzięki temu użytkownik może jednocześnie widzieć najważniejsze KPI, tabele, slicery, listy wniosków i szczegóły analityczne.</p>
+</section>
+<section class="cs-section" id="pl-s2"><h2 class="cs-section-title"><span class="cs-num">2</span>Dane</h2>
+<p>Dane zostały przygotowane przeze mnie specjalnie na potrzeby projektu portfolio. Są to dane fikcyjne, inspirowane realnym procesem biznesowym. Wszelka zbieżność danych osobowych, wartości lub sytuacji biznesowych jest przypadkowa.</p>
+<p>Zbiór został zaprojektowany tak, aby umożliwić analizę zarówno na poziomie operacyjnym, jak i biznesowym: według roku, miesiąca, regionu, przedstawiciela, typu akcji, statusu wniosku, terminowości rozliczeń i efektywności inwestycji.</p>
+<p>W projekcie przygotowałam między innymi:</p><ul><li>bazę 625 wniosków,</li><li>bazę 80 przedstawicieli,</li><li>bazę 85 opisów działań marketingowych,</li><li>bazę rozliczeń obejmującą wnioski, które otrzymały pozytywną decyzję,</li><li>kalendarz raportowy obejmujący każdy dzień od 01.01.2022 do 31.12.2025,</li><li>tabele pomocnicze dla statusów, segmentów, typów działań i powodów odmowy.</li></ul>
+<p>Opisy działań marketingowych zostały przygotowane jako zbiór syntetyczny. Dla uproszczenia część opisów została przypisana losowo do wniosków zgodnie z typem akcji. W realnym środowisku każdy wniosek zawierałby indywidualny opis lub biznes plan przygotowany przez przedstawiciela.</p>
+<p>Przy tworzeniu danych korzystałam również ze wsparcia AI, przede wszystkim do przyspieszenia generowania syntetycznych rekordów zgodnie z określonymi przeze mnie założeniami. Moim zadaniem było zaprojektowanie logiki biznesowej, struktury danych, zależności między tabelami, wskaźników oraz scenariuszy analitycznych.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 1. Kalendarz raportowy z kolumnami pomocniczymi do analiz miesięcznych, kwartalnych i rocznych" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_calendar.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_calendar.png</span></div></div><figcaption>Zdjęcie 1. Kalendarz raportowy z kolumnami pomocniczymi do analiz miesięcznych, kwartalnych i rocznych</figcaption></figure>
+</section>
+<section class="cs-section" id="pl-s3"><h2 class="cs-section-title"><span class="cs-num">3</span>Model danych</h2>
+<p>Projekt został zaprojektowany z myślą o strukturze zbliżonej do modelu gwiazdy. Przygotowałam tabelę faktów dla wniosków oraz tabele wymiarów, m.in. dla przedstawicieli, kalendarza, statusów, typów inicjatyw, kanałów, segmentów, skali działań i powodów odmowy.</p>
+<p>W modelu uwzględniłam między innymi:</p><ul><li>tabelę faktów z wnioskami,</li><li>wymiar przedstawicieli,</li><li>wymiar kalendarza,</li><li>wymiar statusu wniosku,</li><li>wymiar statusu rozliczenia,</li><li>wymiar terminowości,</li><li>wymiar typu inicjatywy,</li><li>wymiar kanału,</li><li>wymiar segmentu kwoty,</li><li>wymiar powodów odmowy,</li><li>wymiar opisów działań.</li></ul>
+<p>Podczas pracy napotkałam ograniczenia związane ze stabilnością i wygodą obsługi modelu w Excelu/Power Pivot przy jednoczesnym budowaniu wielu arkuszy operacyjnych, dashboardów i formularza. Dlatego finalna warstwa raportowa w Excelu została oparta na skonsolidowanej tabeli analitycznej przygotowanej w Power Query.</p>
+<p>Nie była to rezygnacja z modelowania danych, ale świadoma decyzja projektowa: w przypadku tego skoroszytu ważniejsze było stworzenie stabilnego i łatwego w obsłudze narzędzia operacyjnego niż utrzymywanie modelu, który utrudniał dalszą pracę nad dashboardami. Model gwiazdy został zaprojektowany jako etap analityczny, natomiast finalne raportowanie w Excelu zostało uproszczone do jednej tabeli analitycznej.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 2. Model danych — projekt modelu gwiazdy w Power Pivot" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_data_model.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_data_model.png</span></div></div><figcaption>Zdjęcie 2. Model danych — projekt modelu gwiazdy w Power Pivot</figcaption></figure>
+</section>
+<section class="cs-section" id="pl-s4"><h2 class="cs-section-title"><span class="cs-num">4</span>Przygotowanie danych</h2>
+<p>Dane zostały przygotowane i uporządkowane w Power Query. Proces obejmował czyszczenie tabel, łączenie źródeł, dodawanie kolumn pomocniczych oraz przygotowanie jednej tabeli analitycznej wykorzystywanej w dashboardach.</p>
+<p>W Power Query przygotowałam między innymi:</p><ul><li>połączenie danych z wniosków, przedstawicieli, opisów i rozliczeń,</li><li>kolumny segmentacyjne,</li><li>kolumny z flagami pomocniczymi,</li><li>statusy wykorzystywane w KPI,</li><li>dane do analizy terminowości,</li><li>kolumny do raportowania według roku, miesiąca i okresu komisji,</li><li>pola potrzebne do dashboardów i tabel przestawnych.</li></ul>
+<p>W projekcie wykorzystałam między innymi formuły i mechanizmy Excela takie jak:</p><ul><li>IF,</li><li>IFS,</li><li>IFERROR,</li><li>SUMIFS,</li><li>COUNTIFS,</li><li>AVERAGEIFS,</li><li>XLOOKUP,</li><li>FILTER,</li><li>CHOOSECOLS,</li><li>OR,</li><li>MAX,</li><li>odwołania strukturalne do tabel,</li><li>tablice rozlane,</li><li>tabele przestawne,</li><li>slicery,</li><li>wykresy,</li><li>formatowanie warunkowe,</li><li>kształty jako elementy nawigacji i dashboardów.</li></ul>
+<p>Formatowanie warunkowe zostało wykorzystane do wyróżniania informacji pozytywnych i negatywnych, np. wysokiej lub niskiej efektywności inwestycji, ujemnego ROI, długiego paybacku, niekorzystnych odchyleń od prognozy oraz wniosków wymagających uwagi.</p>
+</section>
+<section class="cs-section" id="pl-s5"><h2 class="cs-section-title"><span class="cs-num">5</span>Struktura skoroszytu</h2>
+<p>Skoroszyt składa się z kilku części, które razem tworzą spójny proces pracy komisji.</p>
+<h3>Home</h3>
+<p>Arkusz Home pełni funkcję strony startowej. Zawiera aktywne kafelki prowadzące do najważniejszych części projektu. Użytkownik może przejść bezpośrednio do listy wniosków, szczegółów aplikacji, historii, dashboardów kontrolnych i danych.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 3. Home — strona startowa z aktywnymi kształtami prowadzącymi do arkuszy projektu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_home.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_home.png</span></div></div><figcaption>Zdjęcie 3. Home — strona startowa z aktywnymi kształtami prowadzącymi do arkuszy projektu</figcaption></figure>
+<h3>Application List</h3>
+<p>Arkusz Application List jest operacyjną listą wniosków. Użytkownik może filtrować wnioski według roku, kwartału, miesiąca komisji, regionu, statusu i zakresu finansowania. Arkusz zawiera również podsumowanie komisji, m.in. liczbę wniosków, zaakceptowanych, odrzuconych i oczekujących oraz wartości wnioskowane i przyznane.</p>
+<p>Z tego poziomu użytkownik wybiera konkretny wniosek i przechodzi do jego szczegółów.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 4. Application List — lista wniosków komisji z filtrami i podsumowaniem" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_list.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_list.png</span></div></div><figcaption>Zdjęcie 4. Application List — lista wniosków komisji z filtrami i podsumowaniem</figcaption></figure>
+<h3>Application Details</h3>
+<p>Arkusz Application Details pokazuje pojedynczy wniosek wraz z kontekstem przedstawiciela. Użytkownik widzi dane przedstawiciela, region, menedżera, segment, opis inicjatywy, podstawowe wskaźniki oraz historię wcześniejszych wniosków tego samego przedstawiciela.</p>
+<p>To ważny element procesu decyzyjnego, ponieważ komisja nie ocenia wniosku w oderwaniu od historii. Może sprawdzić, czy wcześniejsze działania były rozliczone, czy przyniosły efekt i czy przedstawiciel ma oczekujące lub nierozliczone wnioski.</p>
+<p>W tym arkuszu wykorzystałam również tablicę rozlaną, która automatycznie wyświetla historię wniosków powiązanych z wybranym przedstawicielem.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 5. Application Details — szczegóły wniosku, opis inicjatywy i historia przedstawiciela" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_details.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_details.png</span></div></div><figcaption>Zdjęcie 5. Application Details — szczegóły wniosku, opis inicjatywy i historia przedstawiciela</figcaption></figure>
+<h3>Committee Decision Form</h3>
+<p>W osobnej wersji pliku przygotowałam formularz VBA Committee Decision Form, który pokazuje, jak Excel może wspierać nie tylko analizę, ale również operacyjną obsługę procesu.</p>
+<p>Ze względów bezpieczeństwa główny plik udostępniony w repozytorium jest zapisany jako .xlsx, czyli bez makr. Wersja .xlsm została pokazana w formie zrzutów ekranu oraz krótkiego filmu prezentującego działanie formularza. Kod VBA został udostępniony jako pliki tekstowe, aby można było go przejrzeć bez uruchamiania makr.</p>
+<p>Formularz VBA umożliwia:</p><ul><li>wyszukanie wniosku po numerze,</li><li>automatyczne pobranie danych z arkusza Data i tabeli Baza,</li><li>uzupełnienie decyzji komisji,</li><li>zapisanie decyzji do głównej bazy,</li><li>wyczyszczenie formularza.</li></ul>
+<p>Ścieżka działania formularza zaczyna się w arkuszu Application List, gdzie użytkownik wybiera wniosek z listy. Następnie przechodzi do arkusza Application Details, aby zapoznać się ze szczegółami wniosku, opisem inicjatywy oraz historią przedstawiciela. Na tym etapie użytkownik może również ręcznie wprowadzić inny numer wniosku.</p>
+<p>Po kliknięciu przycisku Decision Form użytkownik przechodzi do arkusza z formularzem decyzji. Numer wniosku jest automatycznie przenoszony do formularza, ale może być również wpisany ręcznie. Po kliknięciu przycisku Search Application formularz pobiera z głównej bazy dane wniosku, przedstawiciela, regionu, menedżera, datę wniosku, status oraz kwotę wnioskowaną.</p>
+<p>Następnie użytkownik uzupełnia decyzję komisji. W przypadku decyzji pozytywnej wpisuje procent przyznanego dofinansowania, a kwota Granted Amount wylicza się automatycznie na podstawie kwoty wnioskowanej i procentu dofinansowania. W przypadku decyzji negatywnej formularz wymaga podania powodu odmowy oraz zeruje procent i kwotę dofinansowania.</p>
+<p>Po kliknięciu Save Decision dane zapisują się w głównej bazie w arkuszu Data, w tabeli Baza. Przycisk Clear Form czyści pola formularza i pozwala rozpocząć pracę z kolejnym wnioskiem.</p>
+<p>W formularzu zastosowałam walidacje:</p><ul><li>decyzja może być pozytywna lub negatywna,</li><li>w przypadku decyzji negatywnej wymagane jest podanie powodu odmowy,</li><li>decyzja negatywna zeruje procent dofinansowania i kwotę przyznaną,</li><li>w przypadku decyzji pozytywnej nie można wpisać powodu odmowy,</li><li>procent dofinansowania musi być większy od zera i nie może przekraczać 100%,</li><li>kwota przyznana wylicza się automatycznie na podstawie kwoty wnioskowanej i procentu dofinansowania,</li><li>data decyzji musi być poprawną datą w określonym formacie,</li><li>pole kwoty przyznanej jest wyliczane i zabezpieczone przed ręczną edycją.</li></ul>
+<p>Formularz zawiera również zdarzenie arkusza, które automatycznie przelicza kwotę przyznaną po zmianie procentu dofinansowania lub kwoty wnioskowanej. Dodatkowo po dwukrotnym kliknięciu w pole daty decyzji otwiera się bezpieczne okno do wpisania daty.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 6. Committee Decision Form — formularz VBA do wyszukiwania wniosku i zapisu decyzji komisji" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_decision_form.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_decision_form.png</span></div></div><figcaption>Zdjęcie 6. Committee Decision Form — formularz VBA do wyszukiwania wniosku i zapisu decyzji komisji</figcaption></figure>
+<h3>Application History</h3>
+<p>Arkusz Application History to szczegółowa tabela analityczna pokazująca historię wniosków. Dane zostały pogrupowane tematycznie: szczegóły aplikacji, informacje o rozliczeniu, dane finansowe, wskaźniki efektywności i odchylenia od prognozy.</p>
+<p>Arkusz pozwala analizować między innymi:</p><ul><li>decyzję komisji,</li><li>status rozliczenia,</li><li>termin rozliczenia,</li><li>kwotę wnioskowaną i przyznaną,</li><li>prognozowaną i rzeczywistą marżę,</li><li>ROI,</li><li>payback,</li><li>klasę efektywności inwestycji,</li><li>odchylenia między prognozą a wynikiem rzeczywistym.</li></ul>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 7. Application History — historia wniosków i wskaźniki efektywności" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_history.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_history.png</span></div></div><figcaption>Zdjęcie 7. Application History — historia wniosków i wskaźniki efektywności</figcaption></figure>
+<h3>Program Performance Review</h3>
+<p>Arkusz Program Performance Review pokazuje efektywność programu na poziomie zbiorczym. Zawiera informacje o budżecie, przyznanych środkach, pozostałym budżecie, średnim ROI, udziale nieopłacalnych wniosków, efektywności typów inicjatyw, liczbie wniosków i wynikach według regionów.</p>
+<p>W dashboardzie widać między innymi, że różne typy działań marketingowych mają różną efektywność. Niektóre typy akcji osiągają wyższy ROI i krótszy okres zwrotu, podczas gdy inne wymagają dokładniejszej kontroli przed przyznaniem kolejnych środków.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 8. Program Performance Review — analiza przyznanych środków i efektów programu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_program_performance_review.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_program_performance_review.png</span></div></div><figcaption>Zdjęcie 8. Program Performance Review — analiza przyznanych środków i efektów programu</figcaption></figure>
+<h3>Settlement &amp; Risk Control</h3>
+<p>Arkusz Settlement &amp; Risk Control służy do kontroli rozliczeń i identyfikacji ryzyk. Pokazuje ogólne KPI dla wniosków finansowanych, w tym wskaźnik zakończenia rozliczeń, odsetek aktualnie opóźnionych wniosków, średnią liczbę dni opóźnienia, wskaźnik terminowych rozliczeń, wartość nierozliczonych środków oraz kwotę krytycznie opóźnioną.</p>
+<p>W bieżącej wersji danych dashboard pokazuje między innymi:</p><ul><li>77% zakończonych rozliczeń,</li><li>17% aktualnie opóźnionych wniosków,</li><li>średnio 71 dni opóźnienia,</li><li>80% rozliczeń w terminie,</li><li>930 680 zł nierozliczonych środków,</li><li>12 620 zł wniosków krytycznie opóźnionych.</li></ul>
+<p>Dashboard pokazuje również pipeline rozliczeń: wnioski finansowane, rozliczone, rozliczone w terminie, rozliczone po terminie, nierozliczone, aktualnie opóźnione i krytycznie opóźnione.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Zdjęcie 9. Settlement &amp; Risk Control — kontrola rozliczeń, opóźnień i ryzyk" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_settlement_risk_control.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_settlement_risk_control.png</span></div></div><figcaption>Zdjęcie 9. Settlement &amp; Risk Control — kontrola rozliczeń, opóźnień i ryzyk</figcaption></figure>
+</section>
+<section class="cs-section" id="pl-s6"><h2 class="cs-section-title"><span class="cs-num">6</span>Wnioski techniczne</h2>
+<p>Projekt pozwolił mi połączyć kilka obszarów pracy analitycznej w jednym narzędziu:</p><ul><li>przygotowanie syntetycznych danych biznesowych,</li><li>zaprojektowanie logiki procesu,</li><li>przygotowanie tabel źródłowych,</li><li>czyszczenie i transformację danych w Power Query,</li><li>projekt modelu danych w Power Pivot,</li><li>budowę skonsolidowanej tabeli analitycznej,</li><li>tworzenie KPI,</li><li>budowę dashboardów,</li><li>użycie slicerów,</li><li>przygotowanie interaktywnej nawigacji,</li><li>zastosowanie tablic rozlanych,</li><li>przygotowanie formularza VBA,</li><li>użycie walidacji i automatycznego zapisu danych do bazy.</li></ul>
+<p>W projekcie ważne było dla mnie nie tylko techniczne użycie Excela, ale też zaprojektowanie procesu biznesowego: od złożenia wniosku, przez decyzję komisji, po rozliczenie i ocenę efektów.</p>
+<p>Przy pracy korzystałam z AI jako wsparcia technicznego i organizacyjnego. AI pomagało mi przyspieszyć wybrane elementy pracy, np. generowanie syntetycznych rekordów według moich założeń, konsultowanie formuł, porządkowanie logiki VBA i redakcję opisów. Kluczowe decyzje dotyczące procesu, modelu biznesowego, definicji wskaźników, struktury dashboardów i interpretacji wyników były częścią mojej pracy analitycznej.</p>
+<p>To podejście dobrze oddaje sposób, w jaki chcę pracować z danymi: łączyć doświadczenie biznesowe i korporacyjne z narzędziami analitycznymi oraz nowoczesnym wsparciem technologicznym.</p>
+</section>
+<section class="cs-section" id="pl-s7"><h2 class="cs-section-title"><span class="cs-num">7</span>Wnioski biznesowe</h2>
+<p>Analiza danych pokazała kilka istotnych obszarów ryzyka i potencjalnej poprawy procesu.</p>
+<p>Po pierwsze, część wniosków nie została rozliczona w terminie. Dashboard Settlement &amp; Risk Control pokazuje, że 17% finansowanych wniosków jest aktualnie po terminie, a średnie opóźnienie wynosi 71 dni. Oznacza to, że sam proces przyznawania środków powinien być powiązany z regularnym monitoringiem późniejszych rozliczeń.</p>
+<p>Po drugie, część działań miała ujemny lub niski wynik biznesowy. W arkuszu Application History widać wnioski z negatywnym ROI, długim paybackiem lub niską klasą efektywności inwestycji. Takie przypadki powinny być szczególnie analizowane przed przyznaniem kolejnych środków temu samemu przedstawicielowi.</p>
+<p>Po trzecie, analiza pokazuje, że komisja powinna brać pod uwagę historię wcześniejszych akcji. Jeżeli przedstawiciel ma nierozliczone wnioski, opóźnienia lub wcześniejsze działania bez oczekiwanego efektu, powinno to wpływać na ocenę kolejnych aplikacji.</p>
+<p>Po czwarte, różne typy działań marketingowych mają różną efektywność. Część inicjatyw osiąga wyższy ROI i szybszy zwrot, podczas gdy inne wymagają większej ostrożności przy przyznawaniu budżetu.</p>
+</section>
+<section class="cs-section" id="pl-s8"><h2 class="cs-section-title"><span class="cs-num">8</span>Rekomendacje biznesowe</h2>
+<p>Na podstawie analizy rekomendowałabym:</p><ul><li>wprowadzenie obowiązkowej kontroli historii przedstawiciela przed decyzją komisji,</li><li>sprawdzanie statusu rozliczenia wcześniejszych wniosków przed przyznaniem kolejnych środków,</li><li>oznaczanie wniosków ryzykownych na podstawie ROI, paybacku, opóźnień i nierozliczonych akcji,</li><li>ograniczenie finansowania dla przedstawicieli z powtarzającymi się problemami rozliczeniowymi,</li><li>analizę typów akcji pod kątem ich rzeczywistej opłacalności,</li><li>comiesięczny przegląd wniosków zbliżających się do terminu rozliczenia,</li><li>automatyzację przypomnień dla przedstawicieli zalegających z rozliczeniem.</li></ul>
+</section>
+<section class="cs-section" id="pl-s9"><h2 class="cs-section-title"><span class="cs-num">9</span>Dalszy rozwój projektu</h2>
+<p>Projekt ma potencjał do dalszego rozwoju. Kolejnym krokiem mogłoby być przygotowanie dodatkowego modułu do monitorowania rozliczeń w układzie miesięcznym. Taki arkusz mógłby pokazywać wszystkie akcje, które w danym miesiącu powinny zostać rozliczone, wraz z możliwością filtrowania po regionie, menedżerze, przedstawicielu i statusie.</p>
+<p>Możliwe kierunki rozwoju:</p><ul><li>lista wniosków wymagających rozliczenia w danym miesiącu,</li><li>automatyczne przygotowanie treści przypomnień,</li><li>korespondencja seryjna do przedstawicieli,</li><li>powiadomienia o zbliżającym się terminie rozliczenia,</li><li>osobne alerty dla wniosków po terminie,</li><li>wykorzystanie automatyzacji i AI do przygotowania wiadomości lub podsumowań.</li></ul>
+<p>W kolejnych projektach planuję również pokazać proces pozyskiwania danych do bazy, np. przez formularz zgłoszeniowy, walidację danych, komunikację mailową, zgodę na udział w programie i automatyczne uzupełnianie bazy. Taki projekt mógłby pokazać pełniejszy proces: od zebrania danych, przez ich walidację, aż po raportowanie i analizę.</p>
+</section>
+<section class="cs-section" id="pl-s10"><h2 class="cs-section-title"><span class="cs-num">10</span>Powiązanie z projektem Power BI</h2>
+<p>Ten projekt Excel koncentruje się na poziomie operacyjnym. Jego głównym odbiorcą jest komisja oraz osoby nadzorujące rozliczenia i budżet. Excel odpowiada na pytania:</p><ul><li>który wniosek oceniamy,</li><li>jaka jest historia przedstawiciela,</li><li>czy poprzednie akcje zostały rozliczone,</li><li>czy są opóźnienia,</li><li>czy dana akcja była opłacalna,</li><li>czy komisja powinna przyznać kolejne środki.</li></ul>
+<p>Kolejny projekt — Analiza efektywności programu dofinansowań marketingowych w Power BI — będzie rozwinięciem tego samego procesu na poziomie zarządczym. Jego celem będzie analiza opłacalności całego programu: które typy działań przynoszą najlepsze efekty, czy wyższe dofinansowanie przekłada się na lepsze wyniki, które segmenty przedstawicieli wykorzystują środki najefektywniej i czy program powinien być kontynuowany lub zmieniony.</p>
+<p>Excel pokazuje więc perspektywę operacyjną komisji, a Power BI będzie pokazywał perspektywę strategiczną zarządu.</p>
+</section>
+<section class="cs-section" id="pl-s11"><h2 class="cs-section-title"><span class="cs-num">11</span>Czego się nauczyłam</h2>
+<p>Podczas pracy nad projektem przećwiczyłam pełny proces budowy narzędzia analitycznego w Excelu: od zaprojektowania danych, przez przygotowanie tabel, czyszczenie w Power Query, model danych, KPI, dashboardy, aż po formularz VBA.</p>
+<p>Najważniejsze elementy, które rozwinęłam w tym projekcie:</p><ul><li>projektowanie danych pod przyszłą analizę,</li><li>definiowanie wskaźników biznesowych,</li><li>budowanie raportów operacyjnych,</li><li>tworzenie dashboardów dla różnych odbiorców,</li><li>praca z Power Query,</li><li>użycie tabel przestawnych i slicerów,</li><li>stosowanie formatowania warunkowego,</li><li>tworzenie dynamicznych widoków z użyciem formuł,</li><li>podstawowa automatyzacja VBA,</li><li>projektowanie narzędzia z perspektywy użytkownika biznesowego.</li></ul>
+<p>Projekt pokazał mi również, że w pracy analitycznej samo przygotowanie wykresów nie wystarcza. Kluczowe jest zrozumienie procesu, ryzyk, decyzji użytkownika i tego, jakie informacje są naprawdę potrzebne w codziennej pracy.</p>
+</section>
+<section class="cs-section" id="pl-s12"><h2 class="cs-section-title"><span class="cs-num">12</span>Repozytorium</h2>
+<p>Główny plik projektu został udostępniony w formacie .xlsx, bez makr, aby można było bezpiecznie pobrać i obejrzeć skoroszyt. Wersja z VBA została pokazana w formie filmu oraz zrzutów ekranu, a kod VBA został udostępniony osobno jako pliki tekstowe.</p>
+<p><a class="btn btn-primary" href="https://github.com/BWiekiera/marketing-funding-analytics" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> Zobacz na GitHub</a></p>
+</section></div>
+<div data-project-lang="en" id="en-overview" style="display:none;"><figure class="cs-figure cs-main-figure"><div class="cs-hero-img"><img alt="Marketing Funding Committee CRM &amp; Dashboard — main project view" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_main.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_main.png</span></div></div></figure><h1 class="cs-title">Marketing Funding Committee CRM &amp; Dashboard</h1><div class="cs-intro-meta"><span class="tag">Excel</span><span class="tag">Power Query</span><span class="tag">Power Pivot</span><span class="tag">VBA</span><span class="tag">KPI</span></div>
+<p>An Excel-based operational and analytical system supporting marketing funding application review, settlement control and program performance analysis. The project combines a synthetic dataset, Power Query, a data model, KPI dashboards, active workbook navigation and a VBA form for committee decision handling.</p>
+<p>The dataset represents the status as of 1 February 2025 and covers full years 2022–2024 as well as applications submitted in January 2025. January 2025 applications are at the committee review stage. The demo version also shows how the VBA form saves a decision for a selected application and updates the main database.</p>
+<p>Tools: Excel, Power Query, Power Pivot, VBA, pivot tables, formulas, conditional formatting, dashboard design.</p>
+<figure class="cs-figure cs-demo-video"><div class="cs-video-wrap cs-video-giflike"><video autoplay muted loop playsinline preload="metadata" aria-label="Workbook demo"><source src="../images/projects/project1_demo.mp4" type="video/mp4"/>Your browser does not support video playback.</video></div></figure>
+<section class="cs-section" id="en-s1"><h2 class="cs-section-title"><span class="cs-num">1</span>Business problem and project goal</h2>
+<p>In an organization with a sales network or business partners, the marketing funding process may involve many applications, different sales representatives, regions, initiative types and budgets. The funding decision itself is not enough — it is also important to monitor settlement and evaluate whether the funded initiative generated the expected business outcome.</p>
+<p>The main business problem was the lack of one tool that would allow the committee and people supervising the funding program to manage the process comprehensively: from application review, through sales representative history assessment, to settlement control and program performance analysis.</p><p>Such a tool should make it possible to:</p><ul><li>view and filter applications,</li><li>check the sales representative’s history before making a decision,</li><li>analyze previous results and settlements,</li><li>monitor overdue settlements,</li><li>control budget usage,</li><li>identify applications requiring attention,</li><li>evaluate the performance of the funding program.</li></ul>
+<p>The goal of the project was to create an Excel workbook that is not only a static report, but also a simple operational tool for the committee and people supervising the funding program.</p>
+<p>The dashboards were designed for a large-screen working environment. This allows the user to see the most important KPIs, tables, slicers, application lists and analytical details at the same time.</p>
+</section>
+<section class="cs-section" id="en-s2"><h2 class="cs-section-title"><span class="cs-num">2</span>Data</h2>
+<p>The data was prepared by me specifically for this portfolio project. It is fictional data inspired by a real business process. Any similarity to real personal data, values or business situations is coincidental.</p>
+<p>The dataset was designed to support both operational and business analysis: by year, month, region, sales representative, initiative type, application status, settlement timeliness and investment efficiency.</p>
+<p>The project includes, among others:</p><ul><li>a database of 625 applications,</li><li>a database of 80 sales representatives,</li><li>a database of 85 marketing initiative descriptions,</li><li>a settlements table covering applications that received a positive decision,</li><li>a reporting calendar covering every day from 01.01.2022 to 31.12.2025,</li><li>supporting tables for statuses, segments, initiative types and rejection reasons.</li></ul>
+<p>Marketing initiative descriptions were prepared as a synthetic dataset. For simplification, some descriptions were randomly assigned to applications according to the initiative type. In a real environment, each application would include an individual description or business plan prepared by the sales representative.</p>
+<p>I also used AI support during data preparation, mainly to accelerate the generation of synthetic records based on assumptions defined by me. My role was to design the business logic, data structure, table relationships, KPIs and analytical scenarios.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 1. Reporting calendar with supporting columns for monthly, quarterly and yearly analysis" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_calendar.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_calendar.png</span></div></div><figcaption>Image 1. Reporting calendar with supporting columns for monthly, quarterly and yearly analysis</figcaption></figure>
+</section>
+<section class="cs-section" id="en-s3"><h2 class="cs-section-title"><span class="cs-num">3</span>Data model</h2>
+<p>The project was designed with a star-schema-inspired structure. I prepared a fact table for applications and dimension tables, including sales representatives, calendar, statuses, initiative types, channels, segments, initiative scale and rejection reasons.</p>
+<p>The model included, among others:</p><ul><li>application fact table,</li><li>sales representatives dimension,</li><li>calendar dimension,</li><li>application status dimension,</li><li>settlement status dimension,</li><li>timeliness dimension,</li><li>initiative type dimension,</li><li>channel dimension,</li><li>amount segment dimension,</li><li>rejection reason dimension,</li><li>initiative description dimension.</li></ul>
+<p>During the project, I encountered limitations related to stability and usability of the Excel/Power Pivot model while building multiple operational sheets, dashboards and the VBA form. For this reason, the final Excel reporting layer was based on a consolidated analytical table prepared in Power Query.</p>
+<p>This was not a resignation from data modeling, but a conscious project decision: for this workbook, it was more important to build a stable and user-friendly operational tool than to maintain a model that made dashboard development more difficult. The star schema was designed as an analytical stage, while the final Excel reporting layer was simplified into one analytical table.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 2. Data model — star-schema-inspired model in Power Pivot" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_data_model.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_data_model.png</span></div></div><figcaption>Image 2. Data model — star-schema-inspired model in Power Pivot</figcaption></figure>
+</section>
+<section class="cs-section" id="en-s4"><h2 class="cs-section-title"><span class="cs-num">4</span>Data preparation</h2>
+<p>The data was prepared and cleaned in Power Query. The process included table cleaning, merging sources, adding supporting columns and preparing one analytical table used in dashboards.</p>
+<p>In Power Query, I prepared, among others:</p><ul><li>merged data from applications, sales representatives, descriptions and settlements,</li><li>segmentation columns,</li><li>helper flag columns,</li><li>statuses used in KPIs,</li><li>data for settlement timeliness analysis,</li><li>columns for reporting by year, month and committee period,</li><li>fields required for dashboards and pivot tables.</li></ul>
+<p>The project uses Excel formulas and mechanisms such as:</p><ul><li>IF,</li><li>IFS,</li><li>IFERROR,</li><li>SUMIFS,</li><li>COUNTIFS,</li><li>AVERAGEIFS,</li><li>XLOOKUP,</li><li>FILTER,</li><li>CHOOSECOLS,</li><li>OR,</li><li>MAX,</li><li>structured table references,</li><li>dynamic arrays,</li><li>pivot tables,</li><li>slicers,</li><li>charts,</li><li>conditional formatting,</li><li>shapes used as navigation and dashboard elements.</li></ul>
+<p>Conditional formatting was used to highlight positive and negative information, such as high or low investment efficiency, negative ROI, long payback period, unfavorable forecast variances and applications requiring attention.</p>
+</section>
+<section class="cs-section" id="en-s5"><h2 class="cs-section-title"><span class="cs-num">5</span>Workbook structure</h2>
+<p>The workbook consists of several parts that together create a coherent committee workflow.</p>
+<h3>Home</h3>
+<p>The Home sheet acts as the workbook start page. It includes active tiles leading to the most important parts of the project. The user can go directly to the application list, application details, history, control dashboards and data.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 3. Home — start page with active shapes linked to project sheets" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_home.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_home.png</span></div></div><figcaption>Image 3. Home — start page with active shapes linked to project sheets</figcaption></figure>
+<h3>Application List</h3>
+<p>The Application List sheet is an operational application list. The user can filter applications by year, quarter, committee month, region, status and funding range. The sheet also includes a committee summary, such as the number of applications, approved, rejected and pending applications, as well as requested and granted amounts.</p>
+<p>From this sheet, the user selects a specific application and moves to its details.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 4. Application List — committee application list with filters and summary" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_list.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_list.png</span></div></div><figcaption>Image 4. Application List — committee application list with filters and summary</figcaption></figure>
+<h3>Application Details</h3>
+<p>The Application Details sheet shows a single application together with the sales representative context. The user can see sales representative data, region, manager, segment, initiative description, key indicators and the history of previous applications submitted by the same representative.</p>
+<p>This is an important part of the decision process, because the committee does not evaluate an application in isolation. It can check whether previous initiatives were settled, whether they generated results and whether the representative has pending or unsettled applications.</p>
+<p>This sheet also uses a dynamic array that automatically displays the application history related to the selected sales representative.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 5. Application Details — application details, initiative description and sales representative history" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_details.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_details.png</span></div></div><figcaption>Image 5. Application Details — application details, initiative description and sales representative history</figcaption></figure>
+<h3>Committee Decision Form</h3>
+<p>In a separate version of the file, I prepared the Committee Decision Form VBA form, which shows how Excel can support not only analysis, but also operational process handling.</p>
+<p>For security reasons, the main file shared in the repository is saved as .xlsx, without macros. The .xlsm version is shown through screenshots and a short video demonstrating how the form works. The VBA code is shared as text files, so it can be reviewed without running macros.</p>
+<p>The VBA form allows the user to:</p><ul><li>search for an application by ID,</li><li>automatically retrieve data from the Data sheet and Baza table,</li><li>enter the committee decision,</li><li>save the decision to the main database,</li><li>clear the form.</li></ul>
+<p>The form workflow starts in the Application List sheet, where the user selects an application from the list. Then the user moves to the Application Details sheet to review the application details, initiative description and sales representative history. At this stage, the user can also manually enter a different application ID.</p>
+<p>After clicking the Decision Form button, the user moves to the decision form sheet. The application ID is automatically transferred to the form, but it can also be entered manually. After clicking Search Application, the form retrieves application data from the main database, including sales representative, region, manager, application date, status and requested amount.</p>
+<p>Then the user enters the committee decision. In case of a positive decision, the user enters the granted funding percentage, and the Granted Amount is calculated automatically based on the requested amount and granted funding percentage. In case of a negative decision, the form requires a rejection reason and sets the granted funding percentage and granted amount to zero.</p>
+<p>After clicking Save Decision, the data is saved in the main database in the Data sheet, in the Baza table. The Clear Form button clears the form fields and allows the user to start working with another application.</p>
+<p>The form includes validations:</p><ul><li>the decision can be positive or negative,</li><li>a negative decision requires a rejection reason,</li><li>a negative decision sets the granted funding percentage and amount to zero,</li><li>a positive decision does not allow a rejection reason,</li><li>the granted funding percentage must be greater than zero and cannot exceed 100%,</li><li>the granted amount is calculated automatically based on the requested amount and funding percentage,</li><li>the decision date must be a valid date in a specific format,</li><li>the granted amount field is calculated and protected from manual editing.</li></ul>
+<p>The form also includes a worksheet event that automatically recalculates the granted amount after changing the funding percentage or requested amount. Additionally, double-clicking the decision date field opens a safe date input window.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 6. Committee Decision Form — VBA form for searching an application and saving committee decision" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_decision_form.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_decision_form.png</span></div></div><figcaption>Image 6. Committee Decision Form — VBA form for searching an application and saving committee decision</figcaption></figure>
+<h3>Application History</h3>
+<p>The Application History sheet is a detailed analytical table showing application history. The data is grouped by topic: application details, settlement information, financial data, performance indicators and forecast variance.</p>
+<p>The sheet allows the user to analyze, among others:</p><ul><li>committee decision,</li><li>settlement status,</li><li>settlement due date,</li><li>requested and granted amount,</li><li>forecast and actual margin,</li><li>ROI,</li><li>payback,</li><li>investment efficiency class,</li><li>variance between forecast and actual results.</li></ul>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 7. Application History — application history and performance indicators" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_application_history.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_application_history.png</span></div></div><figcaption>Image 7. Application History — application history and performance indicators</figcaption></figure>
+<h3>Program Performance Review</h3>
+<p>The Program Performance Review sheet shows program performance at an aggregated level. It includes budget, granted amount, remaining budget, average ROI, share of unprofitable applications, initiative type effectiveness, number of applications and regional performance.</p>
+<p>The dashboard shows that different marketing initiative types have different levels of effectiveness. Some initiatives achieve higher ROI and shorter payback, while others require more detailed control before further funding is granted.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 8. Program Performance Review — analysis of granted funding and program results" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_program_performance_review.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_program_performance_review.png</span></div></div><figcaption>Image 8. Program Performance Review — analysis of granted funding and program results</figcaption></figure>
+<h3>Settlement &amp; Risk Control</h3>
+<p>The Settlement &amp; Risk Control sheet is used to monitor settlements and identify risks. It shows overall KPIs for funded applications, including settlement completion rate, current overdue rate, average overdue days, on-time settlement rate, unsettled amount and critical overdue amount.</p>
+<p>In the current dataset, the dashboard shows, among others:</p><ul><li>77% settlement completion rate,</li><li>17% current overdue applications,</li><li>71 average overdue days,</li><li>80% on-time settlement rate,</li><li>PLN 930,680 unsettled amount,</li><li>PLN 12,620 critical overdue amount.</li></ul>
+<p>The dashboard also shows a settlement pipeline: funded applications, settled applications, on-time settlements, late settlements, unsettled applications, current overdue and critical overdue applications.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Image 9. Settlement &amp; Risk Control — settlement, overdue and risk control" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project1_settlement_risk_control.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project1_settlement_risk_control.png</span></div></div><figcaption>Image 9. Settlement &amp; Risk Control — settlement, overdue and risk control</figcaption></figure>
+</section>
+<section class="cs-section" id="en-s6"><h2 class="cs-section-title"><span class="cs-num">6</span>Technical conclusions</h2>
+<p>This project allowed me to combine several areas of analytical work in one tool:</p><ul><li>preparing synthetic business data,</li><li>designing the process logic,</li><li>preparing source tables,</li><li>cleaning and transforming data in Power Query,</li><li>designing the data model in Power Pivot,</li><li>building a consolidated analytical table,</li><li>creating KPIs,</li><li>building dashboards,</li><li>using slicers,</li><li>preparing interactive navigation,</li><li>using dynamic arrays,</li><li>preparing a VBA form,</li><li>using validation and automatic data saving to the database.</li></ul>
+<p>In this project, it was important for me not only to use Excel technically, but also to design the business process: from application submission, through committee decision, to settlement and result evaluation.</p>
+<p>During the work, I used AI as technical and organizational support. AI helped me accelerate selected parts of the work, such as generating synthetic records based on my assumptions, consulting formulas, organizing VBA logic and editing descriptions. The key decisions related to the process, business model, KPI definitions, dashboard structure and result interpretation were part of my analytical work.</p>
+<p>This approach reflects the way I want to work with data: combining business and corporate experience with analytical tools and modern technological support.</p>
+</section>
+<section class="cs-section" id="en-s7"><h2 class="cs-section-title"><span class="cs-num">7</span>Business conclusions</h2>
+<p>The analysis revealed several important areas of risk and potential process improvement.</p>
+<p>First, some applications were not settled on time. The Settlement &amp; Risk Control dashboard shows that 17% of funded applications are currently overdue, with an average delay of 71 days. This means that the funding process should be linked with regular settlement monitoring.</p>
+<p>Second, some initiatives had negative or low business results. In the Application History sheet, there are applications with negative ROI, long payback or low investment efficiency class. Such cases should be carefully analyzed before granting additional funding to the same sales representative.</p>
+<p>Third, the analysis shows that the committee should consider the history of previous initiatives. If a sales representative has unsettled applications, delays or previous initiatives without the expected result, this should influence the evaluation of future applications.</p>
+<p>Fourth, different marketing initiative types have different levels of effectiveness. Some initiatives achieve higher ROI and faster payback, while others require greater caution when allocating budget.</p>
+</section>
+<section class="cs-section" id="en-s8"><h2 class="cs-section-title"><span class="cs-num">8</span>Business recommendations</h2>
+<p>Based on the analysis, I would recommend:</p><ul><li>introducing mandatory sales representative history checks before the committee decision,</li><li>checking settlement status of previous applications before granting further funding,</li><li>flagging risky applications based on ROI, payback, delays and unsettled initiatives,</li><li>limiting funding for representatives with repeated settlement issues,</li><li>analyzing initiative types based on their actual profitability,</li><li>conducting monthly reviews of applications approaching settlement due date,</li><li>automating reminders for representatives with overdue settlements.</li></ul>
+</section>
+<section class="cs-section" id="en-s9"><h2 class="cs-section-title"><span class="cs-num">9</span>Further development</h2>
+<p>The project has potential for further development. The next step could be an additional monthly settlement monitoring module. Such a sheet could show all initiatives that should be settled in a given month, with filtering by region, manager, sales representative and status.</p>
+<p>Possible development directions:</p><ul><li>a list of applications requiring settlement in a given month,</li><li>automatic preparation of reminder content,</li><li>mail merge for sales representatives,</li><li>notifications about upcoming settlement due dates,</li><li>separate alerts for overdue applications,</li><li>using automation and AI to prepare messages or summaries.</li></ul>
+<p>In future projects, I also plan to show the process of collecting data for the database, for example through an application form, data validation, email communication, consent collection and automatic database update. Such a project could show a more complete process: from data collection and validation to reporting and analysis.</p>
+</section>
+<section class="cs-section" id="en-s10"><h2 class="cs-section-title"><span class="cs-num">10</span>Connection with the Power BI project</h2>
+<p>This Excel project focuses on the operational level. Its main audience is the committee and people supervising settlements and budget. Excel answers questions such as:</p><ul><li>which application is being reviewed,</li><li>what the sales representative’s history looks like,</li><li>whether previous initiatives were settled,</li><li>whether there are delays,</li><li>whether a given initiative was profitable,</li><li>whether the committee should grant additional funding.</li></ul>
+<p>The next project — Marketing Funding Program Performance Analysis in Power BI — is a continuation of the same process at the management level. Its goal is to analyze the profitability of the entire program: which initiative types deliver the best results, whether higher funding leads to better outcomes, which sales representative segments use funds most effectively and whether the program should be continued or changed.</p>
+<p>Excel shows the committee’s operational perspective, while Power BI will show the management’s strategic perspective.</p>
+</section>
+<section class="cs-section" id="en-s11"><h2 class="cs-section-title"><span class="cs-num">11</span>What I learned</h2>
+<p>During this project, I practiced the full process of building an analytical tool in Excel: from designing data, preparing tables, cleaning data in Power Query, data modeling, KPIs and dashboards, to a VBA form.</p>
+<p>The key areas I developed in this project include:</p><ul><li>designing data for future analysis,</li><li>defining business KPIs,</li><li>building operational reports,</li><li>creating dashboards for different audiences,</li><li>working with Power Query,</li><li>using pivot tables and slicers,</li><li>applying conditional formatting,</li><li>creating dynamic views with formulas,</li><li>basic VBA automation,</li><li>designing a tool from a business user perspective.</li></ul>
+<p>The project also showed me that analytical work is not only about preparing charts. Understanding the process, risks, user decisions and the information needed in daily work is essential.</p>
+</section>
+<section class="cs-section" id="en-s12"><h2 class="cs-section-title"><span class="cs-num">12</span>Repository</h2>
+<p>The main project file is shared as an .xlsx file without macros, so it can be safely downloaded and reviewed. The VBA version is shown through a video and screenshots, and the VBA code is shared separately as text files.</p>
+<p><a class="btn btn-primary" href="https://github.com/BWiekiera/marketing-funding-analytics" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> View on GitHub</a></p>
+</section></div>
+<div class="cs-footer">
+<a class="btn btn-outline" data-i18n="cs_back" href="../portfolio.html">← Powrót do Portfolio</a>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer><span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span></footer>
+<script src="../js/translations.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    const projectNavLabels = {
+      pl: [
+        "Widok projektu",
+        "Problem i cel projektu",
+        "Dane",
+        "Model danych",
+        "Przygotowanie danych",
+        "Struktura skoroszytu",
+        "Wnioski techniczne",
+        "Wnioski biznesowe",
+        "Rekomendacje biznesowe",
+        "Dalszy rozwój projektu",
+        "Powiązanie z projektem Power BI",
+        "Czego się nauczyłam",
+        "Repozytorium"
+      ],
+      en: [
+        "Project overview",
+        "Business problem and project goal",
+        "Data",
+        "Data model",
+        "Data preparation",
+        "Workbook structure",
+        "Technical conclusions",
+        "Business conclusions",
+        "Business recommendations",
+        "Further development",
+        "Connection with the Power BI project",
+        "What I learned",
+        "Repository"
+      ]
+    };
 
-  <!-- GŁÓWNA TREŚĆ -->
-  <main>
-    <div class="container">
-      <div class="cs-layout">
+    function getProjectLang() {
+      return localStorage.getItem('bw-lang') || 'pl';
+    }
 
-        <!-- SIDEBAR — nawigacja po sekcjach -->
-        <aside class="cs-sidebar" aria-label="Nawigacja po sekcjach">
-          <span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
-          <nav class="cs-sidebar-nav">
-            <a href="#problem"   data-i18n="cs_s_problem">Problem biznesowy</a>
-            <a href="#dataset"   data-i18n="cs_s_data">Dane</a>
-            <a href="#tools"     data-i18n="cs_s_tools">Narzędzia</a>
-            <a href="#dataprep"  data-i18n="cs_s_prep">Przygotowanie danych</a>
-            <a href="#analysis"  data-i18n="cs_s_analysis">Proces analizy</a>
-            <a href="#dashboard" data-i18n="cs_s_dashboard">Dashboard</a>
-            <a href="#findings"  data-i18n="cs_s_findings">Wnioski</a>
-            <a href="#recs"      data-i18n="cs_s_recs">Rekomendacje</a>
-            <a href="#learned"   data-i18n="cs_s_learned">Czego się nauczyłam</a>
-            <a href="#repo"      data-i18n="cs_s_repo">Repozytorium</a>
-          </nav>
-        </aside>
+    function updateProjectLanguageBlocks() {
+      const lang = getProjectLang();
+      document.querySelectorAll('[data-project-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-project-lang') === lang ? '' : 'none';
+      });
+      updateProjectSidebar(lang);
+    }
 
-        <!-- GŁÓWNA TREŚĆ CASE STUDY -->
-        <article class="cs-main">
+    function updateProjectSidebar(lang) {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      links.forEach((link, index) => {
+        link.setAttribute('href', index === 0 ? `#${lang}-overview` : `#${lang}-s${index}`);
+        if (projectNavLabels[lang] && projectNavLabels[lang][index]) {
+          link.textContent = projectNavLabels[lang][index];
+        }
+      });
+    }
 
-          <!-- Przycisk powrotu -->
-          <a href="../portfolio.html" class="cs-back-link">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            <span data-i18n="cs_back">← Powrót do Portfolio</span>
-          </a>
+    function initProjectSidebarScroll() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
 
-          <!-- Duży screenshot / placeholder -->
-          <div class="cs-hero-img">
-            <img src="../images/projects/project1.png" alt="Marketing Grants CRM Dashboard – screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="cs-hero-img-placeholder" style="display:none;">
-              <i class="fas fa-chart-bar" aria-hidden="true"></i>
-              <span>project1.png — główny screenshot dashboardu</span>
-            </div>
-          </div>
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const target = document.querySelector(targetId);
+          if (!target) return;
 
-          <!-- Intro -->
-          <div class="cs-intro fade-in">
-            <h1 class="cs-title" data-i18n="cs1_title">Marketing Grants CRM Dashboard</h1>
-            <div class="cs-intro-meta">
-              <span class="tag">Excel</span>
-              <span class="tag">Power Query</span>
-              <span class="tag">Power BI</span>
-              <span class="tag">DAX</span>
-              <span class="tag">Dashboard</span>
-            </div>
-            <p class="cs-intro-p" data-i18n="cs1_intro">
-              Dashboard analityczny do monitorowania i optymalizacji wykorzystania dotacji marketingowych w sieci partnerów CRM. Projekt łączy umiejętności ETL w Power Query z wizualizacją danych w Power BI.
-            </p>
-          </div>
+          const offset = 92;
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+          });
 
-          <!-- 1. Problem biznesowy -->
-          <section class="cs-section fade-in" id="problem">
-            <h2 class="cs-section-title">
-              <span class="cs-num">1</span>
-              <span data-i18n="cs_s_problem">Problem biznesowy</span>
-            </h2>
-            <p data-i18n="cs1_problem">
-              Firma ubezpieczeniowa dysponowała budżetem dotacji marketingowych dla sieci dystrybutorów CRM, ale brakowało przejrzystego narzędzia do monitorowania ich wykorzystania. Decyzje o alokacji środków były podejmowane bez pełnego obrazu ROI i efektywności poszczególnych partnerów.
-            </p>
-          </section>
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          history.replaceState(null, '', targetId);
+        });
+      });
+    }
 
-          <!-- 2. Dane -->
-          <section class="cs-section fade-in" id="dataset">
-            <h2 class="cs-section-title">
-              <span class="cs-num">2</span>
-              <span data-i18n="cs_s_data">Dane</span>
-            </h2>
-            <p data-i18n="cs1_dataset">
-              Dane eksportowane z systemu CRM (aktywności kampanii, kontakty, konwersje) połączone z wewnętrznymi raportami finansowymi dotyczącymi przyznanych i rozliczonych dotacji. Zakres czasowy: 12 miesięcy.
-            </p>
-          </section>
+    function initProjectSidebarActiveState() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
 
-          <!-- 3. Narzędzia -->
-          <section class="cs-section fade-in" id="tools">
-            <h2 class="cs-section-title">
-              <span class="cs-num">3</span>
-              <span data-i18n="cs_s_tools">Narzędzia</span>
-            </h2>
-            <div class="tags">
-              <span class="tag">Excel</span>
-              <span class="tag">Power Query</span>
-              <span class="tag">Power BI</span>
-              <span class="tag">DAX</span>
-            </div>
-          </section>
+      const setActive = () => {
+        const lang = getProjectLang();
+        let currentId = `${lang}-overview`;
+        document.querySelectorAll(`[data-project-lang="${lang}"] .cs-section[id]`).forEach(section => {
+          const top = section.getBoundingClientRect().top;
+          if (top <= 130) currentId = section.id;
+        });
+        links.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      };
 
-          <!-- 4. Przygotowanie danych -->
-          <section class="cs-section fade-in" id="dataprep">
-            <h2 class="cs-section-title">
-              <span class="cs-num">4</span>
-              <span data-i18n="cs_s_prep">Przygotowanie danych</span>
-            </h2>
-            <p data-i18n="cs1_prep">
-              Dane z dwóch źródeł wymagały normalizacji struktury i unifikacji kluczy łączenia. W Power Query przeprowadzono czyszczenie, usunięcie duplikatów, transformację kolumn dat i scalenie tabel w jeden model danych.
-            </p>
-          </section>
+      window.addEventListener('scroll', setActive, { passive: true });
+      window.addEventListener('resize', setActive, { passive: true });
+      setActive();
+    }
 
-          <!-- 5. Proces analizy -->
-          <section class="cs-section fade-in" id="analysis">
-            <h2 class="cs-section-title">
-              <span class="cs-num">5</span>
-              <span data-i18n="cs_s_analysis">Proces analizy</span>
-            </h2>
-            <p data-i18n="cs1_analysis">
-              Analiza objęła: segmentację partnerów według wskaźnika wykorzystania budżetu, porównanie plan vs. wykonanie, identyfikację kampanii o najwyższym ROI oraz analizę trendów miesięcznych wydatków.
-            </p>
-          </section>
-
-          <!-- 6. Dashboard -->
-          <section class="cs-section fade-in" id="dashboard">
-            <h2 class="cs-section-title">
-              <span class="cs-num">6</span>
-              <span data-i18n="cs_s_dashboard">Dashboard</span>
-            </h2>
-            <p data-i18n="cs1_dashboard_desc">
-              Dashboard w Power BI z dynamicznymi filtrami (partner, region, miesiąc), wizualizacją wykorzystania budżetu, rankingiem partnerów i trendami ROI. Zastąp plikiem images/projects/cs1-dashboard.png.
-            </p>
-            <div class="cs-screenshot-ph" style="margin-top:20px;">
-              <i class="fas fa-chart-pie" aria-hidden="true"></i>
-              <span>Wstaw screenshot dashboardu: images/projects/cs1-dashboard.png</span>
-            </div>
-          </section>
-
-          <!-- 7. Wnioski -->
-          <section class="cs-section fade-in" id="findings">
-            <h2 class="cs-section-title">
-              <span class="cs-num">7</span>
-              <span data-i18n="cs_s_findings">Najważniejsze wnioski</span>
-            </h2>
-            <ul>
-              <li>Zidentyfikowano 3 segmenty partnerów: high-performers, underutilizers i high-ROI przy niskim budżecie</li>
-              <li>15% partnerów generuje 60% konwersji z działań CRM</li>
-              <li>Wyraźna sezonowość wydatków z pikiem w Q4</li>
-              <li>Część przyznanych dotacji pozostaje niewykorzystana mimo dostępnego budżetu</li>
-            </ul>
-          </section>
-
-          <!-- 8. Rekomendacje -->
-          <section class="cs-section fade-in" id="recs">
-            <h2 class="cs-section-title">
-              <span class="cs-num">8</span>
-              <span data-i18n="cs_s_recs">Rekomendacje biznesowe</span>
-            </h2>
-            <p data-i18n="cs1_recs">
-              1. Realokacja budżetu od underutilizers do high-performers z zachowaniem buforu. 2. Wprowadzenie kwartalnych przeglądów efektywności kampanii. 3. Ustalenie minimalnego progu wykorzystania dotacji jako warunku przedłużenia umowy partnerskiej.
-            </p>
-          </section>
-
-          <!-- 9. Czego się nauczyłam -->
-          <section class="cs-section fade-in" id="learned">
-            <h2 class="cs-section-title">
-              <span class="cs-num">9</span>
-              <span data-i18n="cs_s_learned">Czego się nauczyłam</span>
-            </h2>
-            <p data-i18n="cs1_learned">
-              Projekt rozwinął umiejętności modelowania danych w Power Query, tworzenia miar DAX i projektowania dashboardów z myślą o odbiorcy biznesowym. Nauczyłam się też, jak ważne jest zdefiniowanie pytań biznesowych przed przystąpieniem do analizy.
-            </p>
-          </section>
-
-          <!-- 10. Repozytorium -->
-          <section class="cs-section fade-in" id="repo">
-            <h2 class="cs-section-title">
-              <span class="cs-num">10</span>
-              <span data-i18n="cs_s_repo">Repozytorium</span>
-            </h2>
-            <a href="https://github.com/placeholder" class="btn btn-outline" target="_blank" rel="noopener">
-              <i class="fab fa-github" aria-hidden="true"></i>
-              <span data-i18n="cs_view_gh">Zobacz na GitHub</span>
-            </a>
-          </section>
-
-          <!-- Footer projektu -->
-          <div class="cs-footer fade-in">
-            <a href="../portfolio.html" class="btn btn-ghost">
-              <i class="fas fa-arrow-left" aria-hidden="true"></i>
-              <span data-i18n="cs_back">← Powrót do Portfolio</span>
-            </a>
-            <div class="tags">
-              <span class="tag tag-navy">Excel</span>
-              <span class="tag tag-navy">Power Query</span>
-              <span class="tag tag-navy">Power BI</span>
-              <span class="tag tag-navy">Dashboard</span>
-              <span class="tag tag-navy">CRM</span>
-            </div>
-          </div>
-
-        </article>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
-  </footer>
-
-  <script src="../js/translations.js"></script>
-  <script src="../js/main.js"></script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProjectLanguageBlocks();
+      initProjectSidebarScroll();
+      initProjectSidebarActiveState();
+      const langBtn = document.getElementById('lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
+          setTimeout(() => {
+            updateProjectLanguageBlocks();
+            const overviewSection = document.querySelector(`#${getProjectLang()}-overview`);
+            if (overviewSection && window.location.hash) {
+              history.replaceState(null, '', `#${getProjectLang()}-overview`);
+            }
+          }, 0);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,234 +1,284 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Case study: Sales Performance Analysis – Bernardeta Wiekiera. SQL, Power BI, DAX." />
-  <title>Sales Performance Analysis – Bernardeta Wiekiera</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="../css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Analiza efektywności programu dofinansowań marketingowych – projekt Power BI, Power Query, DAX i ETL." name="description"/>
+<title>Analiza efektywności programu dofinansowań marketingowych – Bernardeta Wiekiera</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
+<nav aria-label="Główna nawigacja" id="navbar" role="navigation">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">BW<span>.</span></a>
+<button aria-expanded="false" aria-label="Menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<ul id="nav-menu" role="list">
+<li><a class="nav-link" data-i18n="nav_home" data-page="home" href="../index.html">Główna</a></li>
+<li><a class="nav-link" data-i18n="nav_portfolio" data-page="portfolio" href="../portfolio.html">Portfolio</a></li>
+<li><a class="nav-link" data-i18n="nav_cert" data-page="cert" href="../certificates.html">Certyfikaty</a></li>
+<li><button aria-label="Zmień język" class="lang-btn" id="lang-toggle">EN</button></li>
+</ul>
+</div>
+</nav>
+<main class="section section-bg">
+<div class="container">
+<div class="cs-layout">
+<aside class="cs-sidebar">
+<span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
+<nav aria-label="Nawigacja po projekcie" class="cs-sidebar-nav">
+<a href="#pl-overview" data-project-top-link="true">Widok projektu</a><a href="#pl-s1">Problem i cel projektu</a><a href="#pl-s2">Dane</a><a href="#pl-s3">Model danych</a><a href="#pl-s4">Przygotowanie danych</a><a href="#pl-s5">Struktura raportu</a><a href="#pl-s6">Wskaźniki i logika obliczeń</a><a href="#pl-s7">Wnioski techniczne</a><a href="#pl-s8">Wnioski biznesowe</a><a href="#pl-s9">Rekomendacje biznesowe</a><a href="#pl-s10">Powiązanie z projektem Excel</a><a href="#pl-s11">Dalszy rozwój projektu</a><a href="#pl-s12">Czego się nauczyłam</a><a href="#pl-s13">Repozytorium</a>
+</nav>
+</aside>
+<article class="cs-content project1-case project2-case">
+<a class="cs-back-link" data-i18n="cs_back" href="../portfolio.html">← Powrót do Portfolio</a>
+<div data-project-lang="pl" id="pl-overview">
+<figure class="cs-figure cs-main-figure"><div class="cs-hero-img"><img alt="Analiza efektywności programu dofinansowań marketingowych — widok główny projektu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-hero.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-hero.png</span></div></div></figure>
+<h1 class="cs-title">Analiza efektywności programu dofinansowań marketingowych</h1>
+<div class="cs-intro-meta"><span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">DAX</span><span class="tag">ETL</span><span class="tag">Model danych</span><span class="tag">Raport interaktywny</span></div>
+<p>Interaktywny raport Power BI pokazujący efektywność programu dofinansowań marketingowych z perspektywy zarządczej. Projekt analizuje przyznane środki, marżę, zwrot z inwestycji, okres zwrotu, wyniki regionów i przedstawicieli oraz ryzyka związane z rozliczeniami.</p>
+<p>Dane zostały przygotowane w Power Query w procesie ETL, następnie zbudowałam model danych w układzie płatka śniegu, miary DAX oraz pięciostronicowy raport zarządczy.</p>
+<figure class="cs-figure cs-demo-video"><div class="cs-video-wrap cs-video-giflike" style="height:640px;background:#f8fafc;"><iframe title="Interaktywny raport Power BI" src="TUTAJ_WKLEJ_LINK_DO_RAPORTU_KAJODATASPACE" loading="lazy" allowfullscreen style="width:100%;height:100%;border:0;display:block;background:#f8fafc;"></iframe></div><figcaption>Jeżeli raport nie wyświetla się w tym miejscu, otwórz wersję interaktywną w nowej karcie. <a href="TUTAJ_WKLEJ_LINK_DO_RAPORTU_KAJODATASPACE" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline;font-weight:600;">Otwórz raport interaktywny</a></figcaption></figure>
+<section class="cs-section" id="pl-s1"><h2 class="cs-section-title"><span class="cs-num">1</span>Problem i cel projektu</h2>
+<p>W organizacji posiadającej sieć sprzedaży lub sieć partnerów biznesowych proces przyznawania dofinansowań marketingowych może obejmować wiele wniosków, przedstawicieli, regionów, typów inicjatyw i budżetów. Sama informacja o liczbie zaakceptowanych wniosków lub wysokości przyznanych środków nie wystarcza do oceny, czy program przynosi oczekiwany efekt biznesowy.</p>
+<p>Celem projektu było przygotowanie raportu, który pozwala odpowiedzieć na pytania:</p><ul><li>czy program dofinansowań generuje dodatnią marżę,</li><li>które typy inicjatyw są najbardziej efektywne,</li><li>które regiony i zespoły osiągają najlepsze wyniki,</li><li>jak wygląda relacja między przyznanym dofinansowaniem a marżą,</li><li>gdzie pojawiają się opóźnienia w rozliczeniach,</li><li>jaka część środków pozostaje nierozliczona,</li><li>które obszary wymagają dalszej kontroli lub zmiany alokacji budżetu.</li></ul>
+<p>Raport został przygotowany jako narzędzie zarządcze. Jego celem nie jest obsługa pojedynczego wniosku, ale ocena całego programu i wsparcie decyzji dotyczących dalszego finansowania działań marketingowych.</p>
+</section>
+<section class="cs-section" id="pl-s2"><h2 class="cs-section-title"><span class="cs-num">2</span>Dane</h2>
+<p>Dane zostały przygotowane przeze mnie specjalnie na potrzeby projektu portfolio. Są to dane fikcyjne, inspirowane realnym procesem biznesowym. Wszelka zbieżność danych osobowych, wartości lub sytuacji biznesowych jest przypadkowa.</p>
+<p>Zakres danych obejmuje:</p><ul><li>wnioski o dofinansowanie działań marketingowych,</li><li>kwoty wnioskowane i przyznane,</li><li>prognozowaną i rzeczywistą marżę,</li><li>statusy decyzji,</li><li>statusy rozliczeń, terminy rozliczeń i opóźnienia,</li><li>przedstawicieli sprzedaży, menedżerów i regiony,</li><li>typy inicjatyw, kanały działań i segmenty,</li><li>klasy efektywności inwestycji.</li></ul>
+<p>Dane zostały przygotowane tak, aby umożliwiały analizę na kilku poziomach: całego programu, regionu, menedżera, przedstawiciela oraz pojedynczego wniosku.</p>
+</section>
+<section class="cs-section" id="pl-s3"><h2 class="cs-section-title"><span class="cs-num">3</span>Model danych</h2>
+<p>Model danych został zbudowany w układzie płatka śniegu. Centralną tabelą modelu jest tabela faktów <strong>F_Applications</strong>, w której jeden wiersz odpowiada jednemu wnioskowi o dofinansowanie.</p>
+<p>Bezpośrednio z tabelą faktów połączone są wymiary opisujące wnioski, statusy, inicjatywy, kanały, segmenty oraz kalendarz. Dodatkowo tabela przedstawicieli sprzedaży jest połączona z wymiarami organizacyjnymi, takimi jak region, menedżer, segment aktywności i segment przychodu. Dzięki temu model nie jest prostą gwiazdą, ale strukturą płatka śniegu.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Model danych w układzie płatka śniegu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-data-model.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-data-model.png</span></div></div><figcaption>Zdjęcie 1. Model danych w układzie płatka śniegu, oparty na centralnej tabeli faktów F_Applications.</figcaption></figure>
+<p>Taki układ pozwala analizować dane zarówno na poziomie pojedynczego wniosku, jak i na poziomie regionu, menedżera, przedstawiciela oraz całego programu.</p>
+</section>
+<section class="cs-section" id="pl-s4"><h2 class="cs-section-title"><span class="cs-num">4</span>Przygotowanie danych</h2>
+<p>Dane zostały przygotowane w Power Query w procesie ETL, czyli pobrania, przekształcenia i załadowania danych do modelu raportowego.</p>
+<p>W ramach przygotowania danych wykonałam następujące kroki:</p><ul><li>zaimportowałam dane źródłowe,</li><li>utworzyłam warstwę zapytań pomocniczych,</li><li>oczyściłam i ujednoliciłam nazwy kolumn,</li><li>sprawdziłam typy danych,</li><li>usunęłam zbędne pola techniczne,</li><li>połączyłam dane wniosków z danymi rozliczeń,</li><li>przygotowałam tabelę faktów i tabele wymiarów,</li><li>usunęłam duplikaty w wymiarach,</li><li>dodałam identyfikatory techniczne dla wybranych wymiarów,</li><li>uporządkowałam statusy, segmenty i klasy efektywności,</li><li>przygotowałam dane do modelowania i raportowania.</li></ul>
+<p>Ważnym założeniem było rozdzielenie etapu przygotowania danych od etapu analizy. Dane zostały najpierw oczyszczone i ustrukturyzowane w Power Query, a dopiero później wykorzystane w modelu danych i miarach DAX.</p>
+</section>
+<section class="cs-section" id="pl-s5"><h2 class="cs-section-title"><span class="cs-num">5</span>Struktura raportu</h2>
+<p>Raport składa się z pięciu stron analitycznych.</p>
+<h3>Executive Overview</h3>
+<p>Strona główna raportu pokazuje ogólny obraz programu. Zawiera najważniejsze wskaźniki: przyznane dofinansowanie, marżę, wnioski jeszcze niewymagające rozliczenia, liczbę wniosków, zwrot z inwestycji, okres zwrotu i poziom akceptacji. Strona pozwala szybko ocenić kondycję programu oraz wskazać obszary, które wymagają dalszej analizy.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Executive Overview — ogólny obraz programu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-1-executive-overview.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-1-executive-overview.png</span></div></div><figcaption>Zdjęcie 2. Executive Overview — ogólny obraz programu.</figcaption></figure>
+<h3>Program Profitability</h3>
+<p>Strona koncentruje się na opłacalności programu. Pokazuje porównanie prognozowanej i rzeczywistej marży, relację między dofinansowaniem a marżą, odchylenia marży oraz zmianę wskaźników opłacalności w czasie.</p>
+<p>Wskaźniki opłacalności są liczone dla wniosków dojrzałych do oceny, czyli takich, których termin rozliczenia już minął. Zgodnie z założeniami programu przedstawiciele mają 12 miesięcy od otrzymania dofinansowania na rozliczenie efektów działań marketingowych. Wnioski, które nie osiągnęły jeszcze tego terminu, nie są uwzględniane w głównych wskaźnikach opłacalności, aby nie zaniżać wyniku programu.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Program Profitability — opłacalność programu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-2-program-profitability.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-2-program-profitability.png</span></div></div><figcaption>Zdjęcie 3. Program Profitability — opłacalność programu.</figcaption></figure>
+<h3>Initiative &amp; Channel Effectiveness</h3>
+<p>Strona porównuje efektywność typów inicjatyw marketingowych i kanałów. Pokazuje, które działania generują najwyższą marżę, jak zmieniają się wyniki w czasie oraz jak wygląda relacja między dofinansowaniem a marżą dla poszczególnych typów inicjatyw.</p>
+<p>Ta część raportu wspiera decyzje dotyczące tego, które działania warto rozwijać, a które wymagają dalszej analizy.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Initiative & Channel Effectiveness — efektywność inicjatyw i kanałów" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-3-initiative-channel.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-3-initiative-channel.png</span></div></div><figcaption>Zdjęcie 4. Initiative & Channel Effectiveness — efektywność inicjatyw i kanałów.</figcaption></figure>
+<h3>Regional &amp; Sales Representative Performance</h3>
+<p>Strona pokazuje wyniki według regionów, menedżerów i przedstawicieli sprzedaży. Zawiera analizę dofinansowania, marży, zwrotu z inwestycji, efektywności inwestycji i okresu zwrotu.</p>
+<p>W raporcie zastosowałam analizę od ogółu do szczegółu: od poziomu regionu, przez menedżera i przedstawiciela, aż do pojedynczego wniosku.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Regional & Sales Representative Performance — wyniki regionów i przedstawicieli" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-4-regional-sales.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-4-regional-sales.png</span></div></div><figcaption>Zdjęcie 5. Regional & Sales Representative Performance — wyniki regionów i przedstawicieli.</figcaption></figure>
+<h3>Settlement &amp; Risk Overview</h3>
+<p>Strona analizuje statusy rozliczeń i ryzyka operacyjne. Pokazuje kwoty nierozliczone, kwoty po terminie, średnie opóźnienia, statusy rozliczeń oraz listę wniosków wymagających dalszej kontroli.</p>
+<p>Ta część raportu pozwala szybko zidentyfikować obszary, w których środki zostały przyznane, ale rozliczenie nie zostało zakończone lub pojawiło się opóźnienie.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Settlement & Risk Overview — rozliczenia i ryzyko" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-5-settlement-risk.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-5-settlement-risk.png</span></div></div><figcaption>Zdjęcie 6. Settlement & Risk Overview — rozliczenia i ryzyko.</figcaption></figure>
+</section>
+<section class="cs-section" id="pl-s6"><h2 class="cs-section-title"><span class="cs-num">6</span>Wskaźniki i logika obliczeń</h2>
+<p>W raporcie wykorzystałam miary DAX do obliczania wskaźników reagujących na filtry i wybory użytkownika.</p>
+<p>Najważniejsze wskaźniki:</p><ul><li>Liczba wniosków (Application Count) — liczba unikalnych wniosków w analizowanym zakresie.</li><li>Przyznane dofinansowanie (Funding) — suma środków przyznanych na działania marketingowe.</li><li>Marża prognozowana (Forecast Margin) — suma planowanej marży wynikającej z założeń wniosku.</li><li>Marża rzeczywista (Actual Margin) — suma marży rozpoznanej po rozliczeniu działań.</li><li>Zwrot z inwestycji (ROI) — relacja zysku do przyznanego dofinansowania.</li><li>Okres zwrotu (Payback) — informacja, jak szybko przyznane dofinansowanie zwraca się w marży.</li><li>Wskaźnik efektywności inwestycji (Eff. Ratio) — relacja marży rzeczywistej do przyznanego dofinansowania.</li><li>Poziom akceptacji (Approval Rate) — udział zaakceptowanych wniosków w liczbie wszystkich wniosków.</li><li>Poziom rozliczenia (Settlement Completion Rate) — udział rozliczonych wniosków w liczbie zaakceptowanych wniosków.</li><li>Poziom opóźnień (Overdue Rate) — udział wniosków opóźnionych w liczbie zaakceptowanych wniosków.</li><li>Kwota nierozliczona (Unsettled Amount) — suma przyznanych środków, które nie zostały jeszcze rozliczone.</li><li>Kwota po terminie (Overdue Amount) — suma przyznanych środków związanych z wnioskami opóźnionymi.</li></ul>
+<p>Wskaźniki opłacalności, takie jak zwrot z inwestycji, okres zwrotu i wskaźnik efektywności inwestycji, są liczone dla wniosków dojrzałych do oceny. Oznacza to, że obejmują wnioski, dla których minął 12-miesięczny okres przewidziany na rozliczenie efektów działań marketingowych.</p>
+</section>
+<section class="cs-section" id="pl-s7"><h2 class="cs-section-title"><span class="cs-num">7</span>Wnioski techniczne</h2>
+<p>Projekt pokazuje pełny proces przygotowania raportu Power BI: od danych źródłowych, przez przygotowanie danych, modelowanie, obliczenia, aż po interaktywną wizualizację.</p>
+<p>Najważniejsze wnioski techniczne:</p><ul><li>Power Query dobrze sprawdza się jako warstwa ETL, ponieważ pozwala oddzielić dane źródłowe od danych gotowych do modelowania.</li><li>Model w układzie płatka śniegu pozwala zachować przejrzystość przy rozbudowanej strukturze organizacyjnej.</li><li>Tabela faktów F_Applications umożliwia analizę na poziomie pojedynczego wniosku, a wymiary pozwalają filtrować dane według regionów, menedżerów, typów inicjatyw i statusów.</li><li>Tabela kalendarza przygotowana w DAX umożliwia analizę wyników w czasie, w szczególności po latach i kwartałach.</li><li>Miary DAX pozwalają liczyć wskaźniki dynamicznie, zgodnie z wybranymi filtrami.</li><li>Wskaźniki opłacalności powinny być liczone konsekwentnie według tej samej logiki, aby uniknąć sprzecznych wyników na różnych stronach raportu.</li><li>W raporcie warto oddzielać wskaźniki opisujące efektywność programu od wskaźników opisujących ryzyko rozliczeniowe. Oznacza to, że ROI, Payback i Eff. Ratio oceniają opłacalność programu, a Overdue, Unsettled Amount i Delay Days pokazują ryzyko rozliczeniowe.</li><li>Interaktywne filtry i analiza od ogółu do szczegółu zwiększają użyteczność raportu dla odbiorcy biznesowego.</li></ul></section>
+<section class="cs-section" id="pl-s8"><h2 class="cs-section-title"><span class="cs-num">8</span>Wnioski biznesowe</h2>
+<p>Na podstawie raportu można wskazać kilka kluczowych wniosków biznesowych.</p>
+<p>Po pierwsze, ocena programu nie powinna opierać się wyłącznie na liczbie wniosków lub wysokości przyznanego budżetu. Duża liczba wniosków nie oznacza automatycznie wysokiej efektywności, jeśli nie przekłada się na marżę i zwrot z inwestycji.</p>
+<p>Po drugie, typy inicjatyw marketingowych różnią się efektywnością. Część działań generuje wysoką marżę i korzystny zwrot z inwestycji, natomiast inne wymagają dokładniejszej kontroli lub zmiany zasad finansowania.</p>
+<p>Po trzecie, wyniki regionalne nie są równomierne. Raport pozwala porównać regiony, menedżerów i przedstawicieli sprzedaży, a następnie przejść do poziomu pojedynczego wniosku, aby sprawdzić źródło wyniku.</p>
+<p>Po czwarte, część środków może pozostawać nierozliczona lub opóźniona. Nawet jeśli program jako całość generuje dodatni wynik, obszary z wysokim poziomem opóźnień wymagają kontroli operacyjnej.</p>
+<p>Po piąte, wnioski najnowsze nie powinny być oceniane tak samo jak wnioski, które miały już pełny czas na wygenerowanie i rozliczenie efektów. Dlatego w projekcie rozdzielono analizę całego programu od analizy opłacalności wniosków dojrzałych do oceny.</p>
+</section>
+<section class="cs-section" id="pl-s9"><h2 class="cs-section-title"><span class="cs-num">9</span>Rekomendacje biznesowe</h2>
+<p>Na podstawie raportu można zaproponować następujące rekomendacje:</p><ul><li>Utrzymywać finansowanie działań o wysokiej marży i korzystnym zwrocie z inwestycji.</li><li>Ograniczyć lub dokładniej kontrolować inicjatywy o niskiej efektywności.</li><li>Wprowadzić regularny monitoring nierozliczonych wniosków.</li><li>Analizować wyniki na poziomie regionów i menedżerów.</li><li>Wykorzystywać wskaźniki opłacalności dopiero po upływie okresu rozliczeniowego.</li><li>Rozdzielić ocenę operacyjną od oceny zarządczej.</li><li>Wykorzystywać raport jako narzędzie do rozmów budżetowych.</li></ul>
+<p>Raport może wspierać decyzje o kontynuacji, ograniczeniu lub zmianie zasad finansowania poszczególnych działań marketingowych.</p>
+</section>
+<section class="cs-section" id="pl-s10"><h2 class="cs-section-title"><span class="cs-num">10</span>Powiązanie z projektem Excel</h2>
+<p>Ten projekt jest bezpośrednio powiązany z wcześniejszym projektem Excel dotyczącym obsługi wniosków o dofinansowanie działań marketingowych.</p>
+<p>Projekt Excel pełnił funkcję operacyjną. Wspierał pracę komisji, ocenę pojedynczych wniosków, sprawdzanie historii przedstawiciela, obsługę decyzji i kontrolę rozliczeń. Był narzędziem do pracy na poziomie pojedynczego wniosku.</p>
+<p>Projekt Power BI wykorzystuje ten sam proces biznesowy, ale pokazuje go z innej perspektywy. Zamiast wspierać bieżącą obsługę wniosku, raport pozwala ocenić cały program: wykorzystanie budżetu, opłacalność działań, wyniki regionów i przedstawicieli oraz ryzyka rozliczeniowe.</p>
+<p>Dzięki temu te dwa projekty pokazują, jak te same dane mogą pracować w dwóch różnych narzędziach i dla dwóch różnych grup odbiorców:</p><ul><li>Excel — komisja i osoby operacyjnie obsługujące wnioski; cel: ocena i obsługa pojedynczych wniosków.</li><li>Power BI — zarząd, menedżerowie i osoby odpowiedzialne za budżet; cel: analiza efektywności całego programu i wsparcie decyzji.</li></ul>
+<p>Takie połączenie pokazuje pełny przepływ analityczny: od danych operacyjnych, przez przygotowanie i modelowanie, po raport zarządczy wspierający decyzje biznesowe.</p>
+</section>
+<section class="cs-section" id="pl-s11"><h2 class="cs-section-title"><span class="cs-num">11</span>Dalszy rozwój projektu</h2>
+<p>Projekt można rozbudować o kolejne elementy:</p><ul><li>automatyczne odświeżanie danych po publikacji raportu,</li><li>bardziej szczegółową analizę trendów miesięcznych,</li><li>osobną stronę z analizą odchyleń między prognozą a wynikiem rzeczywistym,</li><li>segmentację przedstawicieli według efektywności i terminowości,</li><li>dodatkowe alerty dla wniosków po terminie,</li><li>porównanie efektywności programu między kolejnymi okresami budżetowymi,</li><li>integrację z automatycznym procesem zbierania wniosków.</li></ul></section>
+<section class="cs-section" id="pl-s12"><h2 class="cs-section-title"><span class="cs-num">12</span>Czego się nauczyłam</h2>
+<p>Przygotowanie tego projektu pozwoliło mi przejść przez pełny proces budowy raportu Power BI: od przygotowania danych w Power Query, przez modelowanie danych, po stworzenie miar DAX i zaprojektowanie interaktywnego raportu.</p>
+<p>Najważniejszym elementem było przejście z poziomu operacyjnego do zarządczego. Dane, które w Excelu służyły do obsługi pojedynczego wniosku, w Power BI zostały wykorzystane do oceny całego programu i wsparcia decyzji dotyczących alokacji budżetu.</p>
+<p>Projekt pokazał mi również, jak ważne jest konsekwentne definiowanie wskaźników. Zwrot z inwestycji, okres zwrotu i wskaźnik efektywności inwestycji muszą być liczone według jednej logiki, aby raport był wiarygodny i spójny dla odbiorcy biznesowego.</p>
+</section>
+<section class="cs-section" id="pl-s13"><h2 class="cs-section-title"><span class="cs-num">13</span>Repozytorium</h2>
+<p>W repozytorium zostaną umieszczone materiały projektu:</p><ul><li>opis projektu,</li><li>zrzuty ekranu raportu,</li><li>plik raportu Power BI lub jego wersja demonstracyjna,</li><li>dokumentacja modelu danych,</li><li>opis przyjętych założeń analitycznych,</li><li>link do interaktywnego raportu.</li></ul>
+<p><a class="btn btn-primary" href="https://github.com/placeholder/marketing-funding-program-performance-analysis" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> Zobacz na GitHub</a></p>
+</section>
+</div>
+<div data-project-lang="en" id="en-overview" style="display:none;">
+<figure class="cs-figure cs-main-figure"><div class="cs-hero-img"><img alt="Marketing Funding Program Performance Analysis — main project view" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-hero.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-hero.png</span></div></div></figure>
+<h1 class="cs-title">Marketing Funding Program Performance Analysis</h1>
+<div class="cs-intro-meta"><span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">DAX</span><span class="tag">ETL</span><span class="tag">Data model</span><span class="tag">Interactive report</span></div>
+<p>An interactive Power BI report showing the performance of a marketing funding program from a management perspective. The project analyzes granted funding, margin, return on investment, payback period, regional and sales representative performance, and settlement-related risks.</p>
+<p>The data was prepared in Power Query as part of an ETL process. I then built a snowflake data model, DAX measures and a five-page management report.</p>
+<figure class="cs-figure cs-demo-video"><div class="cs-video-wrap cs-video-giflike" style="height:640px;background:#f8fafc;"><iframe title="Interaktywny raport Power BI" src="TUTAJ_WKLEJ_LINK_DO_RAPORTU_KAJODATASPACE" loading="lazy" allowfullscreen style="width:100%;height:100%;border:0;display:block;background:#f8fafc;"></iframe></div><figcaption>If the report does not display here, open the interactive version in a new tab. <a href="TUTAJ_WKLEJ_LINK_DO_RAPORTU_KAJODATASPACE" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline;font-weight:600;">Open interactive report</a></figcaption></figure>
+<section class="cs-section" id="en-s1"><h2 class="cs-section-title"><span class="cs-num">1</span>Business problem and project goal</h2>
+<p>In an organization with a sales network or a network of business partners, the process of granting marketing funding may involve many applications, sales representatives, regions, initiative types and budgets. Information about the number of approved applications or the value of granted funding is not enough to assess whether the program delivers the expected business impact.</p>
+<p>The goal of the project was to prepare a report that helps answer the following questions:</p><ul><li>does the funding program generate a positive margin,</li><li>which initiative types are the most effective,</li><li>which regions and teams achieve the best results,</li><li>what is the relationship between granted funding and margin,</li><li>where do settlement delays occur,</li><li>what portion of funds remains unsettled,</li><li>which areas require further control or a change in budget allocation.</li></ul>
+<p>The report was prepared as a management tool. Its purpose is not to process a single application, but to evaluate the whole program and support decisions about further funding of marketing activities.</p>
+</section>
+<section class="cs-section" id="en-s2"><h2 class="cs-section-title"><span class="cs-num">2</span>Data</h2>
+<p>The data was prepared by me specifically for this portfolio project. It is fictional data inspired by a real business process. Any similarity to real personal data, values or business situations is coincidental.</p><p>The data scope includes:</p><ul><li>marketing funding applications,</li><li>requested and granted amounts,</li><li>forecast and actual margin,</li><li>decision statuses,</li><li>settlement statuses, settlement due dates and delays,</li><li>sales representatives, managers and regions,</li><li>initiative types, channels and segments,</li><li>investment efficiency classes.</li></ul><p>The data was prepared to support analysis at several levels: the whole program, region, manager, sales representative and individual application.</p></section>
+<section class="cs-section" id="en-s3"><h2 class="cs-section-title"><span class="cs-num">3</span>Data model</h2>
+<p>The data model was built as a snowflake schema. The central table of the model is the fact table <strong>F_Applications</strong>, where one row represents one funding application.</p>
+<p>Dimensions describing applications, statuses, initiatives, channels, segments and the calendar are connected directly to the fact table. Additionally, the sales representatives table is connected to organizational dimensions such as region, manager, activity segment and revenue segment. As a result, the model is not a simple star schema, but a snowflake structure.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Data model in a snowflake schema" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-data-model.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-data-model.png</span></div></div><figcaption>Image 1. Data model in a snowflake schema, based on the central F_Applications fact table.</figcaption></figure>
+<p>This structure allows the data to be analyzed at the level of a single application, region, manager, sales representative and the whole program.</p></section>
+<section class="cs-section" id="en-s4"><h2 class="cs-section-title"><span class="cs-num">4</span>Data preparation</h2>
+<p>The data was prepared in Power Query as part of an ETL process: extracting, transforming and loading data into the reporting model.</p><p>As part of data preparation, I completed the following steps:</p><ul><li>imported source data,</li><li>created a supporting query layer,</li><li>cleaned and standardized column names,</li><li>checked data types,</li><li>removed unnecessary technical fields,</li><li>merged application data with settlement data,</li><li>prepared the fact table and dimension tables,</li><li>removed duplicates in dimensions,</li><li>added technical identifiers for selected dimensions,</li><li>organized statuses, segments and efficiency classes,</li><li>prepared the data for modeling and reporting.</li></ul><p>An important assumption was to separate the data preparation stage from the analysis stage. The data was first cleaned and structured in Power Query and only then used in the data model and DAX measures.</p></section>
+<section class="cs-section" id="en-s5"><h2 class="cs-section-title"><span class="cs-num">5</span>Report structure</h2>
+<p>The report consists of five analytical pages.</p>
+<h3>Executive Overview</h3><p>The main report page shows the overall picture of the program. It includes the key indicators: granted funding, margin, applications not yet due for settlement, application count, return on investment, payback period and approval rate. The page allows users to quickly assess the program condition and identify areas requiring further analysis.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Executive Overview — overall program view" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-1-executive-overview.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-1-executive-overview.png</span></div></div><figcaption>Image 2. Executive Overview — overall program view.</figcaption></figure>
+<h3>Program Profitability</h3><p>This page focuses on program profitability. It shows a comparison of forecast and actual margin, the relationship between funding and margin, margin variance and changes in profitability indicators over time.</p><p>Profitability indicators are calculated for matured applications, meaning those whose settlement due date has already passed. According to the program assumptions, sales representatives have 12 months after receiving funding to settle the effects of marketing activities. Applications that have not yet reached that date are not included in the main profitability indicators, so they do not artificially lower the program result.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Program Profitability — program profitability" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-2-program-profitability.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-2-program-profitability.png</span></div></div><figcaption>Image 3. Program Profitability — program profitability.</figcaption></figure>
+<h3>Initiative &amp; Channel Effectiveness</h3><p>This page compares the effectiveness of marketing initiative types and channels. It shows which activities generate the highest margin, how results change over time and what the relationship between funding and margin looks like for each initiative type.</p><p>This part of the report supports decisions about which activities are worth developing and which require further analysis.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Initiative & Channel Effectiveness — initiative and channel effectiveness" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-3-initiative-channel.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-3-initiative-channel.png</span></div></div><figcaption>Image 4. Initiative & Channel Effectiveness — initiative and channel effectiveness.</figcaption></figure>
+<h3>Regional &amp; Sales Representative Performance</h3><p>This page shows results by regions, managers and sales representatives. It includes analysis of funding, margin, return on investment, investment efficiency and payback period.</p><p>The report uses analysis from general to detailed levels: from region, through manager and sales representative, down to a single application.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Regional & Sales Representative Performance — regional and sales representative performance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-4-regional-sales.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-4-regional-sales.png</span></div></div><figcaption>Image 5. Regional & Sales Representative Performance — regional and sales representative performance.</figcaption></figure>
+<h3>Settlement &amp; Risk Overview</h3><p>This page analyzes settlement statuses and operational risks. It shows unsettled amounts, overdue amounts, average delays, settlement statuses and a list of applications requiring further control.</p><p>This part of the report helps quickly identify areas where funds have been granted, but settlement has not been completed or delays have occurred.</p>
+<figure class="cs-figure"><div class="cs-wide-img"><img alt="Settlement & Risk Overview — settlements and risk" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project2-page-5-settlement-risk.png"/><div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project2-page-5-settlement-risk.png</span></div></div><figcaption>Image 6. Settlement & Risk Overview — settlements and risk.</figcaption></figure>
+</section>
+<section class="cs-section" id="en-s6"><h2 class="cs-section-title"><span class="cs-num">6</span>Measures and calculation logic</h2>
+<p>I used DAX measures in the report to calculate indicators that respond to filters and user selections.</p><p>The key measures include:</p><ul><li>Application count (Application Count) — the number of unique applications in the analyzed scope.</li><li>Granted funding (Funding) — the sum of funds granted for marketing activities.</li><li>Forecast margin (Forecast Margin) — the sum of planned margin resulting from application assumptions.</li><li>Actual margin (Actual Margin) — the sum of margin recognized after settlement of activities.</li><li>Return on investment (ROI) — the relationship between profit and granted funding.</li><li>Payback period (Payback) — information on how quickly granted funding is returned through margin.</li><li>Investment efficiency ratio (Eff. Ratio) — the relationship between actual margin and granted funding.</li><li>Approval rate (Approval Rate) — the share of approved applications in all applications.</li><li>Settlement completion rate (Settlement Completion Rate) — the share of settled applications among approved applications.</li><li>Overdue rate (Overdue Rate) — the share of overdue applications among approved applications.</li><li>Unsettled amount (Unsettled Amount) — the sum of granted funds that have not yet been settled.</li><li>Overdue amount (Overdue Amount) — the sum of granted funds related to overdue applications.</li></ul><p>Profitability indicators such as return on investment, payback period and investment efficiency ratio are calculated for matured applications. This means they include applications for which the 12-month period provided for settling the effects of marketing activities has passed.</p></section>
+<section class="cs-section" id="en-s7"><h2 class="cs-section-title"><span class="cs-num">7</span>Technical conclusions</h2>
+<p>The project shows the full process of preparing a Power BI report: from source data, through data preparation, modeling and calculations, to interactive visualization.</p><p>The key technical conclusions are:</p><ul><li>Power Query works well as an ETL layer because it separates source data from data ready for modeling.</li><li>A snowflake model helps maintain clarity when the organizational structure is more complex.</li><li>The F_Applications fact table enables application-level analysis, while dimensions allow filtering by regions, managers, initiative types and statuses.</li><li>The DAX calendar table enables time-based analysis, especially by years and quarters.</li><li>DAX measures calculate indicators dynamically according to selected filters.</li><li>Profitability indicators should be calculated consistently using the same logic to avoid conflicting results across report pages.</li><li>It is useful to separate indicators describing program effectiveness from indicators describing settlement risk. This means that ROI, Payback and Eff. Ratio evaluate profitability, while Overdue, Unsettled Amount and Delay Days show settlement risk.</li><li>Interactive filters and analysis from general to detailed levels increase the usefulness of the report for business users.</li></ul></section>
+<section class="cs-section" id="en-s8"><h2 class="cs-section-title"><span class="cs-num">8</span>Business conclusions</h2>
+<p>Based on the report, several key business conclusions can be identified.</p>
+<p>First, program evaluation should not be based only on the number of applications or the amount of granted budget. A high number of applications does not automatically mean high effectiveness if it does not translate into margin and return on investment.</p>
+<p>Second, marketing initiative types differ in effectiveness. Some activities generate high margin and favorable return on investment, while others require closer control or changes in funding rules.</p>
+<p>Third, regional results are not equal. The report allows users to compare regions, managers and sales representatives, and then move to the level of a single application to identify the source of the result.</p>
+<p>Fourth, some funds may remain unsettled or overdue. Even if the program as a whole generates a positive result, areas with a high level of delays require operational control.</p>
+<p>Fifth, the newest applications should not be evaluated in the same way as applications that already had the full time to generate and settle their results. That is why the project separates the analysis of the whole program from the profitability analysis of matured applications.</p></section>
+<section class="cs-section" id="en-s9"><h2 class="cs-section-title"><span class="cs-num">9</span>Business recommendations</h2><p>Based on the report, the following recommendations can be proposed:</p><ul><li>Maintain funding for activities with high margin and favorable return on investment.</li><li>Limit or more closely control initiatives with low effectiveness.</li><li>Introduce regular monitoring of unsettled applications.</li><li>Analyze results at the level of regions and managers.</li><li>Use profitability indicators only after the settlement period has passed.</li><li>Separate operational assessment from management assessment.</li><li>Use the report as a tool for budget discussions.</li></ul><p>The report can support decisions on continuing, limiting or changing the funding rules for specific marketing activities.</p></section>
+<section class="cs-section" id="en-s10"><h2 class="cs-section-title"><span class="cs-num">10</span>Connection with the Excel project</h2>
+<p>This project is directly connected with the earlier Excel project covering the handling of applications for marketing activity funding.</p>
+<p>The Excel project had an operational function. It supported committee work, review of individual applications, checking sales representative history, decision handling and settlement control. It was a tool for working at the level of a single application.</p>
+<p>The Power BI project uses the same business process, but shows it from another perspective. Instead of supporting ongoing application handling, the report helps evaluate the whole program: budget usage, initiative profitability, regional and sales representative results, and settlement risks.</p>
+<p>Together, these two projects show how the same data can work in two different tools and for two different groups of users:</p><ul><li>Excel — committee and people handling applications operationally; goal: review and handling of individual applications.</li><li>Power BI — management, managers and budget owners; goal: analysis of overall program effectiveness and decision support.</li></ul><p>This connection shows a full analytical flow: from operational data, through preparation and modeling, to a management report supporting business decisions.</p></section>
+<section class="cs-section" id="en-s11"><h2 class="cs-section-title"><span class="cs-num">11</span>Further development</h2><p>The project could be extended with additional elements:</p><ul><li>automatic data refresh after report publication,</li><li>more detailed monthly trend analysis,</li><li>a separate page analyzing variance between forecast and actual result,</li><li>sales representative segmentation by effectiveness and timeliness,</li><li>additional alerts for overdue applications,</li><li>comparison of program effectiveness across budget periods,</li><li>integration with an automated application collection process.</li></ul></section>
+<section class="cs-section" id="en-s12"><h2 class="cs-section-title"><span class="cs-num">12</span>What I learned</h2>
+<p>Preparing this project allowed me to go through the full process of building a Power BI report: from data preparation in Power Query, through data modeling, to creating DAX measures and designing an interactive report.</p>
+<p>The most important element was moving from an operational level to a management level. Data that was used in Excel to handle a single application was used in Power BI to evaluate the whole program and support decisions about budget allocation.</p>
+<p>The project also showed me how important it is to define indicators consistently. Return on investment, payback period and investment efficiency ratio must be calculated according to one logic, so that the report is reliable and consistent for a business user.</p></section>
+<section class="cs-section" id="en-s13"><h2 class="cs-section-title"><span class="cs-num">13</span>Repository</h2><p>The repository will include project materials:</p><ul><li>project description,</li><li>report screenshots,</li><li>Power BI report file or demo version,</li><li>data model documentation,</li><li>description of analytical assumptions,</li><li>link to the interactive report.</li></ul><p><a class="btn btn-primary" href="https://github.com/placeholder/marketing-funding-program-performance-analysis" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> View on GitHub</a></p></section>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer><span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span></footer>
+<script src="../js/translations.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    const projectNavLabels = {
+      pl: ['Widok projektu', 'Problem i cel projektu', 'Dane', 'Model danych', 'Przygotowanie danych', 'Struktura raportu', 'Wskaźniki i logika obliczeń', 'Wnioski techniczne', 'Wnioski biznesowe', 'Rekomendacje biznesowe', 'Powiązanie z projektem Excel', 'Dalszy rozwój projektu', 'Czego się nauczyłam', 'Repozytorium'],
+      en: ['Project overview', 'Business problem and project goal', 'Data', 'Data model', 'Data preparation', 'Report structure', 'Measures and calculation logic', 'Technical conclusions', 'Business conclusions', 'Business recommendations', 'Connection with the Excel project', 'Further development', 'What I learned', 'Repository']
+    };
 
-  <!-- NAWIGACJA -->
-  <nav id="navbar" role="navigation">
-    <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">BW<span>.</span></a>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul id="nav-menu" role="list">
-        <li><a href="../index.html"        class="nav-link" data-page="home"      data-i18n="nav_home">Główna</a></li>
-        <li><a href="../portfolio.html"    class="nav-link" data-page="portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
-        <li><a href="../certificates.html" class="nav-link" data-page="cert"      data-i18n="nav_cert">Certyfikaty</a></li>
-        <li><button class="lang-btn" id="lang-toggle" aria-label="Zmień język">EN</button></li>
-      </ul>
-    </div>
-  </nav>
+    function getProjectLang() {
+      return localStorage.getItem('bw-lang') || 'pl';
+    }
 
-  <!-- GŁÓWNA TREŚĆ -->
-  <main>
-    <div class="container">
-      <div class="cs-layout">
+    function updateProjectLanguageBlocks() {
+      const lang = getProjectLang();
+      document.querySelectorAll('[data-project-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-project-lang') === lang ? '' : 'none';
+      });
+      updateProjectSidebar(lang);
+    }
 
-        <!-- SIDEBAR -->
-        <aside class="cs-sidebar" aria-label="Nawigacja po sekcjach">
-          <span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
-          <nav class="cs-sidebar-nav">
-            <a href="#problem"   data-i18n="cs_s_problem">Problem biznesowy</a>
-            <a href="#dataset"   data-i18n="cs_s_data">Dane</a>
-            <a href="#tools"     data-i18n="cs_s_tools">Narzędzia</a>
-            <a href="#dataprep"  data-i18n="cs_s_prep">Przygotowanie danych</a>
-            <a href="#analysis"  data-i18n="cs_s_analysis">Proces analizy</a>
-            <a href="#dashboard" data-i18n="cs_s_dashboard">Dashboard</a>
-            <a href="#findings"  data-i18n="cs_s_findings">Wnioski</a>
-            <a href="#recs"      data-i18n="cs_s_recs">Rekomendacje</a>
-            <a href="#learned"   data-i18n="cs_s_learned">Czego się nauczyłam</a>
-            <a href="#repo"      data-i18n="cs_s_repo">Repozytorium</a>
-          </nav>
-        </aside>
+    function updateProjectSidebar(lang) {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      links.forEach((link, index) => {
+        link.setAttribute('href', index === 0 ? `#${lang}-overview` : `#${lang}-s${index}`);
+        if (projectNavLabels[lang] && projectNavLabels[lang][index]) {
+          link.textContent = projectNavLabels[lang][index];
+        }
+      });
+    }
 
-        <!-- TREŚĆ -->
-        <article class="cs-main">
+    function initProjectSidebarScroll() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
 
-          <a href="../portfolio.html" class="cs-back-link">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            <span data-i18n="cs_back">← Powrót do Portfolio</span>
-          </a>
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const target = document.querySelector(targetId);
+          if (!target) return;
 
-          <div class="cs-hero-img">
-            <img src="../images/projects/project2.png" alt="Sales Performance Analysis – screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="cs-hero-img-placeholder" style="display:none;">
-              <i class="fas fa-chart-line" aria-hidden="true"></i>
-              <span>project2.png — główny screenshot dashboardu</span>
-            </div>
-          </div>
+          const offset = 92;
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+          });
 
-          <div class="cs-intro fade-in">
-            <h1 class="cs-title" data-i18n="cs2_title">Sales Performance Analysis</h1>
-            <div class="cs-intro-meta">
-              <span class="tag">SQL</span>
-              <span class="tag">Power BI</span>
-              <span class="tag">DAX</span>
-              <span class="tag">Excel</span>
-              <span class="tag">KPI</span>
-            </div>
-            <p class="cs-intro-p" data-i18n="cs2_intro">
-              Wielowymiarowa analiza wyników sprzedaży z wykorzystaniem SQL do eksploracji danych i Power BI do wizualizacji KPI, trendów i porównań regionalnych.
-            </p>
-          </div>
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          history.replaceState(null, '', targetId);
+        });
+      });
+    }
 
-          <!-- 1. Problem -->
-          <section class="cs-section fade-in" id="problem">
-            <h2 class="cs-section-title">
-              <span class="cs-num">1</span>
-              <span data-i18n="cs_s_problem">Problem biznesowy</span>
-            </h2>
-            <p data-i18n="cs2_problem">
-              Kierownictwo sprzedaży potrzebowało rzetelnego narzędzia do bieżącego monitorowania wyników — porównania realizacji planów, identyfikacji regionów i produktów wymagających wsparcia oraz wglądu w trendy sezonowe.
-            </p>
-          </section>
+    function initProjectSidebarActiveState() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
 
-          <!-- 2. Dane -->
-          <section class="cs-section fade-in" id="dataset">
-            <h2 class="cs-section-title">
-              <span class="cs-num">2</span>
-              <span data-i18n="cs_s_data">Dane</span>
-            </h2>
-            <p data-i18n="cs2_dataset">
-              Dane transakcyjne z systemu sprzedażowego za 24 miesiące: zamówienia, wartości, regiony, produkty, handlowcy. Dane o planach sprzedażowych z pliku Excel.
-            </p>
-          </section>
+      const setActive = () => {
+        const lang = getProjectLang();
+        let currentId = `${lang}-overview`;
+        document.querySelectorAll(`[data-project-lang="${lang}"] .cs-section[id]`).forEach(section => {
+          const top = section.getBoundingClientRect().top;
+          if (top <= 130) currentId = section.id;
+        });
+        links.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      };
 
-          <!-- 3. Narzędzia -->
-          <section class="cs-section fade-in" id="tools">
-            <h2 class="cs-section-title">
-              <span class="cs-num">3</span>
-              <span data-i18n="cs_s_tools">Narzędzia</span>
-            </h2>
-            <div class="tags">
-              <span class="tag">SQL</span>
-              <span class="tag">Power BI</span>
-              <span class="tag">DAX</span>
-              <span class="tag">Excel</span>
-            </div>
-          </section>
+      window.addEventListener('scroll', setActive, { passive: true });
+      window.addEventListener('resize', setActive, { passive: true });
+      setActive();
+    }
 
-          <!-- 4. Przygotowanie danych -->
-          <section class="cs-section fade-in" id="dataprep">
-            <h2 class="cs-section-title">
-              <span class="cs-num">4</span>
-              <span data-i18n="cs_s_prep">Przygotowanie danych</span>
-            </h2>
-            <p data-i18n="cs2_prep">
-              Zapytania SQL do agregacji danych transakcyjnych (GROUP BY region, produkt, miesiąc), obliczenia odchyleń od planu, identyfikacja top 10 i bottom 10 handlowców. Import wyników do Power BI.
-            </p>
-          </section>
-
-          <!-- 5. Proces analizy -->
-          <section class="cs-section fade-in" id="analysis">
-            <h2 class="cs-section-title">
-              <span class="cs-num">5</span>
-              <span data-i18n="cs_s_analysis">Proces analizy</span>
-            </h2>
-            <p data-i18n="cs2_analysis">
-              Analiza KPI: przychód vs. plan (%), wzrost r/r, średnia wartość transakcji. Analiza Pareto — które 20% produktów generuje 80% przychodu. Analiza sezonowości i prognoza trendów.
-            </p>
-          </section>
-
-          <!-- 6. Dashboard -->
-          <section class="cs-section fade-in" id="dashboard">
-            <h2 class="cs-section-title">
-              <span class="cs-num">6</span>
-              <span data-i18n="cs_s_dashboard">Dashboard</span>
-            </h2>
-            <p data-i18n="cs2_dashboard_desc">
-              Interaktywny dashboard z filtrowaniem po regionie, produktie i przedziale czasowym. Widoki: podsumowanie KPI, mapa regionalna, ranking handlowców, analiza trendów. Zastąp plikiem images/projects/cs2-dashboard.png.
-            </p>
-            <div class="cs-screenshot-ph" style="margin-top:20px;">
-              <i class="fas fa-chart-column" aria-hidden="true"></i>
-              <span>Wstaw screenshot dashboardu: images/projects/cs2-dashboard.png</span>
-            </div>
-          </section>
-
-          <!-- 7. Wnioski -->
-          <section class="cs-section fade-in" id="findings">
-            <h2 class="cs-section-title">
-              <span class="cs-num">7</span>
-              <span data-i18n="cs_s_findings">Najważniejsze wnioski</span>
-            </h2>
-            <ul>
-              <li>Regiony Północ i Centrum realizują plan na poziomie 115%+</li>
-              <li>Region Wschód notuje systematyczny spadek przychodów r/r (-8%)</li>
-              <li>Produkty Premium: 42% przychodów przy zaledwie 18% wolumenu</li>
-              <li>Wyraźna sezonowość — Q3 i Q4 to łącznie 65% rocznego przychodu</li>
-            </ul>
-          </section>
-
-          <!-- 8. Rekomendacje -->
-          <section class="cs-section fade-in" id="recs">
-            <h2 class="cs-section-title">
-              <span class="cs-num">8</span>
-              <span data-i18n="cs_s_recs">Rekomendacje biznesowe</span>
-            </h2>
-            <p data-i18n="cs2_recs">
-              1. Dedykowany program wsparcia dla Regionu Wschód — analiza przyczyn spadku. 2. Przesunięcie celów sprzedażowych w kierunku produktów Premium. 3. Wzmocnienie zasobów sprzedażowych w Q3 na podstawie historii sezonowości.
-            </p>
-          </section>
-
-          <!-- 9. Czego się nauczyłam -->
-          <section class="cs-section fade-in" id="learned">
-            <h2 class="cs-section-title">
-              <span class="cs-num">9</span>
-              <span data-i18n="cs_s_learned">Czego się nauczyłam</span>
-            </h2>
-            <p data-i18n="cs2_learned">
-              Projekt pogłębił umiejętności pisania zapytań SQL z wieloma JOINami i agregatami, tworzenia relacji w modelu Power BI oraz projektowania dashboardów dla decydentów wyższego szczebla.
-            </p>
-          </section>
-
-          <!-- 10. Repozytorium -->
-          <section class="cs-section fade-in" id="repo">
-            <h2 class="cs-section-title">
-              <span class="cs-num">10</span>
-              <span data-i18n="cs_s_repo">Repozytorium</span>
-            </h2>
-            <a href="https://github.com/placeholder" class="btn btn-outline" target="_blank" rel="noopener">
-              <i class="fab fa-github" aria-hidden="true"></i>
-              <span data-i18n="cs_view_gh">Zobacz na GitHub</span>
-            </a>
-          </section>
-
-          <!-- Footer projektu -->
-          <div class="cs-footer fade-in">
-            <a href="../portfolio.html" class="btn btn-ghost">
-              <i class="fas fa-arrow-left" aria-hidden="true"></i>
-              <span data-i18n="cs_back">← Powrót do Portfolio</span>
-            </a>
-            <div class="tags">
-              <span class="tag tag-navy">SQL</span>
-              <span class="tag tag-navy">Power BI</span>
-              <span class="tag tag-navy">DAX</span>
-              <span class="tag tag-navy">KPI Analysis</span>
-              <span class="tag tag-navy">Sales</span>
-            </div>
-          </div>
-
-        </article>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span>
-  </footer>
-
-  <script src="../js/translations.js"></script>
-  <script src="../js/main.js"></script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProjectLanguageBlocks();
+      initProjectSidebarScroll();
+      initProjectSidebarActiveState();
+      const langBtn = document.getElementById('lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
+          setTimeout(() => {
+            updateProjectLanguageBlocks();
+            const overviewSection = document.querySelector(`#${getProjectLang()}-overview`);
+            if (overviewSection && window.location.hash) {
+              history.replaceState(null, '', `#${getProjectLang()}-overview`);
+            }
+          }, 0);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

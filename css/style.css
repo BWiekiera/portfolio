@@ -460,20 +460,70 @@ p  { line-height: 1.75; }
 
 /* ---- 13. TECHNOLOGIE ---- */
 #skills { background: var(--white); }
-.skills-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; }
+.skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
 .skill-card {
   background: var(--bg); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 26px 18px; text-align: center;
+  border-radius: var(--radius-lg); padding: 20px 12px; text-align: center;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 .skill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(59,130,246,0.4); }
 .skill-icon {
-  width: 52px; height: 52px; background: var(--light-blue); border-radius: var(--radius);
+  width: 42px; height: 42px; background: var(--light-blue); border-radius: var(--radius);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px; font-size: 22px; color: var(--navy);
+  margin: 0 auto 10px; font-size: 18px; color: var(--navy);
 }
-.skill-name { font-size: 0.9rem; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px; }
-.skill-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.5; }
+.skill-name { font-size: 0.82rem; font-weight: 700; color: var(--dark-navy); margin-bottom: 5px; }
+.skill-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.45; }
+
+
+/* ---- 13a. WYKSZTAŁCENIE ---- */
+#education { background: var(--bg); }
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.education-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.education-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(59,130,246,0.35);
+}
+.education-period {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--light-blue);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.education-title {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.education-school {
+  font-size: 0.88rem;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.education-desc {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.72;
+  margin-bottom: 18px;
+}
 
 /* ---- 14. KONTAKT ---- */
 #contact { background: var(--bg); }
@@ -732,6 +782,7 @@ footer {
   .projects-grid   { grid-template-columns: repeat(2,1fr); }
   /* carousel stage height set by JS */
   .skills-grid     { grid-template-columns: repeat(4,1fr); }
+  .education-grid  { grid-template-columns: 1fr; }
   .about-grid      { grid-template-columns: 1fr; gap: 44px; }
   .portfolio-card-inner { grid-template-columns: 280px 1fr; }
   .cs-layout       { grid-template-columns: 200px 1fr; gap: 36px; }
@@ -806,4 +857,104 @@ footer {
   .contact-link-box { width: 100%; }
   .portfolio-card-content { padding: 24px; }
   .cs-footer { flex-direction: column; align-items: flex-start; }
+}
+
+
+/* ============================================================
+   PODSTRONA PROJEKTU 1 — CASE STUDY INDYWIDUALNE
+   ============================================================ */
+.cs-content { min-width: 0; }
+.project-hero p { max-width: 760px; }
+.project1-case h3 {
+  font-size: 1.02rem;
+  margin: 26px 0 10px;
+  color: var(--navy);
+}
+.project1-case p { margin-bottom: 14px; }
+.cs-figure { margin: 28px 0 42px; }
+.cs-main-figure { margin-top: 28px; }
+.cs-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.cs-wide-img,
+.cs-video-wrap {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+.cs-wide-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.cs-video-wrap { padding: 18px; }
+.cs-video-wrap video {
+  width: 100%;
+  max-height: 620px;
+  display: block;
+  background: #000;
+  border-radius: var(--radius);
+}
+.cs-video-note {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+@media (max-width: 768px) {
+  .cs-figure { margin: 22px 0 34px; }
+  .cs-video-wrap { padding: 12px; }
+}
+
+/* ---- Korekty projektu 1 v6 ---- */
+.project1-case .cs-section ul {
+  margin: 8px 0 20px 0;
+  padding-left: 22px;
+  list-style: disc;
+}
+.project1-case .cs-section ul li {
+  padding: 3px 0;
+  border-bottom: none;
+  line-height: 1.7;
+}
+.project1-case .cs-section ul li::before { content: none; }
+.project1-case .cs-demo-gif img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.project1-case .cs-main-figure figcaption { display: none; }
+
+/* ---- Projekt 1 v8: film osadzony jak GIF ---- */
+.project1-case .cs-demo-video {
+  margin: 28px 0 42px;
+}
+.project1-case .cs-video-giflike {
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.project1-case .cs-video-giflike video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--white);
+  border-radius: 0;
+}
+
+
+/* Project case study sidebar active state */
+.cs-sidebar-nav a.active {
+  background: var(--light-blue);
+  color: var(--blue);
+  font-weight: 700;
+  border-left-color: var(--blue);
 }
