@@ -155,17 +155,19 @@ function initSidebarNav() {
 /* ----- AKTYWNY LINK NAWIGACJI ----- */
 
 function setActiveNavLink() {
+  const bodyPage = document.body?.dataset?.page;
   const path = window.location.pathname;
   const file = path.split('/').pop() || 'index.html';
-  const isProjectPage = path.includes('/projects/') || file.startsWith('project');
+
+  let currentPage = bodyPage;
+  if (!currentPage) {
+    if (file === 'portfolio.html' || path.includes('/projects/')) currentPage = 'portfolio';
+    else if (file === 'certificates.html') currentPage = 'cert';
+    else currentPage = 'home';
+  }
 
   document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-    const page = link.getAttribute('data-page');
-    const isActive =
-      (page === 'home' && file === 'index.html') ||
-      (page === 'portfolio' && (file === 'portfolio.html' || isProjectPage)) ||
-      (page === 'cert' && file === 'certificates.html');
-    link.classList.toggle('active', isActive);
+    link.classList.toggle('active', link.getAttribute('data-page') === currentPage);
   });
 }
 
