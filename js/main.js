@@ -60,27 +60,43 @@ function initHamburger() {
   const menu = document.getElementById('nav-menu');
   if (!btn || !menu) return;
 
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('active');
-    menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded', menu.classList.contains('open'));
+  const closeMenu = () => {
+    btn.classList.remove('active');
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  };
+
+  const toggleMenu = () => {
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('active', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
   });
 
-  // Zamknij po kliknięciu linku
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      btn.classList.remove('active');
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    });
+  // Zamknij menu po kliknięciu linku lub przycisku języka
+  menu.querySelectorAll('a, button').forEach(item => {
+    item.addEventListener('click', closeMenu);
   });
 
   // Zamknij po kliknięciu poza menu
   document.addEventListener('click', e => {
     if (!btn.contains(e.target) && !menu.contains(e.target)) {
-      btn.classList.remove('active');
-      menu.classList.remove('open');
+      closeMenu();
     }
+  });
+
+  // Zamknij po naciśnięciu Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Po rozszerzeniu okna do wersji desktopowej menu nie powinno zostać otwarte
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
   });
 }
 
