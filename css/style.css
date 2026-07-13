@@ -986,3 +986,153 @@ footer {
   font-weight: 700;
   border-left-color: var(--blue);
 }
+
+
+/* ============================================================
+   V19 — responsywność podstron Portfolio/Certyfikaty + menu
+   ============================================================ */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Długie linki i nazwy nie powinny rozpychać kart na telefonie */
+.portfolio-card,
+.cert-card,
+.portfolio-card-content,
+.cert-card-content,
+.meta-value,
+.cert-meta,
+.cert-card-title,
+.portfolio-card-title {
+  min-width: 0;
+}
+.meta-value,
+.cert-meta dd,
+.portfolio-meta,
+.cert-meta,
+.portfolio-card-title,
+.cert-card-title {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* W menu aktywna ma być tylko bieżąca strona; aktywny link nie dziedziczy się po URL folderu */
+#nav-menu .nav-link.active {
+  color: var(--blue);
+  background: var(--light-blue);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  #nav-menu .nav-link.active {
+    border-left: 3px solid var(--blue);
+    padding-left: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: calc(var(--nav-h) + 34px) 0 42px;
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+  .page-hero p {
+    font-size: 0.98rem;
+    padding: 0 8px;
+  }
+
+  .portfolio-list,
+  .cert-list {
+    gap: 22px;
+  }
+
+  .portfolio-card-inner,
+  .cert-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .portfolio-card-img {
+    min-height: 190px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .portfolio-card-content,
+  .cert-card-content {
+    padding: 24px;
+  }
+
+  .portfolio-card-title,
+  .cert-card-title {
+    font-size: 1.08rem;
+    line-height: 1.35;
+    margin-bottom: 18px;
+  }
+
+  .portfolio-meta,
+  .cert-meta {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .meta-label {
+    margin-top: 10px;
+  }
+  .portfolio-meta .meta-label:first-child,
+  .cert-meta .meta-label:first-child {
+    margin-top: 0;
+  }
+
+  .portfolio-card-footer {
+    justify-content: stretch;
+  }
+  .portfolio-card-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cert-card-img {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cert-card-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cert-lightbox {
+    padding: 18px;
+  }
+  .cert-lightbox img {
+    max-width: 96vw;
+    max-height: 86vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .page-hero {
+    padding: calc(var(--nav-h) + 28px) 0 36px;
+  }
+
+  .portfolio-card-content,
+  .cert-card-content {
+    padding: 20px;
+  }
+
+  .portfolio-card-img {
+    min-height: 170px;
+  }
+
+  .portfolio-card-title,
+  .cert-card-title {
+    font-size: 1rem;
+  }
+
+  .meta-value {
+    font-size: 0.88rem;
+  }
+}

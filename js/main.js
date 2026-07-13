@@ -156,13 +156,15 @@ function initSidebarNav() {
 
 function setActiveNavLink() {
   const path = window.location.pathname;
+  const file = path.split('/').pop() || 'index.html';
+  const isProjectPage = path.includes('/projects/') || file.startsWith('project');
+
   document.querySelectorAll('.nav-link[data-page]').forEach(link => {
     const page = link.getAttribute('data-page');
     const isActive =
-      (page === 'home' && (path.endsWith('index.html') || path.endsWith('/') || path === '')) ||
-      (page === 'portfolio' && path.includes('portfolio')) ||
-      (page === 'cert' && path.includes('certificates')) ||
-      (page === 'project' && path.includes('project'));
+      (page === 'home' && file === 'index.html') ||
+      (page === 'portfolio' && (file === 'portfolio.html' || isProjectPage)) ||
+      (page === 'cert' && file === 'certificates.html');
     link.classList.toggle('active', isActive);
   });
 }
