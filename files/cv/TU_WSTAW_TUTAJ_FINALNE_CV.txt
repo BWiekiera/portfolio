@@ -1,6 +1,0 @@
-W tym folderze wstaw finalne pliki PDF CV:
-
-CV_Bernardeta_Wiekiera_PL.pdf
-CV_Bernardeta_Wiekiera_EN.pdf
-
-Przyciski na stronie głównej są już podłączone do tych ścieżek.
