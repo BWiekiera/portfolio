@@ -184,6 +184,11 @@ function initCarousel() {
   const track = stage.querySelector('.carousel-track');
   if (!track) return;
 
+  const cardsInMarkup = Array.from(track.querySelectorAll('.project-card'));
+  cardsInMarkup
+    .sort((a, b) => Number(b.dataset.projectOrder || 0) - Number(a.dataset.projectOrder || 0))
+    .forEach(card => track.appendChild(card));
+
   const origCards = Array.from(track.querySelectorAll('.project-card'));
   const total = origCards.length;
   if (!total) return;

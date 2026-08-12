@@ -751,6 +751,11 @@ footer {
 }
 .cs-sidebar {
   position: sticky; top: calc(var(--nav-h) + 24px);
+  align-self: start;
+  max-height: calc(100vh - var(--nav-h) - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   background: var(--white); border: 1px solid var(--border);
   border-radius: var(--radius-lg); padding: 24px;
   box-shadow: var(--shadow-sm);
@@ -1082,7 +1087,7 @@ footer {
 /* ============================================================
    V19 — responsywność podstron Portfolio/Certyfikaty + menu
    ============================================================ */
-html, body { max-width: 100%; overflow-x: hidden; }
+html, body { max-width: 100%; overflow-x: clip; }
 
 /* Długie linki i nazwy nie powinny rozpychać kart na telefonie */
 .portfolio-card,
