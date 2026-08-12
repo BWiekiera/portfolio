@@ -1006,9 +1006,19 @@ footer {
   padding-left: 22px;
   list-style: disc;
 }
+.project1-case .cs-section ol {
+  margin: 8px 0 20px 0;
+  padding-left: 24px;
+}
 .project1-case .cs-section ul li {
   padding: 3px 0;
   border-bottom: none;
+  line-height: 1.7;
+}
+.project1-case .cs-section ol li {
+  padding: 3px 0 3px 4px;
+  color: var(--text);
+  font-size: 0.95rem;
   line-height: 1.7;
 }
 .project1-case .cs-section ul li::before { content: none; }
@@ -1242,4 +1252,79 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .powerbi-embed-wrap { height: 460px; }
   .cs-button-row { flex-direction: column; align-items: stretch; }
   .cs-button-row .btn { justify-content: center; }
+}
+
+/* ---- Projekt 3: tabele wyników i kolorowanie składni SQL ---- */
+.cs-table-wrap {
+  width: 100%;
+  margin: 22px 0 30px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+}
+.cs-table-wrap:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline-offset: 3px;
+}
+.cs-data-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.cs-data-table th,
+.cs-data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.cs-data-table th {
+  background: var(--light-blue);
+  color: var(--dark-navy);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cs-data-table tbody tr:nth-child(even) { background: #f8fafc; }
+.cs-data-table tbody tr:last-child td { border-bottom: 0; }
+.cs-data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.sql-code-block {
+  margin: 22px 0 18px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius-lg);
+  background: #f7f9fc;
+  box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+}
+.sql-code-block code {
+  display: block;
+  min-width: 720px;
+  padding: 24px 26px;
+  color: #24324a;
+  font-family: "Consolas", "Cascadia Code", "Courier New", monospace;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  tab-size: 4;
+}
+.sql-keyword  { color: #005cc5; font-weight: 700; }
+.sql-function { color: #6f42c1; font-weight: 600; }
+.sql-string   { color: #087f5b; }
+.sql-number   { color: #c2410c; }
+.sql-alias    { color: #9a6700; }
+
+@media (max-width: 768px) {
+  .cs-data-table { font-size: 0.82rem; }
+  .cs-data-table th,
+  .cs-data-table td { padding: 10px 12px; }
+  .sql-code-block code { padding: 20px; font-size: 0.8rem; }
 }

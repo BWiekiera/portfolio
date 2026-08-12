@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Analiza sprzedaży, rentowności i zapasów sieci Maven Toys – studium przypadku SQL w MySQL i DBeaverze." name="description"/>
+<title>Analiza sprzedaży, rentowności i zapasów Maven Toys – Bernardeta Wiekiera</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body data-page="portfolio">
+<nav aria-label="Główna nawigacja" id="navbar" role="navigation">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">BW<span>.</span></a>
+<button aria-expanded="false" aria-label="Menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<ul id="nav-menu" role="list">
+<li><a class="nav-link" data-i18n="nav_home" data-page="home" href="../index.html">Główna</a></li>
+<li><a class="nav-link" data-i18n="nav_portfolio" data-page="portfolio" href="../portfolio.html">Portfolio</a></li>
+<li><a class="nav-link" data-i18n="nav_cert" data-page="cert" href="../certificates.html">Certyfikaty</a></li>
+<li><button aria-label="Zmień język" class="lang-btn" id="lang-toggle">EN</button></li>
+</ul>
+</div>
+</nav>
+
+<main class="section section-bg">
+<div class="container">
+<div class="cs-layout">
+<aside class="cs-sidebar">
+<span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
+<nav aria-label="Nawigacja po projekcie" class="cs-sidebar-nav">
+<a href="#pl-overview" data-project-top-link="true">Widok projektu</a>
+<a href="#pl-s1">Problem i cel projektu</a>
+<a href="#pl-s2">Dane</a>
+<a href="#pl-s3">Struktura bazy danych</a>
+<a href="#pl-s4">Kontrola jakości i przygotowanie danych</a>
+<a href="#pl-s5">Zakres analizy</a>
+<a href="#pl-s6">Wybrane rozwiązanie SQL</a>
+<a href="#pl-s7">Najważniejsze wyniki</a>
+<a href="#pl-s8">Wnioski i rekomendacje</a>
+<a href="#pl-s9">Założenia i ograniczenia</a>
+<a href="#pl-s10">Dalszy rozwój projektu</a>
+<a href="#pl-s11">Czego się nauczyłam</a>
+<a href="#pl-s12">Repozytorium</a>
+</nav>
+</aside>
+
+<article class="cs-content project1-case project3-case">
+<a class="cs-back-link" data-i18n="cs_back" href="../portfolio.html">← Powrót do Portfolio</a>
+
+<div data-project-lang="pl" id="pl-overview">
+<figure class="cs-figure cs-main-figure">
+<div class="cs-hero-img">
+<img alt="Analiza sprzedaży, rentowności i zapasów sieci Maven Toys — widok główny projektu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project3.png"/>
+<div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project3.png</span></div>
+</div>
+</figure>
+<h1 class="cs-title">Analiza sprzedaży, rentowności i zapasów sieci Maven Toys</h1>
+<div class="cs-intro-meta"><span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">DBeaver</span><span class="tag">CTE</span><span class="tag">Funkcje okna</span><span class="tag">Analiza biznesowa</span></div>
+<p>Kompleksowe studium przypadku SQL poświęcone analizie sprzedaży, rentowności, wyników sklepów, trendów oraz aktualnego poziomu zapasów fikcyjnej sieci Maven Toys działającej w Meksyku.</p>
+<p>Przeanalizowałam ponad 829 tys. transakcji sprzedaży z okresu od stycznia 2022 roku do września 2023 roku. Celem projektu było przejście od surowych danych źródłowych do wniosków i rekomendacji wspierających decyzje dotyczące produktów, sklepów oraz zarządzania zapasami.</p>
+
+<section class="cs-section" id="pl-s1">
+<h2 class="cs-section-title"><span class="cs-num">1</span>Problem i cel projektu</h2>
+<p>Sieć posiadająca wiele sklepów i produktów potrzebuje nie tylko informacji o całkowitym przychodzie. Do podejmowania decyzji biznesowych konieczne jest również ustalenie:</p>
+<ul>
+<li>które produkty i kategorie generują największy zysk,</li>
+<li>jak zmieniają się wyniki w czasie,</li>
+<li>które placówki osiągają najlepsze rezultaty,</li>
+<li>czy poziom zapasów odpowiada bieżącej sprzedaży,</li>
+<li>gdzie występuje ryzyko braku produktów,</li>
+<li>gdzie środki są zamrożone w nadmiernym zapasie.</li>
+</ul>
+<p>Przygotowałam analizę odpowiadającą na następujące pytania:</p>
+<ul>
+<li>jaki jest łączny przychód, koszt produktów, zysk brutto na sprzedaży i marża brutto,</li>
+<li>które kategorie i produkty osiągają najlepsze wyniki,</li>
+<li>jak przychód zmienia się miesiąc do miesiąca i rok do roku,</li>
+<li>czy pod koniec analizowanego okresu widoczne jest przyspieszenie lub osłabienie sprzedaży,</li>
+<li>które sklepy i typy lokalizacji osiągają najlepsze wyniki,</li>
+<li>jaka jest aktualna wartość zapasów,</li>
+<li>które kombinacje sklep–produkt mają zbyt niski, optymalny lub nadmierny zapas,</li>
+<li>gdzie występuje brak zapasu pomimo wcześniejszej sprzedaży,</li>
+<li>gdzie zapas pozostaje w sklepie mimo braku sprzedaży.</li>
+</ul>
+<p>Projekt przygotowałam jako kompletną analizę biznesową wykonaną w SQL, a nie tylko zbiór pojedynczych zapytań technicznych.</p>
+</section>
+
+<section class="cs-section" id="pl-s2">
+<h2 class="cs-section-title"><span class="cs-num">2</span>Dane</h2>
+<p>Dane pochodzą z publicznego zbioru Maven Analytics i przedstawiają fikcyjną sieć sklepów z zabawkami działającą w Meksyku.</p>
+<div class="cs-table-wrap" role="region" aria-label="Tabele źródłowe projektu" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Tabela</th><th scope="col">Zawartość</th><th class="num" scope="col">Liczba rekordów</th></tr></thead>
+<tbody>
+<tr><td><code>sales</code></td><td>Transakcje sprzedaży produktów według sklepów</td><td class="num">829 262</td></tr>
+<tr><td><code>products</code></td><td>Nazwy, kategorie, koszty i ceny produktów</td><td class="num">35</td></tr>
+<tr><td><code>stores</code></td><td>Sklepy, miasta, typy lokalizacji i daty otwarcia</td><td class="num">50</td></tr>
+<tr><td><code>inventory</code></td><td>Aktualny zapas według sklepu i produktu</td><td class="num">1 593</td></tr>
+</tbody>
+</table>
+</div>
+<p>Dane sprzedażowe obejmują okres od 1 stycznia 2022 roku do 30 września 2023 roku.</p>
+<p>Tabela <code>inventory</code> przedstawia aktualny stan zapasów. Umożliwia ocenę ich poziomu i struktury, ale nie pokazuje historycznych zmian stanów magazynowych.</p>
+<p><strong>Źródło danych:</strong> <a href="https://mavenanalytics.io/data-playground/mexico-toy-sales" rel="noopener" style="color:var(--blue);text-decoration:underline;" target="_blank">Mexico Toy Sales – Maven Analytics</a></p>
+</section>
+
+<section class="cs-section" id="pl-s3">
+<h2 class="cs-section-title"><span class="cs-num">3</span>Struktura bazy danych</h2>
+<p>Główną tabelą transakcyjną jest tabela <code>sales</code>. Każdy rekord sprzedaży jest powiązany z konkretnym produktem i sklepem. Tabela <code>inventory</code> również łączy produkty ze sklepami, ale przedstawia aktualny stan magazynowy dla konkretnej kombinacji sklep–produkt.</p>
+<p>W analizowanej bazie:</p>
+<ul>
+<li><code>sale_id</code> jest kluczem głównym tabeli <code>sales</code>,</li>
+<li><code>product_id</code> jest kluczem głównym tabeli <code>products</code>,</li>
+<li><code>store_id</code> jest kluczem głównym tabeli <code>stores</code>,</li>
+<li>połączenie <code>store_id + product_id</code> tworzy klucz złożony tabeli <code>inventory</code>,</li>
+<li>kolumny <code>product_id</code> i <code>store_id</code> pozwalają łączyć tabele podczas analizy.</li>
+</ul>
+<p>W bazie źródłowej relacje nie były fizycznie zdefiniowane jako klucze obce. Na potrzeby dokumentacji utworzyłam w DBeaverze diagram ERD z relacjami wirtualnymi:</p>
+<ul>
+<li><code>sales.product_id → products.product_id</code>,</li>
+<li><code>sales.store_id → stores.store_id</code>,</li>
+<li><code>inventory.product_id → products.product_id</code>,</li>
+<li><code>inventory.store_id → stores.store_id</code>.</li>
+</ul>
+<p>Widoku <code>vw_products_clean</code> nie umieściłam na diagramie, ponieważ utworzyłam go podczas przygotowania danych i nie należy on do czterech tabel źródłowych.</p>
+<figure class="cs-figure">
+<div class="cs-wide-img"><img alt="Diagram ERD bazy danych Maven Toys" src="../images/projects/project3-database-erd.png"/></div>
+<figcaption>Zdjęcie 1. Diagram ERD przedstawiający tabele źródłowe oraz relacje wykorzystywane w analizie.</figcaption>
+</figure>
+</section>
+
+<section class="cs-section" id="pl-s4">
+<h2 class="cs-section-title"><span class="cs-num">4</span>Kontrola jakości i przygotowanie danych</h2>
+<p>Przed rozpoczęciem właściwej analizy sprawdziłam jakość, kompletność i spójność danych.</p>
+<p>Kontrola obejmowała:</p>
+<ul>
+<li>liczbę rekordów w każdej tabeli,</li>
+<li>brakujące wartości,</li>
+<li>duplikaty kluczy głównych,</li>
+<li>duplikaty klucza złożonego w tabeli <code>inventory</code>,</li>
+<li>zgodność identyfikatorów produktów i sklepów pomiędzy tabelami,</li>
+<li>zakres dat sprzedaży,</li>
+<li>produkty, których cena była niższa lub równa kosztowi,</li>
+<li>kompletność kombinacji sklep–produkt w tabeli zapasów.</li>
+</ul>
+<p>Nie znalazłam brakujących wartości, zduplikowanych kluczy, niezgodnych identyfikatorów ani produktów sprzedawanych po cenie niższej lub równej kosztowi.</p>
+<p>Koszty i ceny produktów były zapisane jako tekst zawierający symbol waluty. Utworzyłam widok <code>vw_products_clean</code>, w którym usunęłam symbol waluty i przekształciłam wartości do typu <code>DECIMAL(10,2)</code>. W ten sposób przygotowałam jednolitą warstwę danych do dalszych obliczeń bez zmieniania tabeli źródłowej.</p>
+<p>Dla 50 sklepów i 35 produktów istnieje 1 750 możliwych kombinacji sklep–produkt. Tabela <code>inventory</code> zawiera 1 593 rekordy, dlatego dla 157 kombinacji brakuje informacji o zapasie.</p>
+<p>Nie potraktowałam brakujących rekordów jako zapasu równego zero, ponieważ dane nie wskazują, czy produkt nie jest oferowany w danym sklepie, czy odpowiedni rekord nie został zapisany.</p>
+</section>
+
+<section class="cs-section" id="pl-s5">
+<h2 class="cs-section-title"><span class="cs-num">5</span>Zakres analizy i struktura skryptów SQL</h2>
+<p>Podzieliłam kod projektu na sześć tematycznych skryptów:</p>
+<ol>
+<li><code>01_data_quality.sql</code> – kontrola jakości, kompletności i spójności danych,</li>
+<li><code>02_data_preparation.sql</code> – przygotowanie widoku z oczyszczonymi kosztami i cenami produktów,</li>
+<li><code>03_sales_and_profitability.sql</code> – analiza sprzedaży, zysku, marży, kategorii i produktów,</li>
+<li><code>04_time_analysis.sql</code> – analiza miesiąc do miesiąca, rok do roku i średnich kroczących,</li>
+<li><code>05_store_analysis.sql</code> – wyniki i rankingi sklepów oraz typów lokalizacji,</li>
+<li><code>06_inventory_analysis.sql</code> – wartość zapasów, pokrycie sprzedaży zapasem i klasyfikacja pozycji magazynowych.</li>
+</ol>
+<p>W zapytaniach wykorzystałam między innymi:</p>
+<ul>
+<li>złączenia <code>INNER JOIN</code> i <code>LEFT JOIN</code>,</li>
+<li>wspólne wyrażenia tabelowe CTE,</li>
+<li>widok SQL,</li>
+<li>funkcje agregujące,</li>
+<li>instrukcję <code>CASE</code>,</li>
+<li>funkcje <code>COALESCE</code> i <code>NULLIF</code>,</li>
+<li>konwersję typów danych,</li>
+<li>funkcje okna <code>LAG</code> i <code>RANK</code>,</li>
+<li>średnie kroczące, rankingi w obrębie kategorii i porównania okresów.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s6">
+<h2 class="cs-section-title"><span class="cs-num">6</span>Wybrane rozwiązanie SQL – klasyfikacja zapasów</h2>
+<p>Jednym z najważniejszych elementów projektu było określenie poziomu zapasu dla każdej zapisanej kombinacji sklep–produkt.</p>
+<p>Najpierw zagregowałam sprzedaż z ostatnich trzech miesięcy dostępnych w zbiorze, a następnie połączyłam ją z aktualnym stanem zapasu. Na tej podstawie obliczyłam średnią miesięczną sprzedaż oraz liczbę miesięcy, na które powinien wystarczyć obecny zapas.</p>
+<pre class="sql-code-block" aria-label="Fragment zapytania SQL klasyfikującego zapasy"><code><span class="sql-alias">stock_coverage_months_cte</span> <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-function">round</span>(units_sold_last_3_months / <span class="sql-number">3.0</span>, <span class="sql-number">2</span>)
+            <span class="sql-keyword">as</span> avg_monthly_units_sold
+        ,stock_on_hand
+            / <span class="sql-function">nullif</span>(units_sold_last_3_months / <span class="sql-number">3.0</span>, <span class="sql-number">0</span>)
+            <span class="sql-keyword">as</span> stock_coverage_months_exact
+    <span class="sql-keyword">from</span> inventory_sales_cte
+),
+<span class="sql-alias">inventory_status_cte</span> <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-keyword">case</span>
+            <span class="sql-keyword">when</span> stock_on_hand = <span class="sql-number">0</span> <span class="sql-keyword">then</span> <span class="sql-string">'Out of Stock'</span>
+            <span class="sql-keyword">when</span> units_sold_last_3_months = <span class="sql-number">0</span>
+                <span class="sql-keyword">and</span> stock_on_hand &gt; <span class="sql-number">0</span> <span class="sql-keyword">then</span> <span class="sql-string">'No Sales'</span>
+            <span class="sql-keyword">when</span> stock_coverage_months_exact &lt; <span class="sql-number">1</span> <span class="sql-keyword">then</span> <span class="sql-string">'Low Stock'</span>
+            <span class="sql-keyword">when</span> stock_coverage_months_exact &lt;= <span class="sql-number">3</span> <span class="sql-keyword">then</span> <span class="sql-string">'Optimal Stock'</span>
+            <span class="sql-keyword">else</span> <span class="sql-string">'Overstock'</span>
+        <span class="sql-keyword">end as</span> inventory_status
+    <span class="sql-keyword">from</span> stock_coverage_months_cte
+)</code></pre>
+<p>Funkcja <code>NULLIF</code> zabezpiecza obliczenie przed dzieleniem przez zero. Za pomocą instrukcji <code>CASE</code> przypisałam każdej pozycji jeden z pięciu statusów: brak zapasu, niski zapas, zapas optymalny, nadmierny zapas lub brak sprzedaży.</p>
+<p>Rozdzielenie kolejnych etapów pomiędzy CTE ułatwiło mi kontrolę obliczeń i pozwoliło oddzielić przygotowanie danych od właściwej klasyfikacji.</p>
+<p>Pełne zapytanie znajduje się w repozytorium projektu.</p>
+</section>
+
+<section class="cs-section" id="pl-s7">
+<h2 class="cs-section-title"><span class="cs-num">7</span>Najważniejsze wyniki</h2>
+<h3>Wynik całej sieci</h3>
+<div class="cs-table-wrap" role="region" aria-label="Wyniki całej sieci Maven Toys" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Wskaźnik</th><th class="num" scope="col">Wynik</th></tr></thead>
+<tbody>
+<tr><td>Przychód</td><td class="num">14 444 572,35 USD</td></tr>
+<tr><td>Koszt produktów</td><td class="num">10 430 543,35 USD</td></tr>
+<tr><td>Zysk brutto na sprzedaży</td><td class="num">4 014 029,00 USD</td></tr>
+<tr><td>Marża brutto</td><td class="num">27,79%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Obliczyłam zysk brutto na sprzedaży jako różnicę pomiędzy przychodem a kosztem produktów. Dane nie zawierają kosztów operacyjnych sklepów, dlatego wynik nie oznacza zysku netto.</p>
+
+<h3>Rentowność kategorii</h3>
+<div class="cs-table-wrap" role="region" aria-label="Rentowność kategorii produktów" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Kategoria</th><th class="num" scope="col">Przychód</th><th class="num" scope="col">Zysk brutto</th><th class="num" scope="col">Marża brutto</th><th scope="col">Poziom rentowności</th></tr></thead>
+<tbody>
+<tr><td>Toys</td><td class="num">5 093 241,00 USD</td><td class="num">1 079 527,00 USD</td><td class="num">21,20%</td><td>Niski</td></tr>
+<tr><td>Electronics</td><td class="num">2 246 771,25 USD</td><td class="num">1 001 437,00 USD</td><td class="num">44,57%</td><td>Wysoki</td></tr>
+<tr><td>Art &amp; Crafts</td><td class="num">2 705 364,26 USD</td><td class="num">753 354,00 USD</td><td class="num">27,85%</td><td>Średni</td></tr>
+<tr><td>Games</td><td class="num">2 226 836,27 USD</td><td class="num">673 993,00 USD</td><td class="num">30,27%</td><td>Wysoki</td></tr>
+<tr><td>Sports &amp; Outdoors</td><td class="num">2 172 359,57 USD</td><td class="num">505 718,00 USD</td><td class="num">23,28%</td><td>Niski</td></tr>
+</tbody>
+</table>
+</div>
+<p>Kategoria Toys wygenerowała najwyższy przychód i zysk brutto, ale jednocześnie osiągnęła najniższą marżę – 21,20%.</p>
+<p>Electronics wygenerowała 1 001 437,00 USD zysku brutto przy przychodzie wynoszącym 2 246 771,25 USD. Oznacza to wynik zbliżony do kategorii Toys przy przychodzie niższym o ponad połowę. Marża brutto Electronics wyniosła 44,57%.</p>
+<p>Wyniki części kategorii były silnie skoncentrowane na pojedynczych produktach:</p>
+<ul><li>Colorbuds odpowiadał za 69,63% przychodu kategorii Electronics,</li><li>Lego Bricks odpowiadał za 46,90% przychodu kategorii Toys.</li></ul>
+
+<h3>Trend sprzedaży</h3>
+<p>Przychód od stycznia do września 2023 roku był o 30,86% wyższy niż w analogicznym okresie 2022 roku. Pod koniec analizowanego okresu dynamika sprzedaży jednak osłabła.</p>
+<div class="cs-table-wrap" role="region" aria-label="Zmiany sprzedaży w sierpniu i wrześniu 2023 roku" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Miesiąc</th><th class="num" scope="col">Zmiana m/m</th><th class="num" scope="col">Różnica względem średniej z poprzednich 3 miesięcy</th><th class="num" scope="col">Zmiana r/r</th></tr></thead>
+<tbody>
+<tr><td>Sierpień 2023</td><td class="num">−20,22%</td><td class="num">−159 778,80 USD</td><td class="num">+35,03%</td></tr>
+<tr><td>Wrzesień 2023</td><td class="num">−0,41%</td><td class="num">−107 647,25 USD</td><td class="num">+12,35%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Dane kończą się we wrześniu 2023 roku, dlatego nie można jednoznacznie stwierdzić, czy osłabienie oznaczało trwałą zmianę trendu, czy było efektem sezonowym.</p>
+
+<h3>Wyniki sklepów i typów lokalizacji</h3>
+<p>Najwyższy przychód osiągnął sklep Maven Toys Ciudad de Mexico 2: 554 553,43 USD przychodu, 169 856,00 USD zysku brutto na sprzedaży i 30,63% marży brutto.</p>
+<div class="cs-table-wrap" role="region" aria-label="Wyniki według typu lokalizacji sklepu" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Typ lokalizacji</th><th class="num" scope="col">Liczba sklepów</th><th class="num" scope="col">Łączny przychód</th><th class="num" scope="col">Średni przychód na sklep</th><th class="num" scope="col">Marża brutto</th></tr></thead>
+<tbody>
+<tr><td>Downtown</td><td class="num">29</td><td class="num">8 219 596,27 USD</td><td class="num">283 434,35 USD</td><td class="num">27,36%</td></tr>
+<tr><td>Commercial</td><td class="num">12</td><td class="num">3 279 139,52 USD</td><td class="num">273 261,63 USD</td><td class="num">28,27%</td></tr>
+<tr><td>Residential</td><td class="num">6</td><td class="num">1 656 113,98 USD</td><td class="num">276 019,00 USD</td><td class="num">27,80%</td></tr>
+<tr><td>Airport</td><td class="num">3</td><td class="num">1 289 722,58 USD</td><td class="num">429 907,53 USD</td><td class="num">29,31%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Sklepy typu Downtown wygenerowały najwyższy łączny przychód, ale stanowią większość sieci – 29 z 50 placówek.</p>
+<p>Najwyższy średni przychód na jeden sklep osiągnęły lokalizacje Airport – 429 907,53 USD, czyli o 48,81% więcej od średniej dla całej sieci. Wynik ten dotyczy jednak tylko trzech sklepów, dlatego powinien być traktowany jako sygnał do dalszej analizy, a nie samodzielna podstawa decyzji o rozwoju tego typu lokalizacji.</p>
+
+<h3>Stan i struktura zapasów</h3>
+<p>Łączna wartość aktualnego zapasu według kosztu produktów wyniosła 300 209,58 USD.</p>
+<div class="cs-table-wrap" role="region" aria-label="Stan i struktura zapasów" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Status zapasu</th><th class="num" scope="col">Kombinacje sklep–produkt</th><th class="num" scope="col">Udział kombinacji</th><th class="num" scope="col">Wartość zapasu</th><th class="num" scope="col">Udział wartości</th></tr></thead>
+<tbody>
+<tr><td>Brak zapasu</td><td class="num">77</td><td class="num">4,83%</td><td class="num">0,00 USD</td><td class="num">0,00%</td></tr>
+<tr><td>Niski zapas</td><td class="num">937</td><td class="num">58,82%</td><td class="num">152 849,22 USD</td><td class="num">50,91%</td></tr>
+<tr><td>Brak sprzedaży</td><td class="num">89</td><td class="num">5,59%</td><td class="num">16 338,81 USD</td><td class="num">5,44%</td></tr>
+<tr><td>Nadmierny zapas</td><td class="num">123</td><td class="num">7,72%</td><td class="num">32 630,96 USD</td><td class="num">10,87%</td></tr>
+<tr><td>Optymalny zapas</td><td class="num">367</td><td class="num">23,04%</td><td class="num">98 390,59 USD</td><td class="num">32,77%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Tylko 23,04% zapisanych kombinacji sklep–produkt miało optymalny poziom zapasu. Kolejne 58,82% miało zapas wystarczający na mniej niż jeden miesiąc, a w przypadku 77 kombinacji zapas wynosił zero pomimo sprzedaży w poprzednich trzech miesiącach.</p>
+<p>Nadmierny zapas oraz zapas produktów bez sprzedaży miały łączną wartość 48 969,77 USD, co odpowiadało 16,31% wartości całego zapasu.</p>
+</section>
+
+<section class="cs-section" id="pl-s8">
+<h2 class="cs-section-title"><span class="cs-num">8</span>Wnioski i rekomendacje biznesowe</h2>
+<p>Analiza pokazała jednoczesne występowanie dwóch przeciwstawnych problemów: ryzyka utraty sprzedaży z powodu braków i niskich stanów oraz zamrożenia środków w nadmiernym zapasie i produktach bez sprzedaży.</p>
+<p>Na podstawie wyników analizy rekomendowałabym:</p>
+<ul>
+<li>przeanalizowanie w pierwszej kolejności pozycji bez zapasu i z niskim zapasem,</li>
+<li>ustalanie priorytetów uzupełnienia na podstawie tempa sprzedaży oraz zysku jednostkowego,</li>
+<li>sprawdzenie możliwości przesunięcia produktów pomiędzy sklepami,</li>
+<li>ograniczenie kolejnych zamówień lub zastosowanie działań promocyjnych dla produktów z nadmiernym zapasem i bez sprzedaży,</li>
+<li>ochronę dostępności produktów Colorbuds i Lego Bricks ze względu na ich duży udział w wynikach całych kategorii,</li>
+<li>analizę cen, struktury asortymentu i kosztów zakupu w kategoriach o niskiej marży,</li>
+<li>dalsze monitorowanie sprzedaży po wrześniu 2023 roku przed zmianą prognoz lub planów zakupowych,</li>
+<li>porównanie asortymentu, natężenia ruchu i kosztów działania sklepów Airport przed podjęciem decyzji o rozwoju tego typu lokalizacji.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s9">
+<h2 class="cs-section-title"><span class="cs-num">9</span>Założenia i ograniczenia analizy</h2>
+<p>Określiłam poziomy rentowności na podstawie marży brutto:</p>
+<ul>
+<li>wysoki – marża brutto co najmniej 30%,</li>
+<li>średni – marża brutto od 25% do 29,99%,</li>
+<li>niski – marża brutto poniżej 25%.</li>
+</ul>
+<p>Progi te są założeniem analitycznym przyjętym na potrzeby projektu, a nie standardem branżowym.</p>
+<p>Obliczyłam zysk brutto na sprzedaży jako różnicę pomiędzy przychodem a kosztem produktów. Zbiór nie zawiera kosztów operacyjnych sklepów.</p>
+<p>Obliczyłam pokrycie zapasu na podstawie średniej miesięcznej sprzedaży z okresu od lipca do września 2023 roku.</p>
+<p>Zdefiniowałam statusy zapasów następująco:</p>
+<ul>
+<li>niski zapas – poniżej jednego miesiąca sprzedaży,</li>
+<li>zapas optymalny – od jednego do trzech miesięcy sprzedaży,</li>
+<li>nadmierny zapas – powyżej trzech miesięcy sprzedaży.</li>
+</ul>
+<p>Tabela <code>inventory</code> przedstawia aktualny stan zapasów. Nie umożliwia analizy ich historycznych poziomów ani dokładnego określenia wartości sprzedaży utraconej z powodu braku produktu.</p>
+<p>Nie potraktowałam brakujących rekordów w tabeli zapasów jako zerowego zapasu.</p>
+<p>Dane sprzedażowe kończą się we wrześniu 2023 roku, dlatego ocena późniejszego trendu wymagałaby danych z kolejnych miesięcy.</p>
+</section>
+
+<section class="cs-section" id="pl-s10">
+<h2 class="cs-section-title"><span class="cs-num">10</span>Dalszy rozwój projektu</h2>
+<p>Projekt mogłabym rozszerzyć o:</p>
+<ul>
+<li>dashboard prezentujący najważniejsze wyniki,</li>
+<li>dane historyczne dotyczące poziomu zapasów,</li>
+<li>koszty operacyjne poszczególnych sklepów,</li>
+<li>analizę rotacji zapasów,</li>
+<li>prognozowanie zapotrzebowania,</li>
+<li>wyznaczenie poziomów zapasu uruchamiających nowe zamówienie po uzupełnieniu danych o czas dostawy i zapas bezpieczeństwa,</li>
+<li>automatyczne alerty dla produktów z niskim lub nadmiernym zapasem,</li>
+<li>bardziej szczegółową analizę wpływu daty otwarcia sklepu i typu lokalizacji na wyniki.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s11">
+<h2 class="cs-section-title"><span class="cs-num">11</span>Czego się nauczyłam</h2>
+<p>Podczas pracy nad projektem przećwiczyłam projektowanie kompletnej analizy SQL, w której kolejne zapytania prowadzą od kontroli danych do wniosków biznesowych.</p>
+<p>Rozwinęłam umiejętności obejmujące:</p>
+<ul>
+<li>sprawdzanie jakości, kompletności i spójności danych,</li>
+<li>pracę z kilkoma powiązanymi tabelami,</li>
+<li>rozpoznawanie kluczy głównych, obcych i złożonych,</li>
+<li>przygotowanie widoku z oczyszczonymi danymi,</li>
+<li>budowę wieloetapowych zapytań z użyciem CTE,</li>
+<li>wykorzystanie funkcji okna do rankingów i porównań okresów,</li>
+<li>obliczanie średnich kroczących,</li>
+<li>zabezpieczanie obliczeń przy użyciu <code>NULLIF</code> i <code>COALESCE</code>,</li>
+<li>tworzenie klasyfikacji za pomocą <code>CASE</code>,</li>
+<li>definiowanie założeń i ograniczeń analizy,</li>
+<li>interpretowanie wyników technicznych w kontekście biznesowym,</li>
+<li>formułowanie rekomendacji bez wykraczania poza zakres dostępnych danych,</li>
+<li>uporządkowanie projektu i opublikowanie go w repozytorium GitHub.</li>
+</ul>
+<p>Projekt pokazał mi, że dobra analiza SQL nie kończy się na otrzymaniu poprawnego wyniku zapytania. Równie ważne jest sprawdzenie jakości danych, opisanie przyjętej logiki, wskazanie ograniczeń oraz przełożenie wyników na informacje przydatne dla biznesu.</p>
+</section>
+
+<section class="cs-section" id="pl-s12">
+<h2 class="cs-section-title"><span class="cs-num">12</span>Repozytorium</h2>
+<p>Repozytorium zawiera:</p>
+<ul>
+<li>cztery źródłowe pliki CSV,</li>
+<li>sześć uporządkowanych tematycznie skryptów SQL,</li>
+<li>szesnaście wyeksportowanych wyników zapytań,</li>
+<li>diagram ERD,</li>
+<li>opis projektu, założeń analitycznych, wyników i rekomendacji.</li>
+</ul>
+<p class="cs-button-row"><a class="btn btn-primary" href="https://github.com/BWiekiera/maven-toys-sql-analysis" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> Zobacz na GitHubie</a></p>
+</section>
+</div>
+
+<div data-project-lang="en" id="en-overview" style="display:none;">
+<figure class="cs-figure cs-main-figure">
+<div class="cs-hero-img">
+<img alt="Maven Toys sales, profitability and inventory analysis — main project view" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project3.png"/>
+<div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project3.png</span></div>
+</div>
+</figure>
+<h1 class="cs-title">Maven Toys Sales, Profitability and Inventory Analysis</h1>
+<div class="cs-intro-meta"><span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">DBeaver</span><span class="tag">CTEs</span><span class="tag">Window Functions</span><span class="tag">Business Analysis</span></div>
+<p>A comprehensive SQL case study focused on sales, profitability, store performance, trends and current inventory levels for the fictional Maven Toys chain operating in Mexico.</p>
+<p>I analyzed more than 829,000 sales transactions from January 2022 to September 2023. The purpose of the project was to move from raw source data to insights and recommendations supporting decisions about products, stores and inventory management.</p>
+
+<section class="cs-section" id="en-s1">
+<h2 class="cs-section-title"><span class="cs-num">1</span>Business problem and project goal</h2>
+<p>A chain with many stores and products needs more than information about total revenue. Business decisions also require an understanding of:</p>
+<ul>
+<li>which products and categories generate the highest profit,</li>
+<li>how results change over time,</li>
+<li>which stores achieve the strongest results,</li>
+<li>whether inventory levels reflect current sales,</li>
+<li>where there is a risk of product shortages,</li>
+<li>where funds are tied up in excess inventory.</li>
+</ul>
+<p>I prepared an analysis answering the following questions:</p>
+<ul>
+<li>what are total revenue, product cost, gross profit on sales and gross margin,</li>
+<li>which categories and products achieve the best results,</li>
+<li>how revenue changes month over month and year over year,</li>
+<li>whether sales accelerate or weaken near the end of the analyzed period,</li>
+<li>which stores and location types achieve the best results,</li>
+<li>what the current inventory value is,</li>
+<li>which store-product combinations have low, optimal or excess inventory,</li>
+<li>where inventory is unavailable despite previous sales,</li>
+<li>where stock remains in a store despite no sales.</li>
+</ul>
+<p>I prepared the project as a complete business analysis in SQL rather than only a collection of individual technical queries.</p>
+</section>
+
+<section class="cs-section" id="en-s2">
+<h2 class="cs-section-title"><span class="cs-num">2</span>Data</h2>
+<p>The data comes from a public Maven Analytics dataset and represents a fictional toy store chain operating in Mexico.</p>
+<div class="cs-table-wrap" role="region" aria-label="Project source tables" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Table</th><th scope="col">Contents</th><th class="num" scope="col">Records</th></tr></thead>
+<tbody>
+<tr><td><code>sales</code></td><td>Product sales transactions by store</td><td class="num">829,262</td></tr>
+<tr><td><code>products</code></td><td>Product names, categories, costs and prices</td><td class="num">35</td></tr>
+<tr><td><code>stores</code></td><td>Stores, cities, location types and opening dates</td><td class="num">50</td></tr>
+<tr><td><code>inventory</code></td><td>Current inventory by store and product</td><td class="num">1,593</td></tr>
+</tbody>
+</table>
+</div>
+<p>The sales data covers the period from 1 January 2022 to 30 September 2023.</p>
+<p>The <code>inventory</code> table presents current inventory levels. It supports an assessment of their level and structure but does not show historical changes in inventory.</p>
+<p><strong>Data source:</strong> <a href="https://mavenanalytics.io/data-playground/mexico-toy-sales" rel="noopener" style="color:var(--blue);text-decoration:underline;" target="_blank">Mexico Toy Sales – Maven Analytics</a></p>
+</section>
+
+<section class="cs-section" id="en-s3">
+<h2 class="cs-section-title"><span class="cs-num">3</span>Database structure</h2>
+<p>The main transactional table is <code>sales</code>. Each sales record is linked to a specific product and store. The <code>inventory</code> table also connects products and stores, but it presents the current inventory level for a specific store-product combination.</p>
+<p>In the analyzed database:</p>
+<ul>
+<li><code>sale_id</code> is the primary key of the <code>sales</code> table,</li>
+<li><code>product_id</code> is the primary key of the <code>products</code> table,</li>
+<li><code>store_id</code> is the primary key of the <code>stores</code> table,</li>
+<li>the combination of <code>store_id + product_id</code> forms the composite key of the <code>inventory</code> table,</li>
+<li>the <code>product_id</code> and <code>store_id</code> columns allow the tables to be joined during analysis.</li>
+</ul>
+<p>Relationships in the source database were not physically defined as foreign keys. For project documentation, I created an ERD in DBeaver using virtual relationships:</p>
+<ul>
+<li><code>sales.product_id → products.product_id</code>,</li>
+<li><code>sales.store_id → stores.store_id</code>,</li>
+<li><code>inventory.product_id → products.product_id</code>,</li>
+<li><code>inventory.store_id → stores.store_id</code>.</li>
+</ul>
+<p>I did not include the <code>vw_products_clean</code> view in the diagram because I created it during data preparation and it is not one of the four source tables.</p>
+<figure class="cs-figure">
+<div class="cs-wide-img"><img alt="Maven Toys database ERD" src="../images/projects/project3-database-erd.png"/></div>
+<figcaption>Image 1. ERD showing the source tables and the relationships used in the analysis.</figcaption>
+</figure>
+</section>
+
+<section class="cs-section" id="en-s4">
+<h2 class="cs-section-title"><span class="cs-num">4</span>Data quality and preparation</h2>
+<p>Before starting the main analysis, I checked data quality, completeness and consistency.</p>
+<p>The checks covered:</p>
+<ul>
+<li>the number of records in each table,</li>
+<li>missing values,</li>
+<li>duplicate primary keys,</li>
+<li>duplicate composite keys in the <code>inventory</code> table,</li>
+<li>product and store identifier consistency across tables,</li>
+<li>the sales date range,</li>
+<li>products with a price lower than or equal to cost,</li>
+<li>the completeness of store-product combinations in the inventory table.</li>
+</ul>
+<p>I found no missing values, duplicate keys, inconsistent identifiers or products sold at a price lower than or equal to cost.</p>
+<p>Product costs and prices were stored as text containing a currency symbol. I created the <code>vw_products_clean</code> view, removed the currency symbol and converted the values to <code>DECIMAL(10,2)</code>. This allowed me to prepare a consistent data layer for further calculations without changing the source table.</p>
+<p>There are 1,750 possible store-product combinations for 50 stores and 35 products. The <code>inventory</code> table contains 1,593 records, so inventory information is missing for 157 combinations.</p>
+<p>I did not treat the missing records as zero inventory because the data does not indicate whether a product is unavailable in a given store or whether the relevant record was not captured.</p>
+</section>
+
+<section class="cs-section" id="en-s5">
+<h2 class="cs-section-title"><span class="cs-num">5</span>Analysis scope and SQL script structure</h2>
+<p>I divided the project code into six thematic scripts:</p>
+<ol>
+<li><code>01_data_quality.sql</code> – data quality, completeness and consistency checks,</li>
+<li><code>02_data_preparation.sql</code> – a view with cleaned product costs and prices,</li>
+<li><code>03_sales_and_profitability.sql</code> – sales, profit, margin, category and product analysis,</li>
+<li><code>04_time_analysis.sql</code> – month-over-month, year-over-year and moving-average analysis,</li>
+<li><code>05_store_analysis.sql</code> – store and location type performance and rankings,</li>
+<li><code>06_inventory_analysis.sql</code> – inventory value, stock coverage and inventory classification.</li>
+</ol>
+<p>The queries use:</p>
+<ul>
+<li><code>INNER JOIN</code> and <code>LEFT JOIN</code>,</li>
+<li>common table expressions (CTEs),</li>
+<li>an SQL view,</li>
+<li>aggregate functions,</li>
+<li>the <code>CASE</code> expression,</li>
+<li><code>COALESCE</code> and <code>NULLIF</code>,</li>
+<li>data type conversion,</li>
+<li>the <code>LAG</code> and <code>RANK</code> window functions,</li>
+<li>moving averages, category-level rankings and period comparisons.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s6">
+<h2 class="cs-section-title"><span class="cs-num">6</span>Selected SQL solution – inventory classification</h2>
+<p>One of the most important elements of the project was determining the inventory level for each recorded store-product combination.</p>
+<p>I first aggregated sales from the final three months available in the dataset and then joined them with current inventory. Based on this, I calculated average monthly sales and the number of months that current stock should cover.</p>
+<pre class="sql-code-block" aria-label="SQL query fragment classifying inventory"><code><span class="sql-alias">stock_coverage_months_cte</span> <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-function">round</span>(units_sold_last_3_months / <span class="sql-number">3.0</span>, <span class="sql-number">2</span>)
+            <span class="sql-keyword">as</span> avg_monthly_units_sold
+        ,stock_on_hand
+            / <span class="sql-function">nullif</span>(units_sold_last_3_months / <span class="sql-number">3.0</span>, <span class="sql-number">0</span>)
+            <span class="sql-keyword">as</span> stock_coverage_months_exact
+    <span class="sql-keyword">from</span> inventory_sales_cte
+),
+<span class="sql-alias">inventory_status_cte</span> <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-keyword">case</span>
+            <span class="sql-keyword">when</span> stock_on_hand = <span class="sql-number">0</span> <span class="sql-keyword">then</span> <span class="sql-string">'Out of Stock'</span>
+            <span class="sql-keyword">when</span> units_sold_last_3_months = <span class="sql-number">0</span>
+                <span class="sql-keyword">and</span> stock_on_hand &gt; <span class="sql-number">0</span> <span class="sql-keyword">then</span> <span class="sql-string">'No Sales'</span>
+            <span class="sql-keyword">when</span> stock_coverage_months_exact &lt; <span class="sql-number">1</span> <span class="sql-keyword">then</span> <span class="sql-string">'Low Stock'</span>
+            <span class="sql-keyword">when</span> stock_coverage_months_exact &lt;= <span class="sql-number">3</span> <span class="sql-keyword">then</span> <span class="sql-string">'Optimal Stock'</span>
+            <span class="sql-keyword">else</span> <span class="sql-string">'Overstock'</span>
+        <span class="sql-keyword">end as</span> inventory_status
+    <span class="sql-keyword">from</span> stock_coverage_months_cte
+)</code></pre>
+<p>The <code>NULLIF</code> function prevents division by zero. Using the <code>CASE</code> expression, I assigned each item to one of five statuses: out of stock, low stock, optimal stock, overstock or no sales.</p>
+<p>Splitting the stages across CTEs made it easier for me to verify the calculations and separate data preparation from the classification itself.</p>
+<p>The full query is available in the project repository.</p>
+</section>
+
+<section class="cs-section" id="en-s7">
+<h2 class="cs-section-title"><span class="cs-num">7</span>Key results</h2>
+<h3>Overall chain performance</h3>
+<div class="cs-table-wrap" role="region" aria-label="Overall Maven Toys performance" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Metric</th><th class="num" scope="col">Result</th></tr></thead>
+<tbody>
+<tr><td>Revenue</td><td class="num">USD 14,444,572.35</td></tr>
+<tr><td>Product cost</td><td class="num">USD 10,430,543.35</td></tr>
+<tr><td>Gross profit on sales</td><td class="num">USD 4,014,029.00</td></tr>
+<tr><td>Gross margin</td><td class="num">27.79%</td></tr>
+</tbody>
+</table>
+</div>
+<p>I calculated gross profit on sales as the difference between revenue and product cost. The dataset does not include store operating costs, so this result is not net profit.</p>
+
+<h3>Category profitability</h3>
+<div class="cs-table-wrap" role="region" aria-label="Product category profitability" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Category</th><th class="num" scope="col">Revenue</th><th class="num" scope="col">Gross profit</th><th class="num" scope="col">Gross margin</th><th scope="col">Profitability level</th></tr></thead>
+<tbody>
+<tr><td>Toys</td><td class="num">USD 5,093,241.00</td><td class="num">USD 1,079,527.00</td><td class="num">21.20%</td><td>Low</td></tr>
+<tr><td>Electronics</td><td class="num">USD 2,246,771.25</td><td class="num">USD 1,001,437.00</td><td class="num">44.57%</td><td>High</td></tr>
+<tr><td>Art &amp; Crafts</td><td class="num">USD 2,705,364.26</td><td class="num">USD 753,354.00</td><td class="num">27.85%</td><td>Medium</td></tr>
+<tr><td>Games</td><td class="num">USD 2,226,836.27</td><td class="num">USD 673,993.00</td><td class="num">30.27%</td><td>High</td></tr>
+<tr><td>Sports &amp; Outdoors</td><td class="num">USD 2,172,359.57</td><td class="num">USD 505,718.00</td><td class="num">23.28%</td><td>Low</td></tr>
+</tbody>
+</table>
+</div>
+<p>Toys generated the highest revenue and gross profit, but it also had the lowest margin at 21.20%.</p>
+<p>Electronics generated USD 1,001,437.00 in gross profit on revenue of USD 2,246,771.25. This means it achieved a result close to Toys with less than half the revenue. The Electronics gross margin was 44.57%.</p>
+<p>Results in some categories were highly concentrated in individual products:</p>
+<ul><li>Colorbuds accounted for 69.63% of Electronics revenue,</li><li>Lego Bricks accounted for 46.90% of Toys revenue.</li></ul>
+
+<h3>Sales trend</h3>
+<p>Revenue from January to September 2023 was 30.86% higher than in the same period of 2022. However, sales momentum weakened near the end of the analyzed period.</p>
+<div class="cs-table-wrap" role="region" aria-label="Sales changes in August and September 2023" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Month</th><th class="num" scope="col">MoM change</th><th class="num" scope="col">Difference from the previous 3-month average</th><th class="num" scope="col">YoY change</th></tr></thead>
+<tbody>
+<tr><td>August 2023</td><td class="num">−20.22%</td><td class="num">−USD 159,778.80</td><td class="num">+35.03%</td></tr>
+<tr><td>September 2023</td><td class="num">−0.41%</td><td class="num">−USD 107,647.25</td><td class="num">+12.35%</td></tr>
+</tbody>
+</table>
+</div>
+<p>The data ends in September 2023, so it is not possible to determine conclusively whether the slowdown represented a lasting trend change or a seasonal effect.</p>
+
+<h3>Store and location type performance</h3>
+<p>Maven Toys Ciudad de Mexico 2 generated the highest revenue: USD 554,553.43 in revenue, USD 169,856.00 in gross profit on sales and a gross margin of 30.63%.</p>
+<div class="cs-table-wrap" role="region" aria-label="Performance by store location type" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Location type</th><th class="num" scope="col">Stores</th><th class="num" scope="col">Total revenue</th><th class="num" scope="col">Average revenue per store</th><th class="num" scope="col">Gross margin</th></tr></thead>
+<tbody>
+<tr><td>Downtown</td><td class="num">29</td><td class="num">USD 8,219,596.27</td><td class="num">USD 283,434.35</td><td class="num">27.36%</td></tr>
+<tr><td>Commercial</td><td class="num">12</td><td class="num">USD 3,279,139.52</td><td class="num">USD 273,261.63</td><td class="num">28.27%</td></tr>
+<tr><td>Residential</td><td class="num">6</td><td class="num">USD 1,656,113.98</td><td class="num">USD 276,019.00</td><td class="num">27.80%</td></tr>
+<tr><td>Airport</td><td class="num">3</td><td class="num">USD 1,289,722.58</td><td class="num">USD 429,907.53</td><td class="num">29.31%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Downtown stores generated the highest total revenue, but they account for most of the chain: 29 of 50 stores.</p>
+<p>Airport locations achieved the highest average revenue per store at USD 429,907.53, which was 48.81% above the chain average. However, the result is based on only three stores, so it should be treated as a signal for further analysis rather than a stand-alone basis for expanding this location type.</p>
+
+<h3>Inventory level and structure</h3>
+<p>The total current inventory value at product cost was USD 300,209.58.</p>
+<div class="cs-table-wrap" role="region" aria-label="Inventory level and structure" tabindex="0">
+<table class="cs-data-table">
+<thead><tr><th scope="col">Inventory status</th><th class="num" scope="col">Store-product combinations</th><th class="num" scope="col">Share of combinations</th><th class="num" scope="col">Inventory value</th><th class="num" scope="col">Share of value</th></tr></thead>
+<tbody>
+<tr><td>Out of stock</td><td class="num">77</td><td class="num">4.83%</td><td class="num">USD 0.00</td><td class="num">0.00%</td></tr>
+<tr><td>Low stock</td><td class="num">937</td><td class="num">58.82%</td><td class="num">USD 152,849.22</td><td class="num">50.91%</td></tr>
+<tr><td>No sales</td><td class="num">89</td><td class="num">5.59%</td><td class="num">USD 16,338.81</td><td class="num">5.44%</td></tr>
+<tr><td>Overstock</td><td class="num">123</td><td class="num">7.72%</td><td class="num">USD 32,630.96</td><td class="num">10.87%</td></tr>
+<tr><td>Optimal stock</td><td class="num">367</td><td class="num">23.04%</td><td class="num">USD 98,390.59</td><td class="num">32.77%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Only 23.04% of recorded store-product combinations had an optimal inventory level. A further 58.82% had less than one month of stock coverage, and 77 combinations had no inventory despite sales in the previous three months.</p>
+<p>Overstocked products and products with inventory but no sales had a combined value of USD 48,969.77, equivalent to 16.31% of total inventory value.</p>
+</section>
+
+<section class="cs-section" id="en-s8">
+<h2 class="cs-section-title"><span class="cs-num">8</span>Business conclusions and recommendations</h2>
+<p>The analysis identified two opposing problems occurring at the same time: the risk of lost sales due to stockouts and low inventory, and funds tied up in overstocked products and products with no sales.</p>
+<p>Based on the results, I would recommend:</p>
+<ul>
+<li>reviewing out-of-stock and low-stock items first,</li>
+<li>prioritizing replenishment based on sales velocity and unit profit,</li>
+<li>checking whether products can be transferred between stores,</li>
+<li>limiting further orders or using promotional activity for overstocked products and products with no sales,</li>
+<li>protecting the availability of Colorbuds and Lego Bricks because of their large contribution to category results,</li>
+<li>reviewing pricing, product mix and purchasing costs in low-margin categories,</li>
+<li>continuing to monitor sales after September 2023 before changing forecasts or purchasing plans,</li>
+<li>comparing product mix, customer traffic and operating costs of Airport stores before deciding whether to expand this location type.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s9">
+<h2 class="cs-section-title"><span class="cs-num">9</span>Analytical assumptions and limitations</h2>
+<p>I defined profitability levels based on gross margin:</p>
+<ul>
+<li>high – gross margin of at least 30%,</li>
+<li>medium – gross margin from 25% to 29.99%,</li>
+<li>low – gross margin below 25%.</li>
+</ul>
+<p>These thresholds are analytical assumptions adopted for the project, not an industry standard.</p>
+<p>I calculated gross profit on sales as the difference between revenue and product cost. The dataset does not include store operating costs.</p>
+<p>I calculated stock coverage using average monthly sales from July to September 2023.</p>
+<p>I defined inventory statuses as follows:</p>
+<ul>
+<li>low stock – less than one month of sales coverage,</li>
+<li>optimal stock – one to three months of sales coverage,</li>
+<li>overstock – more than three months of sales coverage.</li>
+</ul>
+<p>The <code>inventory</code> table presents current inventory. It does not support an analysis of historical inventory levels or an exact calculation of sales lost because a product was unavailable.</p>
+<p>I did not treat missing records in the inventory table as zero inventory.</p>
+<p>The sales data ends in September 2023, so evaluating the later trend would require data from subsequent months.</p>
+</section>
+
+<section class="cs-section" id="en-s10">
+<h2 class="cs-section-title"><span class="cs-num">10</span>Further development</h2>
+<p>I could extend the project with:</p>
+<ul>
+<li>a dashboard presenting the key results,</li>
+<li>historical inventory data,</li>
+<li>operating costs for individual stores,</li>
+<li>inventory turnover analysis,</li>
+<li>demand forecasting,</li>
+<li>reorder levels after adding lead-time and safety-stock data,</li>
+<li>automatic alerts for products with low or excess inventory,</li>
+<li>a more detailed analysis of how store opening date and location type affect performance.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s11">
+<h2 class="cs-section-title"><span class="cs-num">11</span>What I learned</h2>
+<p>During the project, I practiced designing a complete SQL analysis in which successive queries move from data checks to business conclusions.</p>
+<p>I developed skills in:</p>
+<ul>
+<li>checking data quality, completeness and consistency,</li>
+<li>working with several related tables,</li>
+<li>identifying primary, foreign and composite keys,</li>
+<li>preparing a view with cleaned data,</li>
+<li>building multi-stage queries with CTEs,</li>
+<li>using window functions for rankings and period comparisons,</li>
+<li>calculating moving averages,</li>
+<li>protecting calculations with <code>NULLIF</code> and <code>COALESCE</code>,</li>
+<li>creating classifications with <code>CASE</code>,</li>
+<li>defining analytical assumptions and limitations,</li>
+<li>interpreting technical results in a business context,</li>
+<li>formulating recommendations without going beyond the available data,</li>
+<li>organizing the project and publishing it in a GitHub repository.</li>
+</ul>
+<p>The project showed me that a good SQL analysis does not end with a correct query result. Checking data quality, explaining the adopted logic, identifying limitations and translating results into useful business information are equally important.</p>
+</section>
+
+<section class="cs-section" id="en-s12">
+<h2 class="cs-section-title"><span class="cs-num">12</span>Repository</h2>
+<p>The repository includes:</p>
+<ul>
+<li>four source CSV files,</li>
+<li>six SQL scripts organized by topic,</li>
+<li>sixteen exported query results,</li>
+<li>an ERD,</li>
+<li>the project description, analytical assumptions, results and recommendations.</li>
+</ul>
+<p class="cs-button-row"><a class="btn btn-primary" href="https://github.com/BWiekiera/maven-toys-sql-analysis" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> View on GitHub</a></p>
+</section>
+</div>
+</article>
+</div>
+</div>
+</main>
+
+<footer><span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span></footer>
+<script src="../js/translations.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    const projectNavLabels = {
+      pl: ['Widok projektu', 'Problem i cel projektu', 'Dane', 'Struktura bazy danych', 'Kontrola jakości i przygotowanie danych', 'Zakres analizy', 'Wybrane rozwiązanie SQL', 'Najważniejsze wyniki', 'Wnioski i rekomendacje', 'Założenia i ograniczenia', 'Dalszy rozwój projektu', 'Czego się nauczyłam', 'Repozytorium'],
+      en: ['Project overview', 'Business problem and project goal', 'Data', 'Database structure', 'Data quality and preparation', 'Analysis scope', 'Selected SQL solution', 'Key results', 'Business conclusions and recommendations', 'Assumptions and limitations', 'Further development', 'What I learned', 'Repository']
+    };
+
+    function getProjectLang() {
+      return localStorage.getItem('bw-lang') || 'pl';
+    }
+
+    function updateProjectLanguageBlocks() {
+      const lang = getProjectLang();
+      document.querySelectorAll('[data-project-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-project-lang') === lang ? '' : 'none';
+      });
+      updateProjectSidebar(lang);
+    }
+
+    function updateProjectSidebar(lang) {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      links.forEach((link, index) => {
+        link.setAttribute('href', index === 0 ? `#${lang}-overview` : `#${lang}-s${index}`);
+        if (projectNavLabels[lang] && projectNavLabels[lang][index]) {
+          link.textContent = projectNavLabels[lang][index];
+        }
+      });
+    }
+
+    function initProjectSidebarScroll() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          const offset = 92;
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+          });
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          history.replaceState(null, '', link.getAttribute('href'));
+        });
+      });
+    }
+
+    function initProjectSidebarActiveState() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
+      const setActive = () => {
+        const lang = getProjectLang();
+        let currentId = `${lang}-overview`;
+        document.querySelectorAll(`[data-project-lang="${lang}"] .cs-section[id]`).forEach(section => {
+          if (section.getBoundingClientRect().top <= 130) currentId = section.id;
+        });
+        links.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      };
+      window.addEventListener('scroll', setActive, { passive: true });
+      window.addEventListener('resize', setActive, { passive: true });
+      setActive();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProjectLanguageBlocks();
+      initProjectSidebarScroll();
+      initProjectSidebarActiveState();
+      const langBtn = document.getElementById('lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
+          setTimeout(() => {
+            updateProjectLanguageBlocks();
+            const overviewSection = document.querySelector(`#${getProjectLang()}-overview`);
+            if (overviewSection && window.location.hash) {
+              history.replaceState(null, '', `#${getProjectLang()}-overview`);
+            }
+          }, 0);
+        });
+      }
+    });
+</script>
+</body>
+</html>

@@ -51,6 +51,7 @@ function applyTranslations(lang) {
 
 function toggleLanguage() {
   applyTranslations(currentLang === 'pl' ? 'en' : 'pl');
+  window.dispatchEvent(new Event('resize'));
 }
 
 /* ----- HAMBURGER MENU ----- */
@@ -233,7 +234,7 @@ function initCarousel() {
   }
 
   function updateHeight() {
-    const h = origCards[0].offsetHeight;
+    const h = Math.max(...origCards.map(card => card.offsetHeight));
     stage.style.height = Math.ceil(h * 1.12 + 32) + 'px';
   }
 
