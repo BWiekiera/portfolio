@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Analiza retencji i segmentacji klientów – Online Retail II. SQL, PostgreSQL, RFM, analiza kohortowa, retencja, cykl życia klientów, anulowania i sezonowość." name="description"/>
+<title>Analiza retencji i segmentacji klientów – Bernardeta Wiekiera</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body data-page="portfolio">
+<nav aria-label="Główna nawigacja" id="navbar" role="navigation">
+<div class="nav-inner">
+<a class="nav-logo" href="../index.html">BW<span>.</span></a>
+<button aria-expanded="false" aria-label="Menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<ul id="nav-menu" role="list">
+<li><a class="nav-link" data-i18n="nav_home" data-page="home" href="../index.html">Główna</a></li>
+<li><a class="nav-link" data-i18n="nav_portfolio" data-page="portfolio" href="../portfolio.html">Portfolio</a></li>
+<li><a class="nav-link" data-i18n="nav_cert" data-page="cert" href="../certificates.html">Certyfikaty</a></li>
+<li><button aria-label="Zmień język" class="lang-btn" id="lang-toggle">EN</button></li>
+</ul>
+</div>
+</nav>
+
+<main class="section section-bg">
+<div class="container">
+<div class="cs-layout">
+<aside class="cs-sidebar">
+<span class="cs-sidebar-label" data-i18n="cs_nav_label">Nawigacja po projekcie</span>
+<nav aria-label="Nawigacja po projekcie" class="cs-sidebar-nav">
+<a href="#pl-overview" data-project-top-link="true">Widok projektu</a>
+<a href="#pl-s1">Problem i cel projektu</a>
+<a href="#pl-s2">Dane</a>
+<a href="#pl-s3">Kontrola jakości i przygotowanie danych</a>
+<a href="#pl-s4">Warstwa analityczna</a>
+<a href="#pl-s5">Zachowania klientów</a>
+<a href="#pl-s6">Wartość klientów i koncentracja</a>
+<a href="#pl-s7">Segmentacja RFM</a>
+<a href="#pl-s8">Analiza kohortowa i retencja</a>
+<a href="#pl-s9">Cykl życia klienta i reaktywacja</a>
+<a href="#pl-s10">Anulowania i ich wpływ</a>
+<a href="#pl-s11">Sezonowość</a>
+<a href="#pl-s12">Najważniejsze wnioski biznesowe</a>
+<a href="#pl-s13">Ograniczenia analizy</a>
+<a href="#pl-s14">Dalszy rozwój projektu</a>
+<a href="#pl-s15">Czego się nauczyłam</a>
+<a href="#pl-s16">Repozytorium</a>
+</nav>
+</aside>
+
+<article class="cs-content project1-case project4-case">
+<a class="cs-back-link" data-i18n="cs_back" href="../portfolio.html">← Powrót do Portfolio</a>
+
+<div data-project-lang="pl" id="pl-overview">
+<figure class="cs-figure cs-main-figure">
+<div class="cs-hero-img">
+<img alt="Analiza retencji i segmentacji klientów – Online Retail II — widok główny projektu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project4.png"/>
+<div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project4.png</span></div>
+</div>
+</figure>
+<h1 class="cs-title">Analiza retencji i segmentacji klientów – Online Retail II</h1>
+<div class="cs-intro-meta"><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">pgAdmin</span><span class="tag">CTE</span><span class="tag">Funkcje okna</span><span class="tag">RFM</span><span class="tag">Analiza kohortowa</span></div>
+<p>Kompleksowe studium przypadku dotyczące zachowań klientów, ich wartości i utrzymania w czasie, zrealizowane w PostgreSQL.</p>
+<p>Projekt prowadzi od kontroli i przygotowania danych źródłowych do analizy powtarzalności zakupów, segmentacji RFM, retencji kohortowej, cyklu życia klientów, reaktywacji, anulowań oraz sezonowości. Głównym obszarem analizy jest klient: jego aktywność, częstotliwość zakupów, wartość i zachowanie w czasie.</p>
+
+<section class="cs-section" id="pl-s1">
+<h2 class="cs-section-title"><span class="cs-num">1</span>Problem i cel projektu</h2>
+<p>Sama wartość sprzedaży nie pokazuje, jak zachowują się klienci ani które grupy mają największe znaczenie dla biznesu.</p>
+<p>Celem projektu było odpowiedzenie m.in. na pytania:</p>
+<ul>
+<li>ilu klientów dokonuje kolejnych zakupów,</li>
+<li>jak szybko wracają po poprzednim zamówieniu,</li>
+<li>jak koncentruje się wartość zakupów,</li>
+<li>które segmenty RFM są najliczniejsze i generują najwyższą wartość dodatnich zakupów,</li>
+<li>jak zmienia się retencja kolejnych kohort,</li>
+<li>którzy klienci są aktywni, zagrożeni utratą lub nieaktywni,</li>
+<li>jak często klienci wracają po długiej przerwie,</li>
+<li>jak anulowania wpływają na ocenę wartości klienta,</li>
+<li>czy w danych występują powtarzalne wzorce sezonowe.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s2">
+<h2 class="cs-section-title"><span class="cs-num">2</span>Dane</h2>
+<p>Zbiór Online Retail II zawiera rzeczywiste transakcje brytyjskiego sklepu internetowego sprzedającego głównie artykuły upominkowe. Wiele zamówień pochodzi od klientów hurtowych.</p>
+<p><strong>Źródło danych:</strong> <a href="https://archive.ics.uci.edu/dataset/502/online+retail+ii" rel="noopener" style="color:var(--blue);text-decoration:underline;" target="_blank">Online Retail II – UCI Machine Learning Repository</a></p>
+<p>Dane obejmują:</p>
+<div class="cs-table-wrap" role="region" aria-label="Dane projektu" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Element</th><th>Wartość</th></tr></thead><tbody>
+<tr><td>Liczba rekordów źródłowych</td><td>1 067 371</td></tr>
+<tr><td>Okres</td><td>01.12.2009–09.12.2011</td></tr>
+<tr><td>Liczba źródeł</td><td>2</td></tr>
+<tr><td>Rekord</td><td>pojedyncza pozycja faktury</td></tr>
+<tr><td>Główne pola</td><td>faktura, produkt, ilość, data, cena, klient, kraj</td></tr>
+</tbody></table></div>
+<p>Jeden rekord nie oznacza całego zamówienia, dlatego przed analizą klienta dane zostały zagregowane z poziomu pozycji faktury do poziomu zamówienia.</p>
+</section>
+
+<section class="cs-section" id="pl-s3">
+<h2 class="cs-section-title"><span class="cs-num">3</span>Kontrola jakości i przygotowanie danych</h2>
+<p>Przed rozpoczęciem analizy przeprowadziłam kontrolę kompletności, duplikatów, zakresów dat i nietypowych operacji.</p>
+<p>Najważniejsze problemy jakości danych:</p>
+<div class="cs-table-wrap" role="region" aria-label="Problemy jakości danych" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Problem</th><th>Skala</th></tr></thead><tbody>
+<tr><td>Brak <code>customer_id</code></td><td>243 007 rekordów</td></tr>
+<tr><td>Udział rekordów bez <code>customer_id</code></td><td>22,77%</td></tr>
+<tr><td>Nakładające się rekordy między źródłami</td><td>22 523</td></tr>
+<tr><td>Dokładne duplikaty usunięte po połączeniu źródeł</td><td>11 812</td></tr>
+<tr><td>Rekordy bez opisu produktu</td><td>4 382</td></tr>
+</tbody></table></div>
+<p>Brak <code>customer_id</code> uniemożliwia wykorzystanie tych rekordów w analizie RFM, kohort, retencji i historii konkretnego klienta.</p>
+<p>Dwa źródła nakładały się w okresie od 1 do 9 grudnia 2010 r. Do usunięcia powtórzeń wynikających z nakładania wykorzystałam <code>EXCEPT ALL</code>, zachowując jednocześnie dane źródłowe w warstwie <code>raw</code>.</p>
+<p>Następnie przygotowałam warstwę <code>staging</code>, w której rekordy zostały sklasyfikowane jako:</p>
+<ul><li><code>sale</code>,</li><li><code>cancellation</code>,</li><li><code>stock_adjustment</code>,</li><li><code>zero_price</code>,</li><li><code>bad_debt_adjustment</code>,</li><li><code>manual_correction</code>.</li></ul>
+</section>
+
+<section class="cs-section" id="pl-s4">
+<h2 class="cs-section-title"><span class="cs-num">4</span>Warstwa analityczna</h2>
+<p>Do analiz klientów wykorzystałam wyłącznie dodatnie, płatne transakcje posiadające identyfikator klienta.</p>
+<p>Po zagregowaniu pozycji faktur do poziomu zamówień otrzymałam:</p>
+<div class="cs-table-wrap" role="region" aria-label="Warstwa analityczna" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Wskaźnik</th><th>Wynik</th></tr></thead><tbody>
+<tr><td>Zamówienia klientów</td><td>36 969</td></tr>
+<tr><td>Zidentyfikowani klienci</td><td>5 878</td></tr>
+<tr><td>Wartość dodatnich zakupów klientów</td><td>17 374 804,25</td></tr>
+<tr><td>Zamówienia o wartości ≤ 0</td><td>0</td></tr>
+</tbody></table></div>
+<p>Widok zamówień klientów stał się podstawą dalszych analiz zachowań, wartości klienta, RFM, kohort, retencji i cyklu życia.</p>
+</section>
+
+<section class="cs-section" id="pl-s5">
+<h2 class="cs-section-title"><span class="cs-num">5</span>Zachowania klientów</h2>
+<p>Analiza pokazała, że większość klientów w dostępnej historii dokonała więcej niż jednego zakupu.</p>
+<div class="cs-table-wrap" role="region" aria-label="Zachowania klientów" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Typ klienta</th><th>Liczba klientów</th><th>Udział klientów</th><th>Liczba zamówień</th></tr></thead><tbody>
+<tr><td>Powracający</td><td>4 255</td><td>72,39%</td><td>35 346</td></tr>
+<tr><td>Jednorazowi</td><td>1 623</td><td>27,61%</td><td>1 623</td></tr>
+</tbody></table></div>
+<p>Klienci powracający odpowiadali za około 95,61% wszystkich zamówień.</p>
+<p>Średni czas pomiędzy pierwszym i drugim zaobserwowanym zamówieniem wyniósł 97,53 dnia, natomiast średni odstęp pomiędzy wszystkimi kolejnymi zamówieniami wyniósł 51,69 dnia.</p>
+</section>
+
+<section class="cs-section" id="pl-s6">
+<h2 class="cs-section-title"><span class="cs-num">6</span>Wartość klientów i koncentracja</h2>
+<p>Dla każdego klienta obliczyłam liczbę zamówień, łączną wartość dodatnich zakupów oraz średnią wartość zamówienia.</p>
+<p>Analiza koncentracji wykazała, że:</p>
+<p><strong>1 354 klientów, czyli 23,04% bazy, odpowiadało za 80,01% wartości dodatnich zakupów.</strong></p>
+<p>Oznacza to silną koncentrację wartości wśród części klientów, choć wynik nie odpowiada dokładnie klasycznej relacji 80/20.</p>
+</section>
+
+<section class="cs-section" id="pl-s7">
+<h2 class="cs-section-title"><span class="cs-num">7</span>Segmentacja RFM</h2>
+<p>Dla każdego klienta obliczyłam:</p>
+<ul><li>Recency – liczbę dni od ostatniego zamówienia,</li><li>Frequency – liczbę zamówień,</li><li>Monetary – łączną wartość dodatnich zakupów.</li></ul>
+<p>Wstępnie przetestowałam <code>NTILE(4)</code>, jednak metoda dzieliła klientów o identycznej liczbie zamówień pomiędzy różne grupy. W finalnym rozwiązaniu zastosowałam <code>PERCENT_RANK()</code>, dzięki czemu klienci o tych samych wartościach metryk otrzymywali ten sam percentyl.</p>
+<pre class="sql-code-block"><code><span class="sql-keyword">with</span> rfm_percentiles_CTE <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> recency_days <span class="sql-keyword">desc</span>) <span class="sql-keyword">as</span> r_percentile
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> frequency) <span class="sql-keyword">as</span> f_percentile
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> monetary) <span class="sql-keyword">as</span> m_percentile
+    <span class="sql-keyword">from</span> analytics.customer_rfm
+)
+<span class="sql-keyword">select</span>
+    *
+    ,<span class="sql-keyword">case</span>
+        <span class="sql-keyword">when</span> frequency = <span class="sql-number">1</span> <span class="sql-keyword">and</span> r_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">then</span> <span class="sql-string">'new_customer'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">and</span> f_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">and</span> m_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">then</span> <span class="sql-string">'champion'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> f_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">then</span> <span class="sql-string">'loyal_customer'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> f_percentile &lt; <span class="sql-number">0.50</span> <span class="sql-keyword">then</span> <span class="sql-string">'potential_loyalist'</span>
+        <span class="sql-keyword">when</span> r_percentile &lt; <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> (f_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">or</span> m_percentile &gt;= <span class="sql-number">0.75</span>) <span class="sql-keyword">then</span> <span class="sql-string">'at_risk'</span>
+        <span class="sql-keyword">else</span> <span class="sql-string">'hibernating'</span>
+    <span class="sql-keyword">end</span> <span class="sql-keyword">as</span> rfm_segment
+<span class="sql-keyword">from</span> rfm_percentiles_CTE;</code></pre>
+<p>Wyniki segmentacji</p>
+<div class="cs-table-wrap" role="region" aria-label="Wyniki segmentacji RFM" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Segment</th><th>Udział klientów</th><th>Średnia liczba zamówień</th><th>Udział w wartości dodatnich zakupów</th></tr></thead><tbody>
+<tr><td>Champion</td><td>10,39%</td><td>25,48</td><td>52,49%</td></tr>
+<tr><td>Loyal customer</td><td>21,78%</td><td>8,17</td><td>23,12%</td></tr>
+<tr><td>At risk</td><td>13,63%</td><td>6,92</td><td>13,60%</td></tr>
+<tr><td>Hibernating</td><td>36,54%</td><td>1,57</td><td>5,59%</td></tr>
+<tr><td>Potential loyalist</td><td>16,01%</td><td>2,06</td><td>5,02%</td></tr>
+<tr><td>New customer*</td><td>1,65%</td><td>1,00</td><td>0,18%</td></tr>
+</tbody></table></div>
+<p>* <code>new_customer</code> oznacza klienta z jednym niedawnym zamówieniem w dostępnej historii danych, a nie potwierdzonego nowego klienta firmy.</p>
+<p>Segment <code>champion</code> stanowił tylko 10,39% klientów, ale odpowiadał za ponad połowę wartości dodatnich zakupów.</p>
+</section>
+
+<section class="cs-section" id="pl-s8">
+<h2 class="cs-section-title"><span class="cs-num">8</span>Analiza kohortowa i retencja</h2>
+<p>Klientów przypisałam do kohort na podstawie miesiąca pierwszego zamówienia zaobserwowanego w dostępnych danych.</p>
+<p>Retencję obliczyłam jako udział klientów aktywnych w danym miesiącu względem początkowej liczebności kohorty.</p>
+<p>Wybrane wyniki</p>
+<div class="cs-table-wrap" role="region" aria-label="Wybrane wyniki retencji" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Wskaźnik</th><th>Wynik</th></tr></thead><tbody>
+<tr><td>Średnia retencja po 1 miesiącu</td><td>21,17%</td></tr>
+<tr><td>Ważona retencja po 1 miesiącu</td><td>23,15%</td></tr>
+<tr><td>Najwyższa retencja po 1 miesiącu</td><td>35,29%</td></tr>
+<tr><td>Najniższa retencja po 1 miesiącu</td><td>9,21%</td></tr>
+</tbody></table></div>
+<p>Retencja nie spadała liniowo – klient mógł nie kupować w jednym miesiącu i wrócić w kolejnym.</p>
+<p>W analizie rozróżniłam również:</p>
+<ul><li><code>NULL</code> – brak wystarczającego okresu obserwacji,</li><li>0% – okres był obserwowany, ale żaden klient nie wrócił.</li></ul>
+<p>Ważona retencja została wykorzystana jako bardziej reprezentatywna dla ogólnego zachowania klientów, ponieważ uwzględnia różną wielkość kohort.</p>
+</section>
+
+<section class="cs-section" id="pl-s9">
+<h2 class="cs-section-title"><span class="cs-num">9</span>Cykl życia klienta i reaktywacja</h2>
+<p>Progi aktywności nie zostały przyjęte arbitralnie. Wyznaczyłam je na podstawie percentyli rzeczywistych odstępów pomiędzy zakupami.</p>
+<p>Przyjęte statusy:</p>
+<div class="cs-table-wrap" role="region" aria-label="Statusy cyklu życia" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Status</th><th>Warunek</th><th>Udział klientów</th></tr></thead><tbody>
+<tr><td>Active</td><td><code>recency_days &lt;= 70</code></td><td>43,55%</td></tr>
+<tr><td>At risk</td><td>71–147 dni</td><td>12,15%</td></tr>
+<tr><td>Inactive</td><td>&gt;147 dni</td><td>44,30%</td></tr>
+</tbody></table></div>
+<p>Za reaktywację uznałam zakup wykonany po przerwie dłuższej niż 147 dni.</p>
+<p>Co najmniej jedną reaktywację miało <strong>2 174 klientów, czyli 36,99% całej bazy.</strong></p>
+<p>Szczególnie interesująca okazała się grupa <code>at_risk</code> – 53,08% klientów z tego segmentu było już wcześniej reaktywowanych, co wskazuje na powtarzający się wzorzec długich przerw w zakupach.</p>
+</section>
+
+<section class="cs-section" id="pl-s10">
+<h2 class="cs-section-title"><span class="cs-num">10</span>Anulowania i ich wpływ na wartość klienta</h2>
+<p>Anulowania zostały przeanalizowane jako osobny obszar, zamiast łączyć je bezpośrednio z wcześniejszymi analizami dodatnich zachowań zakupowych.</p>
+<div class="cs-table-wrap" role="region" aria-label="Anulowania" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Wskaźnik</th><th>Wynik</th></tr></thead><tbody>
+<tr><td>Anulowane faktury</td><td>8 291</td></tr>
+<tr><td>Klienci z anulowaniami</td><td>2 572</td></tr>
+<tr><td>Wartość anulowań</td><td>1 462 424,18</td></tr>
+<tr><td>Anulowania / wartość sprzedaży</td><td>7,14%</td></tr>
+<tr><td>Udział wartości anulowań z <code>customer_id</code></td><td>74,18%</td></tr>
+</tbody></table></div>
+<p>Analiza ujawniła przypadki, w których ranking oparty wyłącznie na dodatnich zakupach był mylący.</p>
+<p>Przykład wpływu anulowań na ranking</p>
+<div class="cs-table-wrap" role="region" aria-label="Wpływ anulowań na ranking" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Klient</th><th>Wartość dodatnich zakupów</th><th>Anulowania</th><th>Obserwowana wartość po anulowaniach</th><th>Ranking brutto</th><th>Ranking po anulowaniach</th></tr></thead><tbody>
+<tr><td>16446</td><td>168 472,50</td><td>168 478,60</td><td>-6,10</td><td>8</td><td>5 735</td></tr>
+<tr><td>12346</td><td>77 556,46</td><td>77 608,20</td><td>-51,74</td><td>19</td><td>5 736</td></tr>
+<tr><td>16029</td><td>117 763,62</td><td>28 058,15</td><td>89 705,47</td><td>12</td><td>15</td></tr>
+<tr><td>12931</td><td>92 347,34</td><td>21 047,67</td><td>71 299,67</td><td>16</td><td>19</td></tr>
+</tbody></table></div>
+<p>Przypadek klienta 16446 pokazuje, że bardzo wysoka wartość dodatnich zakupów może zostać praktycznie całkowicie zneutralizowana przez anulowania.</p>
+</section>
+
+<section class="cs-section" id="pl-s11">
+<h2 class="cs-section-title"><span class="cs-num">11</span>Sezonowość</h2>
+<p>Do porównania sezonowości wykorzystałam te same miesiące 2010 i 2011 r., wykluczając niepełny grudzień 2011.</p>
+<p>Najbardziej powtarzalny wzorzec wystąpił jesienią.</p>
+<div class="cs-table-wrap" role="region" aria-label="Sezonowość" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Miesiąc</th><th>Zamówienia 2010</th><th>Zamówienia 2011</th><th>Wartość 2010</th><th>Wartość 2011</th></tr></thead><tbody>
+<tr><td>Wrzesień</td><td>1 689</td><td>1 755</td><td>829 013,95</td><td>950 690,20</td></tr>
+<tr><td>Październik</td><td>2 133</td><td>1 929</td><td>1 033 112,01</td><td>1 035 642,45</td></tr>
+<tr><td>Listopad</td><td>2 587</td><td>2 657</td><td>1 166 460,02</td><td>1 156 205,61</td></tr>
+</tbody></table></div>
+<p>W obu latach aktywność rosła od września, a <strong>listopad był miesiącem o najwyższej liczbie zamówień i najwyższej wartości zakupów.</strong></p>
+<p>Ze względu na dostępność tylko dwóch porównywalnych cykli rocznych wynik należy traktować jako sygnał sezonowości, a nie jej jednoznaczne potwierdzenie.</p>
+</section>
+
+<section class="cs-section" id="pl-s12">
+<h2 class="cs-section-title"><span class="cs-num">12</span>Najważniejsze wnioski biznesowe</h2>
+<p>Analiza wskazuje, że:</p>
+<ul>
+<li>działalność w dużym stopniu opiera się na klientach dokonujących kolejnych zakupów,</li>
+<li>wartość zakupów jest silnie skoncentrowana wśród części klientów,</li>
+<li>segment <code>champion</code> ma bardzo duży udział w wartości dodatnich zakupów mimo niewielkiego udziału w bazie,</li>
+<li>istotna część klientów przechodzi w długie okresy nieaktywności,</li>
+<li>grupa <code>at_risk</code> często zawiera klientów, którzy już wcześniej wracali po długich przerwach,</li>
+<li>anulowania mogą istotnie zmienić ocenę wartości pojedynczych klientów,</li>
+<li>jesienią widoczny jest powtarzalny wzrost aktywności zakupowej.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s13">
+<h2 class="cs-section-title"><span class="cs-num">13</span>Ograniczenia analizy</h2>
+<h3>Brak <code>customer_id</code></h3>
+<p>22,77% rekordów nie posiada identyfikatora klienta. Rekordy te nie mogły zostać wykorzystane w analizie RFM, kohort, retencji ani historii pojedynczego klienta.</p>
+<h3>Początek historii klienta</h3>
+<p>Dane rozpoczynają się w grudniu 2009 r., dlatego pierwszy zakup klienta widoczny w zbiorze nie musi być jego pierwszym zakupem w firmie.</p>
+<p>W związku z tym:</p>
+<ul>
+<li><code>first_purchase_date</code> należy interpretować jako pierwszą zaobserwowaną datę zakupu,</li>
+<li>kohorty są kohortami pierwszego zaobserwowanego zakupu, a nie potwierdzonymi kohortami pozyskania,</li>
+<li>RFM, lifecycle i częstotliwość opisują zachowanie klienta w dostępnej historii, a nie jego pełną relację z firmą.</li>
+</ul>
+<h3>Anulowania</h3>
+<p>Segmentacja RFM została obliczona na podstawie dodatnich zamówień. Opisuje więc aktywność, częstotliwość i wartość dodatnich zakupów, a nie pełną wartość netto klienta po anulowaniach.</p>
+<h3>Niepełny ostatni miesiąc</h3>
+<p>Dane kończą się 9 grudnia 2011 r., dlatego miesiąc ten nie został wykorzystany do porównań sezonowych z pełnymi miesiącami.</p>
+</section>
+
+<section class="cs-section" id="pl-s14">
+<h2 class="cs-section-title"><span class="cs-num">14</span>Dalszy rozwój projektu</h2>
+<p>W środowisku produkcyjnym analizę warto byłoby rozszerzyć o:</p>
+<ul>
+<li>pełniejszą historię transakcji sprzed grudnia 2009,</li>
+<li>rzeczywistą datę pozyskania lub rejestracji klienta,</li>
+<li>uzupełnienie brakujących <code>customer_id</code> z systemu źródłowego,</li>
+<li>jednoznaczne powiązanie anulowania z pierwotną transakcją,</li>
+<li>przeliczenie komponentu Monetary i segmentacji RFM na podstawie wartości netto,</li>
+<li>porównanie segmentacji brutto i netto,</li>
+<li>dłuższy okres danych do dokładniejszej oceny sezonowości.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="pl-s15">
+<h2 class="cs-section-title"><span class="cs-num">15</span>Czego się nauczyłam</h2>
+<p>Projekt pozwolił mi przećwiczyć nie tylko składnię SQL, ale przede wszystkim prowadzenie analizy od surowych danych do interpretacji biznesowej.</p>
+<p>Wykorzystałam m.in.:</p>
+<ul>
+<li>strukturę <code>raw → staging → analytics</code>,</li>
+<li>kontrolę jakości i deduplikację,</li>
+<li><code>EXCEPT ALL</code>,</li>
+<li>wieloetapowe CTE,</li>
+<li><code>FILTER</code>,</li>
+<li><code>CASE</code>,</li>
+<li><code>COALESCE</code>,</li>
+<li><code>NULLIF</code>,</li>
+<li><code>ROW_NUMBER()</code>,</li>
+<li><code>LAG()</code>,</li>
+<li><code>DENSE_RANK()</code>,</li>
+<li><code>PERCENT_RANK()</code>,</li>
+<li><code>FIRST_VALUE()</code>,</li>
+<li><code>PERCENTILE_CONT()</code>,</li>
+<li>analizę RFM,</li>
+<li>kohorty i retencję,</li>
+<li>analizę cyklu życia i reaktywacji.</li>
+</ul>
+<p>Najważniejszym elementem projektu było dla mnie rozróżnienie pomiędzy wynikiem obliczenia a jego poprawną interpretacją. Analiza anulowań i ograniczonej historii klienta pokazała, że nawet poprawne technicznie zapytanie SQL może prowadzić do błędnego wniosku, jeśli nie uwzględni się kontekstu i ograniczeń danych.</p>
+</section>
+
+<section class="cs-section" id="pl-s16">
+<h2 class="cs-section-title"><span class="cs-num">16</span>Repozytorium</h2>
+<p>Planowana struktura skryptów:</p>
+<pre class="sql-code-block"><code>01_database_setup_and_import.sql
+02_data_quality.sql
+03_data_preparation.sql
+04_customer_behavior.sql
+05_customer_value.sql
+06_rfm_segmentation.sql
+07_retention_and_cohort_analysis.sql
+08_cancellations_and_seasonality.sql</code></pre>
+<p class="cs-button-row"><a class="btn btn-primary" href="https://github.com/BWiekiera/customer-retention-segmentation-sql" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> Zobacz na GitHubie</a></p>
+</section>
+</div>
+
+<div data-project-lang="en" id="en-overview" style="display:none;">
+<figure class="cs-figure cs-main-figure">
+<div class="cs-hero-img">
+<img alt="Customer Retention and Segmentation Analysis – Online Retail II — main project view" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" src="../images/projects/project4.png"/>
+<div class="cs-hero-img-placeholder" style="display:none;"><i aria-hidden="true" class="fas fa-image"></i><span>../images/projects/project4.png</span></div>
+</div>
+</figure>
+<h1 class="cs-title">Customer Retention and Segmentation Analysis – Online Retail II</h1>
+<div class="cs-intro-meta"><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">pgAdmin</span><span class="tag">CTEs</span><span class="tag">Window Functions</span><span class="tag">RFM</span><span class="tag">Cohort Analysis</span></div>
+<p>A comprehensive case study of customer behavior, value and retention over time, conducted in PostgreSQL.</p>
+<p>The project moves from source data quality checks and preparation to repeat purchase analysis, RFM segmentation, cohort retention, customer lifecycle, reactivation, cancellations and seasonality. The main focus of the analysis is the customer: activity, purchase frequency, value and behavior over time.</p>
+
+<section class="cs-section" id="en-s1">
+<h2 class="cs-section-title"><span class="cs-num">1</span>Business problem and project goal</h2>
+<p>Sales value alone does not show how customers behave or which groups have the greatest significance for the business.</p>
+<p>The project aimed to answer questions including:</p>
+<ul>
+<li>how many customers make repeat purchases,</li>
+<li>how quickly they return after a previous order,</li>
+<li>how purchase value is concentrated,</li>
+<li>which RFM segments are the largest and generate the highest gross purchase value,</li>
+<li>how retention changes across successive cohorts,</li>
+<li>which customers are active, at risk of churn or inactive,</li>
+<li>how often customers return after a long gap,</li>
+<li>how cancellations affect customer value assessment,</li>
+<li>whether repeatable seasonal patterns are present in the data.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s2">
+<h2 class="cs-section-title"><span class="cs-num">2</span>Data</h2>
+<p>The Online Retail II dataset contains real transactions from a UK online retailer selling mainly gift items. Many orders come from wholesale customers.</p>
+<p><strong>Data source:</strong> <a href="https://archive.ics.uci.edu/dataset/502/online+retail+ii" rel="noopener" style="color:var(--blue);text-decoration:underline;" target="_blank">Online Retail II – UCI Machine Learning Repository</a></p>
+<p>The data includes:</p>
+<div class="cs-table-wrap" role="region" aria-label="Project data" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Source rows</td><td>1,067,371</td></tr>
+<tr><td>Period</td><td>01 Dec 2009–09 Dec 2011</td></tr>
+<tr><td>Number of sources</td><td>2</td></tr>
+<tr><td>Record</td><td>single invoice line</td></tr>
+<tr><td>Main fields</td><td>invoice, product, quantity, date, price, customer, country</td></tr>
+</tbody></table></div>
+<p>One record does not represent an entire order, so before customer analysis the data was aggregated from invoice-line level to order level.</p>
+</section>
+
+<section class="cs-section" id="en-s3">
+<h2 class="cs-section-title"><span class="cs-num">3</span>Data quality and preparation</h2>
+<p>Before starting the analysis, I checked completeness, duplicates, date ranges and unusual operations.</p>
+<p>The main data quality issues were:</p>
+<div class="cs-table-wrap" role="region" aria-label="Data quality issues" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Issue</th><th>Scale</th></tr></thead><tbody>
+<tr><td>Missing <code>customer_id</code></td><td>243,007 rows</td></tr>
+<tr><td>Share of rows without <code>customer_id</code></td><td>22.77%</td></tr>
+<tr><td>Overlapping rows between sources</td><td>22,523</td></tr>
+<tr><td>Exact duplicates removed after combining the sources</td><td>11,812</td></tr>
+<tr><td>Rows without product description</td><td>4,382</td></tr>
+</tbody></table></div>
+<p>Missing <code>customer_id</code> prevents these records from being used in RFM, cohort, retention and individual customer history analysis.</p>
+<p>The two sources overlapped from 1 to 9 December 2010. To remove repetitions caused by the overlap, I used <code>EXCEPT ALL</code> while preserving the source data in the <code>raw</code> layer.</p>
+<p>I then prepared the <code>staging</code> layer, where records were classified as:</p>
+<ul><li><code>sale</code>,</li><li><code>cancellation</code>,</li><li><code>stock_adjustment</code>,</li><li><code>zero_price</code>,</li><li><code>bad_debt_adjustment</code>,</li><li><code>manual_correction</code>.</li></ul>
+</section>
+
+<section class="cs-section" id="en-s4">
+<h2 class="cs-section-title"><span class="cs-num">4</span>Analytics layer</h2>
+<p>For customer analysis, I used only positive, paid transactions with a customer identifier.</p>
+<p>After aggregating invoice lines to the order level, I obtained:</p>
+<div class="cs-table-wrap" role="region" aria-label="Analytics layer" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Metric</th><th>Result</th></tr></thead><tbody>
+<tr><td>Customer orders</td><td>36,969</td></tr>
+<tr><td>Identified customers</td><td>5,878</td></tr>
+<tr><td>Gross purchase value of identified customers</td><td>17,374,804.25</td></tr>
+<tr><td>Orders with value ≤ 0</td><td>0</td></tr>
+</tbody></table></div>
+<p>The customer order view became the basis for further analysis of customer behavior, customer value, RFM, cohorts, retention and lifecycle.</p>
+</section>
+
+<section class="cs-section" id="en-s5">
+<h2 class="cs-section-title"><span class="cs-num">5</span>Customer behavior</h2>
+<p>The analysis showed that most customers made more than one purchase within the available history.</p>
+<div class="cs-table-wrap" role="region" aria-label="Customer behavior" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Customer type</th><th>Customers</th><th>Customer share</th><th>Orders</th></tr></thead><tbody>
+<tr><td>Returning</td><td>4,255</td><td>72.39%</td><td>35,346</td></tr>
+<tr><td>One-time</td><td>1,623</td><td>27.61%</td><td>1,623</td></tr>
+</tbody></table></div>
+<p>Returning customers accounted for approximately 95.61% of all orders.</p>
+<p>The average time between the first and second observed order was 97.53 days, while the average gap between all consecutive orders was 51.69 days.</p>
+</section>
+
+<section class="cs-section" id="en-s6">
+<h2 class="cs-section-title"><span class="cs-num">6</span>Customer value and concentration</h2>
+<p>For each customer, I calculated the number of orders, total gross purchase value and average order value.</p>
+<p>The concentration analysis showed that:</p>
+<p><strong>1,354 customers, representing 23.04% of the customer base, accounted for 80.01% of gross purchase value.</strong></p>
+<p>This shows a strong concentration of value among part of the customer base, although the result does not exactly match the classic 80/20 relationship.</p>
+</section>
+
+<section class="cs-section" id="en-s7">
+<h2 class="cs-section-title"><span class="cs-num">7</span>RFM segmentation</h2>
+<p>For each customer, I calculated:</p>
+<ul><li>Recency – the number of days since the last order,</li><li>Frequency – the number of orders,</li><li>Monetary – the total gross purchase value.</li></ul>
+<p>I initially tested <code>NTILE(4)</code>, but the method split customers with identical order counts across different groups. In the final solution, I used <code>PERCENT_RANK()</code>, so customers with the same metric values received the same percentile.</p>
+<pre class="sql-code-block"><code><span class="sql-keyword">with</span> rfm_percentiles_CTE <span class="sql-keyword">as</span>
+(
+    <span class="sql-keyword">select</span>
+        *
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> recency_days <span class="sql-keyword">desc</span>) <span class="sql-keyword">as</span> r_percentile
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> frequency) <span class="sql-keyword">as</span> f_percentile
+        ,<span class="sql-function">percent_rank</span>() <span class="sql-keyword">over</span> (<span class="sql-keyword">order by</span> monetary) <span class="sql-keyword">as</span> m_percentile
+    <span class="sql-keyword">from</span> analytics.customer_rfm
+)
+<span class="sql-keyword">select</span>
+    *
+    ,<span class="sql-keyword">case</span>
+        <span class="sql-keyword">when</span> frequency = <span class="sql-number">1</span> <span class="sql-keyword">and</span> r_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">then</span> <span class="sql-string">'new_customer'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">and</span> f_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">and</span> m_percentile &gt;= <span class="sql-number">0.75</span> <span class="sql-keyword">then</span> <span class="sql-string">'champion'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> f_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">then</span> <span class="sql-string">'loyal_customer'</span>
+        <span class="sql-keyword">when</span> r_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> f_percentile &lt; <span class="sql-number">0.50</span> <span class="sql-keyword">then</span> <span class="sql-string">'potential_loyalist'</span>
+        <span class="sql-keyword">when</span> r_percentile &lt; <span class="sql-number">0.50</span> <span class="sql-keyword">and</span> (f_percentile &gt;= <span class="sql-number">0.50</span> <span class="sql-keyword">or</span> m_percentile &gt;= <span class="sql-number">0.75</span>) <span class="sql-keyword">then</span> <span class="sql-string">'at_risk'</span>
+        <span class="sql-keyword">else</span> <span class="sql-string">'hibernating'</span>
+    <span class="sql-keyword">end</span> <span class="sql-keyword">as</span> rfm_segment
+<span class="sql-keyword">from</span> rfm_percentiles_CTE;</code></pre>
+<p>Segmentation results</p>
+<div class="cs-table-wrap" role="region" aria-label="RFM segmentation results" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Segment</th><th>Customer share</th><th>Average number of orders</th><th>Share of gross purchase value</th></tr></thead><tbody>
+<tr><td>Champion</td><td>10.39%</td><td>25.48</td><td>52.49%</td></tr>
+<tr><td>Loyal customer</td><td>21.78%</td><td>8.17</td><td>23.12%</td></tr>
+<tr><td>At risk</td><td>13.63%</td><td>6.92</td><td>13.60%</td></tr>
+<tr><td>Hibernating</td><td>36.54%</td><td>1.57</td><td>5.59%</td></tr>
+<tr><td>Potential loyalist</td><td>16.01%</td><td>2.06</td><td>5.02%</td></tr>
+<tr><td>New customer*</td><td>1.65%</td><td>1.00</td><td>0.18%</td></tr>
+</tbody></table></div>
+<p>* <code>new_customer</code> means a customer with one recent order in the available data history, not a confirmed new customer of the company.</p>
+<p>The <code>champion</code> segment represented only 10.39% of customers but accounted for more than half of gross purchase value.</p>
+</section>
+
+<section class="cs-section" id="en-s8">
+<h2 class="cs-section-title"><span class="cs-num">8</span>Cohort analysis and retention</h2>
+<p>I assigned customers to cohorts based on the month of the first order observed in the available data.</p>
+<p>I calculated retention as the share of customers active in a given month relative to the initial cohort size.</p>
+<p>Selected results</p>
+<div class="cs-table-wrap" role="region" aria-label="Selected retention results" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Metric</th><th>Result</th></tr></thead><tbody>
+<tr><td>Average retention after 1 month</td><td>21.17%</td></tr>
+<tr><td>Weighted retention after 1 month</td><td>23.15%</td></tr>
+<tr><td>Highest retention after 1 month</td><td>35.29%</td></tr>
+<tr><td>Lowest retention after 1 month</td><td>9.21%</td></tr>
+</tbody></table></div>
+<p>Retention did not decrease linearly – a customer could make no purchase in one month and return in a later month.</p>
+<p>I also distinguished between:</p>
+<ul><li><code>NULL</code> – insufficient observation period,</li><li>0% – the period was observed, but no customer returned.</li></ul>
+<p>Weighted retention was used as a more representative measure of overall customer behavior because it accounts for differences in cohort size.</p>
+</section>
+
+<section class="cs-section" id="en-s9">
+<h2 class="cs-section-title"><span class="cs-num">9</span>Customer lifecycle and reactivation</h2>
+<p>The activity thresholds were not chosen arbitrarily. I derived them from percentiles of the actual gaps between purchases.</p>
+<p>The adopted statuses were:</p>
+<div class="cs-table-wrap" role="region" aria-label="Customer lifecycle statuses" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Status</th><th>Rule</th><th>Customer share</th></tr></thead><tbody>
+<tr><td>Active</td><td><code>recency_days &lt;= 70</code></td><td>43.55%</td></tr>
+<tr><td>At risk</td><td>71–147 days</td><td>12.15%</td></tr>
+<tr><td>Inactive</td><td>&gt;147 days</td><td>44.30%</td></tr>
+</tbody></table></div>
+<p>I defined reactivation as a purchase made after a gap longer than 147 days.</p>
+<p>At least one reactivation was observed for <strong>2,174 customers, representing 36.99% of the entire customer base.</strong></p>
+<p>The <code>at_risk</code> group was particularly interesting – 53.08% of customers in this segment had already been reactivated before, indicating a recurring pattern of long gaps between purchases.</p>
+</section>
+
+<section class="cs-section" id="en-s10">
+<h2 class="cs-section-title"><span class="cs-num">10</span>Cancellations and their impact on customer value</h2>
+<p>Cancellations were analyzed as a separate area rather than being combined directly with the earlier analyses of positive purchase behavior.</p>
+<div class="cs-table-wrap" role="region" aria-label="Cancellations" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Metric</th><th>Result</th></tr></thead><tbody>
+<tr><td>Cancelled invoices</td><td>8,291</td></tr>
+<tr><td>Customers with cancellations</td><td>2,572</td></tr>
+<tr><td>Cancellation value</td><td>1,462,424.18</td></tr>
+<tr><td>Cancellations / sales value</td><td>7.14%</td></tr>
+<tr><td>Share of cancellation value with <code>customer_id</code></td><td>74.18%</td></tr>
+</tbody></table></div>
+<p>The analysis revealed cases where a ranking based only on positive purchases was misleading.</p>
+<p>Example of the impact of cancellations on customer ranking</p>
+<div class="cs-table-wrap" role="region" aria-label="Impact of cancellations on ranking" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Customer</th><th>Gross purchase value</th><th>Cancellations</th><th>Observed value after cancellations</th><th>Gross rank</th><th>Rank after cancellations</th></tr></thead><tbody>
+<tr><td>16446</td><td>168,472.50</td><td>168,478.60</td><td>-6.10</td><td>8</td><td>5,735</td></tr>
+<tr><td>12346</td><td>77,556.46</td><td>77,608.20</td><td>-51.74</td><td>19</td><td>5,736</td></tr>
+<tr><td>16029</td><td>117,763.62</td><td>28,058.15</td><td>89,705.47</td><td>12</td><td>15</td></tr>
+<tr><td>12931</td><td>92,347.34</td><td>21,047.67</td><td>71,299.67</td><td>16</td><td>19</td></tr>
+</tbody></table></div>
+<p>Customer 16446 shows that a very high gross purchase value can be almost completely neutralized by cancellations.</p>
+</section>
+
+<section class="cs-section" id="en-s11">
+<h2 class="cs-section-title"><span class="cs-num">11</span>Seasonality</h2>
+<p>To compare seasonality, I used the same months in 2010 and 2011, excluding incomplete December 2011.</p>
+<p>The most repeatable pattern appeared in autumn.</p>
+<div class="cs-table-wrap" role="region" aria-label="Seasonality" tabindex="0"><table class="cs-data-table">
+<thead><tr><th>Month</th><th>Orders 2010</th><th>Orders 2011</th><th>Value 2010</th><th>Value 2011</th></tr></thead><tbody>
+<tr><td>September</td><td>1,689</td><td>1,755</td><td>829,013.95</td><td>950,690.20</td></tr>
+<tr><td>October</td><td>2,133</td><td>1,929</td><td>1,033,112.01</td><td>1,035,642.45</td></tr>
+<tr><td>November</td><td>2,587</td><td>2,657</td><td>1,166,460.02</td><td>1,156,205.61</td></tr>
+</tbody></table></div>
+<p>In both years, activity increased from September, and <strong>November was the month with the highest number of orders and the highest purchase value.</strong></p>
+<p>Because only two comparable yearly cycles are available, the result should be treated as a signal of seasonality rather than definitive confirmation.</p>
+</section>
+
+<section class="cs-section" id="en-s12">
+<h2 class="cs-section-title"><span class="cs-num">12</span>Key business conclusions</h2>
+<p>The analysis indicates that:</p>
+<ul>
+<li>the business relies to a large extent on customers making repeat purchases,</li>
+<li>purchase value is strongly concentrated among part of the customer base,</li>
+<li>the <code>champion</code> segment has a very large share of gross purchase value despite representing a relatively small share of customers,</li>
+<li>a significant share of customers moves into long periods of inactivity,</li>
+<li>the <code>at_risk</code> group often includes customers who have previously returned after long gaps,</li>
+<li>cancellations can materially change the assessment of individual customer value,</li>
+<li>a repeatable increase in purchase activity is visible in autumn.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s13">
+<h2 class="cs-section-title"><span class="cs-num">13</span>Analysis limitations</h2>
+<h3>Missing <code>customer_id</code></h3>
+<p>22.77% of records do not have a customer identifier. These records could not be used in RFM, cohort, retention or individual customer history analysis.</p>
+<h3>Beginning of customer history</h3>
+<p>The data begins in December 2009, so the first purchase visible for a customer in the dataset does not have to be their first purchase from the company.</p>
+<p>Therefore:</p>
+<ul>
+<li><code>first_purchase_date</code> should be interpreted as the first observed purchase date,</li>
+<li>cohorts are based on the first observed purchase, not confirmed acquisition cohorts,</li>
+<li>RFM, lifecycle and frequency describe customer behavior within the available history, not the customer's full relationship with the company.</li>
+</ul>
+<h3>Cancellations</h3>
+<p>RFM segmentation was calculated using positive orders. It therefore describes activity, frequency and gross purchase value rather than the customer's full net value after cancellations.</p>
+<h3>Incomplete final month</h3>
+<p>The data ends on 9 December 2011, so this month was not used in seasonal comparisons with complete months.</p>
+</section>
+
+<section class="cs-section" id="en-s14">
+<h2 class="cs-section-title"><span class="cs-num">14</span>Further development</h2>
+<p>In a production environment, the analysis could be extended with:</p>
+<ul>
+<li>a more complete transaction history before December 2009,</li>
+<li>the actual customer acquisition or registration date,</li>
+<li>enrichment of missing <code>customer_id</code> values from the source system,</li>
+<li>unambiguous linking of a cancellation to the original transaction,</li>
+<li>recalculation of the Monetary component and RFM segmentation using net value,</li>
+<li>comparison of gross and net segmentation,</li>
+<li>a longer data period for a more reliable assessment of seasonality.</li>
+</ul>
+</section>
+
+<section class="cs-section" id="en-s15">
+<h2 class="cs-section-title"><span class="cs-num">15</span>What I learned</h2>
+<p>The project allowed me to practice not only SQL syntax but, above all, the process of conducting an analysis from raw data to business interpretation.</p>
+<p>I used, among other things:</p>
+<ul>
+<li>the <code>raw → staging → analytics</code> structure,</li>
+<li>data quality checks and deduplication,</li>
+<li><code>EXCEPT ALL</code>,</li>
+<li>multi-step CTEs,</li>
+<li><code>FILTER</code>,</li>
+<li><code>CASE</code>,</li>
+<li><code>COALESCE</code>,</li>
+<li><code>NULLIF</code>,</li>
+<li><code>ROW_NUMBER()</code>,</li>
+<li><code>LAG()</code>,</li>
+<li><code>DENSE_RANK()</code>,</li>
+<li><code>PERCENT_RANK()</code>,</li>
+<li><code>FIRST_VALUE()</code>,</li>
+<li><code>PERCENTILE_CONT()</code>,</li>
+<li>RFM analysis,</li>
+<li>cohorts and retention,</li>
+<li>customer lifecycle and reactivation analysis.</li>
+</ul>
+<p>The most important part of the project for me was distinguishing between a calculation result and its correct interpretation. The analysis of cancellations and limited customer history showed that even a technically correct SQL query can lead to an incorrect conclusion if the context and limitations of the data are not taken into account.</p>
+</section>
+
+<section class="cs-section" id="en-s16">
+<h2 class="cs-section-title"><span class="cs-num">16</span>Repository</h2>
+<p>Planned script structure:</p>
+<pre class="sql-code-block"><code>01_database_setup_and_import.sql
+02_data_quality.sql
+03_data_preparation.sql
+04_customer_behavior.sql
+05_customer_value.sql
+06_rfm_segmentation.sql
+07_retention_and_cohort_analysis.sql
+08_cancellations_and_seasonality.sql</code></pre>
+<p class="cs-button-row"><a class="btn btn-primary" href="https://github.com/BWiekiera/customer-retention-segmentation-sql" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-github"></i> View on GitHub</a></p>
+</section>
+</div>
+</article>
+</div>
+</div>
+</main>
+
+<footer><span data-i18n="footer_copy">© 2026 Bernardeta Wiekiera. Wszelkie prawa zastrzeżone.</span></footer>
+<script src="../js/translations.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    const projectNavLabels = {
+      pl: ['Widok projektu', 'Problem i cel projektu', 'Dane', 'Kontrola jakości i przygotowanie danych', 'Warstwa analityczna', 'Zachowania klientów', 'Wartość klientów i koncentracja', 'Segmentacja RFM', 'Analiza kohortowa i retencja', 'Cykl życia klienta i reaktywacja', 'Anulowania i ich wpływ', 'Sezonowość', 'Najważniejsze wnioski biznesowe', 'Ograniczenia analizy', 'Dalszy rozwój projektu', 'Czego się nauczyłam', 'Repozytorium'],
+      en: ['Project overview', 'Business problem and project goal', 'Data', 'Data quality and preparation', 'Analytics layer', 'Customer behavior', 'Customer value and concentration', 'RFM segmentation', 'Cohort analysis and retention', 'Customer lifecycle and reactivation', 'Cancellations and their impact', 'Seasonality', 'Key business conclusions', 'Analysis limitations', 'Further development', 'What I learned', 'Repository']
+    };
+
+    function getProjectLang() {
+      return localStorage.getItem('bw-lang') || 'pl';
+    }
+
+    function updateProjectLanguageBlocks() {
+      const lang = getProjectLang();
+      document.querySelectorAll('[data-project-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-project-lang') === lang ? '' : 'none';
+      });
+      updateProjectSidebar(lang);
+    }
+
+    function updateProjectSidebar(lang) {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      links.forEach((link, index) => {
+        link.setAttribute('href', index === 0 ? `#${lang}-overview` : `#${lang}-s${index}`);
+        if (projectNavLabels[lang] && projectNavLabels[lang][index]) {
+          link.textContent = projectNavLabels[lang][index];
+        }
+      });
+    }
+
+    function initProjectSidebarScroll() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          const offset = 92;
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+          });
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          history.replaceState(null, '', link.getAttribute('href'));
+        });
+      });
+    }
+
+    function initProjectSidebarActiveState() {
+      const links = document.querySelectorAll('.cs-sidebar-nav a');
+      if (!links.length) return;
+      const setActive = () => {
+        const lang = getProjectLang();
+        let currentId = `${lang}-overview`;
+        document.querySelectorAll(`[data-project-lang="${lang}"] .cs-section[id]`).forEach(section => {
+          if (section.getBoundingClientRect().top <= 130) currentId = section.id;
+        });
+        links.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      };
+      window.addEventListener('scroll', setActive, { passive: true });
+      window.addEventListener('resize', setActive, { passive: true });
+      setActive();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProjectLanguageBlocks();
+      initProjectSidebarScroll();
+      initProjectSidebarActiveState();
+      const langBtn = document.getElementById('lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
+          setTimeout(() => {
+            updateProjectLanguageBlocks();
+            const overviewSection = document.querySelector(`#${getProjectLang()}-overview`);
+            if (overviewSection && window.location.hash) {
+              history.replaceState(null, '', `#${getProjectLang()}-overview`);
+            }
+          }, 0);
+        });
+      }
+    });
+</script>
+</body>
+</html>
